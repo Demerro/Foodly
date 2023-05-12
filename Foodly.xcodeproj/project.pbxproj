@@ -9,20 +9,26 @@
 /* Begin PBXBuildFile section */
 		6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692247692A0A9DEB0025C682 /* AppDelegate.swift */; };
 		6922476C2A0A9DEB0025C682 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */; };
-		6922476E2A0A9DEB0025C682 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6922476D2A0A9DEB0025C682 /* ViewController.swift */; };
 		692247732A0A9DED0025C682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 692247722A0A9DED0025C682 /* Assets.xcassets */; };
 		692247762A0A9DED0025C682 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 692247742A0A9DED0025C682 /* LaunchScreen.storyboard */; };
+		692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692247832A0AA5680025C682 /* OnboardingViewController.swift */; };
+		6922478A2A0AD6E90025C682 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692247892A0AD6E90025C682 /* OnboardingPageViewController.swift */; };
+		6950C17C2A0CBA9100E4F400 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6950C17B2A0CBA9100E4F400 /* Localizable.strings */; };
+		69B9AD402A0BBD2500A48E05 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 69B9AD3F2A0BBD2500A48E05 /* SnapKit */; };
+		69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		692247662A0A9DEB0025C682 /* Foodly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		692247692A0A9DEB0025C682 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6922476D2A0A9DEB0025C682 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		692247722A0A9DED0025C682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		692247752A0A9DED0025C682 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		692247772A0A9DED0025C682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6922477D2A0A9F0E0025C682 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = "<group>"; };
+		692247832A0AA5680025C682 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		692247892A0AD6E90025C682 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		6950C17B2A0CBA9100E4F400 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		6950C17E2A0CBC5800E4F400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastOnboardingPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69B9AD402A0BBD2500A48E05 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,7 +46,6 @@
 		6922475D2A0A9DEB0025C682 = {
 			isa = PBXGroup;
 			children = (
-				6922477D2A0A9F0E0025C682 /* Modules */,
 				692247682A0A9DEB0025C682 /* Foodly */,
 				692247672A0A9DEB0025C682 /* Products */,
 			);
@@ -56,14 +62,33 @@
 		692247682A0A9DEB0025C682 /* Foodly */ = {
 			isa = PBXGroup;
 			children = (
+				6950C17A2A0CBA5A00E4F400 /* Resources */,
+				692247802A0AA5180025C682 /* Onboarding */,
 				692247692A0A9DEB0025C682 /* AppDelegate.swift */,
 				6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */,
-				6922476D2A0A9DEB0025C682 /* ViewController.swift */,
+			);
+			path = Foodly;
+			sourceTree = "<group>";
+		};
+		692247802A0AA5180025C682 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				692247832A0AA5680025C682 /* OnboardingViewController.swift */,
+				692247892A0AD6E90025C682 /* OnboardingPageViewController.swift */,
+				69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		6950C17A2A0CBA5A00E4F400 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				692247722A0A9DED0025C682 /* Assets.xcassets */,
 				692247742A0A9DED0025C682 /* LaunchScreen.storyboard */,
 				692247772A0A9DED0025C682 /* Info.plist */,
+				6950C17B2A0CBA9100E4F400 /* Localizable.strings */,
 			);
-			path = Foodly;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +107,9 @@
 			dependencies = (
 			);
 			name = Foodly;
+			packageProductDependencies = (
+				69B9AD3F2A0BBD2500A48E05 /* SnapKit */,
+			);
 			productName = Foodly;
 			productReference = 692247662A0A9DEB0025C682 /* Foodly.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +138,9 @@
 				Base,
 			);
 			mainGroup = 6922475D2A0A9DEB0025C682;
+			packageReferences = (
+				69B9AD3E2A0BBD2500A48E05 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 692247672A0A9DEB0025C682 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				692247762A0A9DED0025C682 /* LaunchScreen.storyboard in Resources */,
+				6950C17C2A0CBA9100E4F400 /* Localizable.strings in Resources */,
 				692247732A0A9DED0025C682 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,8 +168,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6922476E2A0A9DEB0025C682 /* ViewController.swift in Sources */,
+				692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */,
 				6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */,
+				69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */,
+				6922478A2A0AD6E90025C682 /* OnboardingPageViewController.swift in Sources */,
 				6922476C2A0A9DEB0025C682 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,7 +182,7 @@
 		692247742A0A9DED0025C682 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				692247752A0A9DED0025C682 /* Base */,
+				6950C17E2A0CBC5800E4F400 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -279,12 +313,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KZY2C4A2P7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Foodly/Info.plist;
+				INFOPLIST_FILE = Foodly/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,12 +341,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KZY2C4A2P7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Foodly/Info.plist;
+				INFOPLIST_FILE = Foodly/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -348,6 +382,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		69B9AD3E2A0BBD2500A48E05 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		69B9AD3F2A0BBD2500A48E05 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69B9AD3E2A0BBD2500A48E05 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6922475E2A0A9DEB0025C682 /* Project object */;
 }

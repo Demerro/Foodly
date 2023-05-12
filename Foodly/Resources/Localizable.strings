@@ -1,0 +1,13 @@
+// MARK: - OnboardingView
+
+"view.onboardingPage.title.0" = "Order Your Food";
+"view.onboardingPage.title.1" = "Safe Food Transfer";
+"view.onboardingPage.title.2" = "Fast Delivery";
+
+"view.onboardingPage.subtitle.0" = "Now you can order your food anytime from your mobile.";
+"view.onboardingPage.subtitle.1" = "We maintain safety and cleanliness while preparing your food.";
+"view.onboardingPage.subtitle.2" = "We deliver your food immediately at your doorsteps.";
+
+"view.onboardingPage.button.getStarted" = "Get Started";
+
+"view.onboarding.button.skip" = "Skip";
