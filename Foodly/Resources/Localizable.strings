@@ -11,3 +11,19 @@
 "view.onboardingPage.button.getStarted" = "Get Started";
 
 "view.onboarding.button.skip" = "Skip";
+
+// MARK: - LoginView
+
+"view.login.title" = "Login Your Account";
+
+"view.login.textField.placeholder.email" = "Enter Your Email";
+"view.login.textField.password" = "Password";
+
+"view.login.button.forgetPassword" = "Forget Password?";
+"view.login.button.login" = "Login";
+"view.login.button.signUp" = "Sign Up";
+
+"view.login.label.createNewAccount" = "Create New Account?";
+"view.login.label.continueWithAccounts" = "Continue With Accounts";
+
+"view.login.alert.action.dismiss" = "Ok";

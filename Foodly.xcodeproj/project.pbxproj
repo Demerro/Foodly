@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6912DA232A10A45A002785E3 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA222A10A45A002785E3 /* FormTextField.swift */; };
+		6912DA282A10BCD1002785E3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6912DA272A10BCD1002785E3 /* FirebaseAuth */; };
+		6912DA2A2A10BCD1002785E3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6912DA292A10BCD1002785E3 /* FirebaseFirestore */; };
+		6912DA2C2A10C0C4002785E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6912DA2B2A10C0C4002785E3 /* GoogleService-Info.plist */; };
+		6912DA2E2A10C175002785E3 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA2D2A10C175002785E3 /* LoginPresenter.swift */; };
+		6912DA302A10C379002785E3 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA2F2A10C379002785E3 /* LoginInteractor.swift */; };
+		6912DA322A10D215002785E3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA312A10D215002785E3 /* Router.swift */; };
 		6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692247692A0A9DEB0025C682 /* AppDelegate.swift */; };
 		6922476C2A0A9DEB0025C682 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */; };
 		692247732A0A9DED0025C682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 692247722A0A9DED0025C682 /* Assets.xcassets */; };
@@ -14,11 +21,20 @@
 		692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692247832A0AA5680025C682 /* OnboardingViewController.swift */; };
 		6922478A2A0AD6E90025C682 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692247892A0AD6E90025C682 /* OnboardingPageViewController.swift */; };
 		6950C17C2A0CBA9100E4F400 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6950C17B2A0CBA9100E4F400 /* Localizable.strings */; };
+		69947D432A1283AB0062A04F /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D422A1283AB0062A04F /* LoginModels.swift */; };
+		69947D4D2A12A2F60062A04F /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D4C2A12A2F60062A04F /* UIWindow.swift */; };
+		69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2D93E2A0E992800323A8A /* LoginView.swift */; };
+		69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2D9402A0E993700323A8A /* LoginViewController.swift */; };
 		69B9AD402A0BBD2500A48E05 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 69B9AD3F2A0BBD2500A48E05 /* SnapKit */; };
 		69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6912DA222A10A45A002785E3 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
+		6912DA2B2A10C0C4002785E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6912DA2D2A10C175002785E3 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		6912DA2F2A10C379002785E3 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		6912DA312A10D215002785E3 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		692247662A0A9DEB0025C682 /* Foodly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		692247692A0A9DEB0025C682 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +44,10 @@
 		692247892A0AD6E90025C682 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		6950C17B2A0CBA9100E4F400 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		6950C17E2A0CBC5800E4F400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		69947D422A1283AB0062A04F /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
+		69947D4C2A12A2F60062A04F /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
+		69B2D93E2A0E992800323A8A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		69B2D9402A0E993700323A8A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastOnboardingPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,12 +57,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				69B9AD402A0BBD2500A48E05 /* SnapKit in Frameworks */,
+				6912DA282A10BCD1002785E3 /* FirebaseAuth in Frameworks */,
+				6912DA2A2A10BCD1002785E3 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6912DA212A10A2E9002785E3 /* FoodlyUI */ = {
+			isa = PBXGroup;
+			children = (
+				6912DA222A10A45A002785E3 /* FormTextField.swift */,
+			);
+			path = FoodlyUI;
+			sourceTree = "<group>";
+		};
 		6922475D2A0A9DEB0025C682 = {
 			isa = PBXGroup;
 			children = (
@@ -62,10 +92,14 @@
 		692247682A0A9DEB0025C682 /* Foodly */ = {
 			isa = PBXGroup;
 			children = (
+				69947D4B2A12A2E00062A04F /* Extensions */,
+				6912DA212A10A2E9002785E3 /* FoodlyUI */,
+				69B2D93D2A0E991900323A8A /* Login */,
 				6950C17A2A0CBA5A00E4F400 /* Resources */,
 				692247802A0AA5180025C682 /* Onboarding */,
 				692247692A0A9DEB0025C682 /* AppDelegate.swift */,
 				6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */,
+				6912DA312A10D215002785E3 /* Router.swift */,
 			);
 			path = Foodly;
 			sourceTree = "<group>";
@@ -83,12 +117,33 @@
 		6950C17A2A0CBA5A00E4F400 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6912DA2B2A10C0C4002785E3 /* GoogleService-Info.plist */,
 				692247722A0A9DED0025C682 /* Assets.xcassets */,
 				692247742A0A9DED0025C682 /* LaunchScreen.storyboard */,
 				692247772A0A9DED0025C682 /* Info.plist */,
 				6950C17B2A0CBA9100E4F400 /* Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		69947D4B2A12A2E00062A04F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				69947D4C2A12A2F60062A04F /* UIWindow.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		69B2D93D2A0E991900323A8A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				69B2D93E2A0E992800323A8A /* LoginView.swift */,
+				69B2D9402A0E993700323A8A /* LoginViewController.swift */,
+				6912DA2D2A10C175002785E3 /* LoginPresenter.swift */,
+				6912DA2F2A10C379002785E3 /* LoginInteractor.swift */,
+				69947D422A1283AB0062A04F /* LoginModels.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,6 +164,8 @@
 			name = Foodly;
 			packageProductDependencies = (
 				69B9AD3F2A0BBD2500A48E05 /* SnapKit */,
+				6912DA272A10BCD1002785E3 /* FirebaseAuth */,
+				6912DA292A10BCD1002785E3 /* FirebaseFirestore */,
 			);
 			productName = Foodly;
 			productReference = 692247662A0A9DEB0025C682 /* Foodly.app */;
@@ -140,6 +197,7 @@
 			mainGroup = 6922475D2A0A9DEB0025C682;
 			packageReferences = (
 				69B9AD3E2A0BBD2500A48E05 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				6912DA262A10BCD1002785E3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 692247672A0A9DEB0025C682 /* Products */;
 			projectDirPath = "";
@@ -156,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				692247762A0A9DED0025C682 /* LaunchScreen.storyboard in Resources */,
+				6912DA2C2A10C0C4002785E3 /* GoogleService-Info.plist in Resources */,
 				6950C17C2A0CBA9100E4F400 /* Localizable.strings in Resources */,
 				692247732A0A9DED0025C682 /* Assets.xcassets in Resources */,
 			);
@@ -168,10 +227,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6912DA322A10D215002785E3 /* Router.swift in Sources */,
+				69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */,
+				69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */,
 				692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */,
+				69947D4D2A12A2F60062A04F /* UIWindow.swift in Sources */,
+				6912DA2E2A10C175002785E3 /* LoginPresenter.swift in Sources */,
+				6912DA232A10A45A002785E3 /* FormTextField.swift in Sources */,
 				6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */,
 				69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */,
 				6922478A2A0AD6E90025C682 /* OnboardingPageViewController.swift in Sources */,
+				69947D432A1283AB0062A04F /* LoginModels.swift in Sources */,
+				6912DA302A10C379002785E3 /* LoginInteractor.swift in Sources */,
 				6922476C2A0A9DEB0025C682 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,6 +451,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6912DA262A10BCD1002785E3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		69B9AD3E2A0BBD2500A48E05 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -395,6 +470,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6912DA272A10BCD1002785E3 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6912DA262A10BCD1002785E3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		6912DA292A10BCD1002785E3 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6912DA262A10BCD1002785E3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		69B9AD3F2A0BBD2500A48E05 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 69B9AD3E2A0BBD2500A48E05 /* XCRemoteSwiftPackageReference "SnapKit" */;
