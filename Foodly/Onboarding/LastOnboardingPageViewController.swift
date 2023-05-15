@@ -6,6 +6,11 @@ final class LastOnboardingPageViewController: OnboardingPageViewController {
         super.viewDidLoad()
         
         stackView.addArrangedSubview(getStartedButton)
+        
+        getStartedButton.addAction(UIAction { [weak self] _ in
+            UserDefaults.standard.setValue(true, forKey: "hasSeenOnboarding")
+            self?.view.window?.switchRootViewController(LoginViewController())
+        }, for: .touchUpInside)
     }
     
     private let getStartedButton: UIButton = {
@@ -17,9 +22,7 @@ final class LastOnboardingPageViewController: OnboardingPageViewController {
             return outgoing
         }
         
-        let button = UIButton(primaryAction: UIAction { _ in
-            UserDefaults.standard.setValue(true, forKey: "hasSeenOnboarding")
-        })
+        let button = UIButton()
         button.configuration = config
         
         return button

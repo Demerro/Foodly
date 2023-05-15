@@ -44,11 +44,17 @@ final class OnboardingViewController: UIPageViewController {
             $0.top.equalTo(skipButton.snp.top)
             $0.bottom.equalTo(skipButton.snp.bottom)
         }
+        
+        skipButton.addAction(UIAction { [weak self] _ in
+            UserDefaults.standard.setValue(true, forKey: "hasSeenOnboarding")
+            self?.view.window?.switchRootViewController(LoginViewController())
+        }, for: .touchUpInside)
     }
     
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         
+        pageControl.currentPage = initialPage
         pageControl.numberOfPages = pages.count
         pageControl.currentPageIndicatorTintColor = UIColor(named: "AccentColor")
         pageControl.pageIndicatorTintColor = .lightGray
@@ -60,9 +66,7 @@ final class OnboardingViewController: UIPageViewController {
         var config = UIButton.Configuration.plain()
         config.title = String(localized: "view.onboarding.button.skip")
         
-        let button = UIButton(primaryAction: UIAction { _ in
-            UserDefaults.standard.setValue(true, forKey: "hasSeenOnboarding")
-        })
+        let button = UIButton()
         button.configuration = config
         
         return button
