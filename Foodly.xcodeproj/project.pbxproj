@@ -23,6 +23,7 @@
 		6950C17C2A0CBA9100E4F400 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6950C17B2A0CBA9100E4F400 /* Localizable.strings */; };
 		69947D432A1283AB0062A04F /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D422A1283AB0062A04F /* LoginModels.swift */; };
 		69947D4D2A12A2F60062A04F /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D4C2A12A2F60062A04F /* UIWindow.swift */; };
+		69947D502A12A7C00062A04F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D4F2A12A7C00062A04F /* RegisterViewController.swift */; };
 		69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2D93E2A0E992800323A8A /* LoginView.swift */; };
 		69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2D9402A0E993700323A8A /* LoginViewController.swift */; };
 		69B9AD402A0BBD2500A48E05 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 69B9AD3F2A0BBD2500A48E05 /* SnapKit */; };
@@ -46,6 +47,7 @@
 		6950C17E2A0CBC5800E4F400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69947D422A1283AB0062A04F /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		69947D4C2A12A2F60062A04F /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
+		69947D4F2A12A7C00062A04F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		69B2D93E2A0E992800323A8A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		69B2D9402A0E993700323A8A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastOnboardingPageViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		692247682A0A9DEB0025C682 /* Foodly */ = {
 			isa = PBXGroup;
 			children = (
+				69947D4E2A12A7AF0062A04F /* Register */,
 				69947D4B2A12A2E00062A04F /* Extensions */,
 				6912DA212A10A2E9002785E3 /* FoodlyUI */,
 				69B2D93D2A0E991900323A8A /* Login */,
@@ -132,6 +135,14 @@
 				69947D4C2A12A2F60062A04F /* UIWindow.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		69947D4E2A12A7AF0062A04F /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				69947D4F2A12A7C00062A04F /* RegisterViewController.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		69B2D93D2A0E991900323A8A /* Login */ = {
@@ -236,6 +247,7 @@
 				6912DA232A10A45A002785E3 /* FormTextField.swift in Sources */,
 				6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */,
 				69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */,
+				69947D502A12A7C00062A04F /* RegisterViewController.swift in Sources */,
 				6922478A2A0AD6E90025C682 /* OnboardingPageViewController.swift in Sources */,
 				69947D432A1283AB0062A04F /* LoginModels.swift in Sources */,
 				6912DA302A10C379002785E3 /* LoginInteractor.swift in Sources */,

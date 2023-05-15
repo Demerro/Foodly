@@ -10,6 +10,7 @@ class LoginViewController: UIViewController {
     private let loginView = LoginView()
     
     private var interactor: LoginBusinessLogic?
+    private var router: AuthRoutingLogic?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -29,19 +30,30 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         title = String(localized: "view.login.title")
-        loginView.loginButton.addAction(UIAction { [weak self] _ in
-            self?.loginUser()
-        }, for: .touchUpInside)
+        setupButtonActions()
     }
     
     private func setup() {
         let viewController = self
         let interactor = LoginInteractor()
         let presenter = LoginPresenter()
+        let router = Router()
         
         viewController.interactor = interactor
+        viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
+        router.viewController = viewController
+    }
+    
+    private func setupButtonActions() {
+        loginView.loginButton.addAction(UIAction { [weak self] _ in
+            self?.loginUser()
+        }, for: .touchUpInside)
+        
+        loginView.signUpButton.addAction(UIAction { [weak self] _ in
+            self?.router?.navigateToRegister()
+        }, for: .touchUpInside)
     }
     
     private func loginUser() {

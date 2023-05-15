@@ -138,7 +138,7 @@ class LoginView: UIView {
         return label
     }()
     
-    private let signUpButton: UIButton = {
+    let signUpButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = String(localized: "view.login.button.signUp")
         
