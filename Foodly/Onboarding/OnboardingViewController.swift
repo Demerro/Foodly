@@ -61,6 +61,7 @@ final class OnboardingViewController: UIPageViewController {
         pageControl.numberOfPages = pages.count
         pageControl.currentPageIndicatorTintColor = UIColor(named: "AccentColor")
         pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
         
         return pageControl
     }()
@@ -71,6 +72,7 @@ final class OnboardingViewController: UIPageViewController {
         
         let button = UIButton()
         button.configuration = config
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()

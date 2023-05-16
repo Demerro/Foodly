@@ -14,6 +14,7 @@
 		6912DA2E2A10C175002785E3 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA2D2A10C175002785E3 /* LoginPresenter.swift */; };
 		6912DA302A10C379002785E3 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA2F2A10C379002785E3 /* LoginInteractor.swift */; };
 		6912DA322A10D215002785E3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA312A10D215002785E3 /* Router.swift */; };
+		6917A82B2A13F5D1002EFA5D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917A82A2A13F5D1002EFA5D /* RegisterView.swift */; };
 		6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692247692A0A9DEB0025C682 /* AppDelegate.swift */; };
 		6922476C2A0A9DEB0025C682 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */; };
 		692247732A0A9DED0025C682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 692247722A0A9DED0025C682 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		6912DA2D2A10C175002785E3 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		6912DA2F2A10C379002785E3 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		6912DA312A10D215002785E3 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		6917A82A2A13F5D1002EFA5D /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		692247662A0A9DEB0025C682 /* Foodly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		692247692A0A9DEB0025C682 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6922476B2A0A9DEB0025C682 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				69947D4F2A12A7C00062A04F /* RegisterViewController.swift */,
+				6917A82A2A13F5D1002EFA5D /* RegisterView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */,
 				69947D4D2A12A2F60062A04F /* UIWindow.swift in Sources */,
 				6912DA2E2A10C175002785E3 /* LoginPresenter.swift in Sources */,
+				6917A82B2A13F5D1002EFA5D /* RegisterView.swift in Sources */,
 				6912DA232A10A45A002785E3 /* FormTextField.swift in Sources */,
 				6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */,
 				69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */,

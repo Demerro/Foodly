@@ -27,6 +27,7 @@ final class LastOnboardingPageViewController: OnboardingPageViewController {
         
         let button = UIButton()
         button.configuration = config
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()

@@ -10,7 +10,7 @@ class LoginView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(frame: frame)
+        super.init(coder: coder)
         
         backgroundColor = .systemGroupedBackground
         setupView()
@@ -63,7 +63,10 @@ class LoginView: UIView {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        
         scrollView.alwaysBounceVertical = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
         return scrollView
     }()
     
@@ -73,6 +76,7 @@ class LoginView: UIView {
         stackView.alignment = .center
         stackView.axis = .vertical
         stackView.spacing = 15
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
     }()
@@ -85,6 +89,7 @@ class LoginView: UIView {
         let stackView = UIStackView()
         
         stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
     }()
@@ -117,6 +122,7 @@ class LoginView: UIView {
         
         let button = UIButton()
         button.configuration = config
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -128,6 +134,7 @@ class LoginView: UIView {
         
         let button = UIButton()
         button.configuration = config
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -137,6 +144,7 @@ class LoginView: UIView {
         
         label.text = String(localized: "view.login.label.createNewAccount")
         label.textColor = .secondaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -147,6 +155,7 @@ class LoginView: UIView {
         
         let button = UIButton()
         button.configuration = config
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()

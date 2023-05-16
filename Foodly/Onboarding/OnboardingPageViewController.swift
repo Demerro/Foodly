@@ -38,9 +38,12 @@ class OnboardingPageViewController: UIViewController {
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
+        
         stackView.alignment = .center
         stackView.axis = .vertical
         stackView.spacing = 15
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         return stackView
     }()
     
@@ -50,18 +53,24 @@ class OnboardingPageViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
+        
         label.font = .preferredFont(forTextStyle: .largeTitle, compatibleWith: UITraitCollection(legibilityWeight: .bold))
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
+        
         label.font = .preferredFont(forTextStyle: .title3)
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
 }
