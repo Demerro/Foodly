@@ -1,4 +1,4 @@
-// MARK: - OnboardingView
+// MARK: - OnboardingScene
 
 "view.onboardingPage.title.0" = "Order Your Food";
 "view.onboardingPage.title.1" = "Safe Food Transfer";
@@ -12,12 +12,12 @@
 
 "view.onboarding.button.skip" = "Skip";
 
-// MARK: - LoginView
+// MARK: - LoginScene
 
-"view.login.title" = "Login Your Account";
+"viewController.login.title" = "Login Your Account";
 
 "view.login.textField.placeholder.email" = "Enter Your Email";
-"view.login.textField.password" = "Password";
+"view.login.textField.placeholder.password" = "Password";
 
 "view.login.button.forgetPassword" = "Forget Password?";
 "view.login.button.login" = "Login";
@@ -27,3 +27,15 @@
 "view.login.label.continueWithAccounts" = "Continue With Accounts";
 
 "view.login.alert.action.dismiss" = "Ok";
+
+// MARK: - RegisterScene
+
+"viewController.register.title" = "Create Your Account";
+
+"view.register.textField.placeholder.name" = "Full Name";
+"view.register.textField.placeholder.email" = "Enter Your Email";
+"view.register.textField.placeholder.password" = "Password";
+
+"view.register.button.register" = "Register";
+
+"view.register.alert.action.dismiss" = "Ok";
