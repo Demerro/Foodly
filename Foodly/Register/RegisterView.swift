@@ -91,6 +91,7 @@ class RegisterView: UIView {
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.placeholder = String(localized: "view.register.textField.placeholder.email")
         
         return textField
