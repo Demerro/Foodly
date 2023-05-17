@@ -110,7 +110,7 @@ class LoginView: UIView {
         
         textField.textContentType = .password
         textField.isSecureTextEntry = true
-        textField.placeholder = String(localized: "view.login.textField.password")
+        textField.placeholder = String(localized: "view.login.textField.placeholder.password")
         
         return textField
     }()
@@ -129,7 +129,7 @@ class LoginView: UIView {
     
     let loginButton: UIButton = {
         var config = UIButton.Configuration.borderedProminent()
-        config.title = String(localized: "view.login.button.login")
+        config.title = String(localized: "view.login.button.login").uppercased()
         config.cornerStyle = .large
         
         let button = UIButton()

@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = String(localized: "view.login.title")
+        title = String(localized: "viewController.login.title")
         setupButtonActions()
     }
     
