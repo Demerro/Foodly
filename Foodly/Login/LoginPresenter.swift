@@ -1,8 +1,6 @@
-import UIKit
-
 protocol LoginPresentationLogic: AnyObject {
-    func presentSuccess(_ response: LoginModels.LoginAction.Response)
-    func presentError(message: String)
+    func presentLoginSuccess(_ response: LoginModels.LoginAction.Response)
+    func presentLoginError(message: String)
 }
 
 class LoginPresenter {
@@ -10,12 +8,12 @@ class LoginPresenter {
 }
 
 extension LoginPresenter: LoginPresentationLogic {
-    func presentSuccess(_ response: LoginModels.LoginAction.Response) {
+    func presentLoginSuccess(_ response: LoginModels.LoginAction.Response) {
         viewController?.makeLoginEnabled()
     }
     
-    func presentError(message: String) {
+    func presentLoginError(message: String) {
         let viewModel = LoginModels.LoginAction.ViewModelFailure(errorMessage: message)
-        viewController?.presentErrorAlert(message: viewModel.errorMessage)
+        viewController?.presentErrorAlert(viewModel)
     }
 }

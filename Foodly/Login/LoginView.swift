@@ -100,6 +100,7 @@ class LoginView: UIView {
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.placeholder = String(localized: "view.login.textField.placeholder.email")
         
         return textField

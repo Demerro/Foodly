@@ -13,11 +13,11 @@ extension LoginInteractor: LoginBusinessLogic {
     func loginUser(_ request: LoginModels.LoginAction.Request) {
         Auth.auth().signIn(withEmail: request.email, password: request.password) { [weak self] result, error in
             if let error = error {
-                self?.presenter?.presentError(message: error.localizedDescription)
+                self?.presenter?.presentLoginError(message: error.localizedDescription)
             }
             
             let response = LoginModels.LoginAction.Response()
-            self?.presenter?.presentSuccess(response)
+            self?.presenter?.presentLoginSuccess(response)
         }
     }
 }

@@ -2,7 +2,7 @@ import UIKit
 
 protocol LoginDisplayLogic: AnyObject {
     func makeLoginEnabled()
-    func presentErrorAlert(message: String)
+    func presentErrorAlert(_ viewModel: LoginModels.LoginAction.ViewModelFailure)
 }
 
 class LoginViewController: UIViewController {
@@ -80,7 +80,7 @@ extension LoginViewController: LoginDisplayLogic {
     func makeLoginEnabled() {
         saveAuthState()
         
-        let button = self.loginView.loginButton
+        let button = loginView.loginButton
         
         button.isEnabled = true
         UIView.animate(withDuration: 0.1) {
@@ -88,9 +88,9 @@ extension LoginViewController: LoginDisplayLogic {
         }
     }
     
-    func presentErrorAlert(message: String) {
+    func presentErrorAlert(_ viewModel: LoginModels.LoginAction.ViewModelFailure) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+            let alert = UIAlertController(title: viewModel.errorMessage, message: nil, preferredStyle: .alert)
             let action = UIAlertAction(title: String(localized: "view.login.alert.action.dismiss"), style: .default)
             alert.addAction(action)
             
