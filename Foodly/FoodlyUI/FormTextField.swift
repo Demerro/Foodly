@@ -9,9 +9,10 @@ final class FormTextField: UITextField {
         
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+        layer.cornerRadius = 15
+        
         configureColors()
         configureLeftView()
-        configureBorder()
     }
     
     required init?(coder: NSCoder) {
@@ -35,11 +36,5 @@ final class FormTextField: UITextField {
         
         leftViewMode = .always
         leftView = containerView
-    }
-    
-    private func configureBorder() {
-        layer.cornerRadius = 15
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.clear.cgColor
     }
 }

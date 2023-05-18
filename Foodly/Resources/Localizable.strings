@@ -39,3 +39,16 @@
 "view.register.button.register" = "Register";
 
 "view.register.alert.action.dismiss" = "Ok";
+
+// MARK: - ForgetPasswordScene
+
+"viewController.forgetPassword.title" = "Forget Password";
+
+"view.forgetPassword.cardView.email.title" = "Email";
+"view.forgetPassword.cardView.email.subtitle" = "Code send to your email";
+
+"view.forgetPassword.textField" = "Email";
+
+"view.forgetPassword.button.next" = "Next";
+
+"view.forgetPassword.alert.title" = "We have sent a password reset link, check your email";
