@@ -116,7 +116,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    private let forgetPasswordButton: UIButton = {
+    let forgetPasswordButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = String(localized: "view.login.button.forgetPassword")
         config.baseForegroundColor = .secondaryLabel

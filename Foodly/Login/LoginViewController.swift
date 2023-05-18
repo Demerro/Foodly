@@ -54,6 +54,10 @@ class LoginViewController: UIViewController {
         loginView.signUpButton.addAction(UIAction { [weak self] _ in
             self?.router?.navigateToRegister()
         }, for: .touchUpInside)
+        
+        loginView.forgetPasswordButton.addAction(UIAction { [weak self] _ in
+            self?.router?.navigateToForgetPassword()
+        }, for: .touchUpInside)
     }
     
     private func loginUser() {
