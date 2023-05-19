@@ -28,7 +28,7 @@ class ForgetPasswordView: UIView {
         }
         
         rootStackView.snp.makeConstraints {
-            $0.width.equalToSuperview().offset(-20)
+            $0.width.equalToSuperview().offset(-40)
             $0.centerX.equalToSuperview()
         }
         
@@ -38,11 +38,6 @@ class ForgetPasswordView: UIView {
         }
         
         emailTextField.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.height.equalTo(50)
-        }
-        
-        sendButton.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(50)
         }
@@ -91,6 +86,7 @@ class ForgetPasswordView: UIView {
         var config = UIButton.Configuration.borderedProminent()
         config.title = String(localized: "view.forgetPassword.button.next").uppercased()
         config.cornerStyle = .large
+        config.buttonSize = .large
         
         let button = UIButton()
         button.configuration = config

@@ -52,3 +52,4 @@
 "view.forgetPassword.button.next" = "Next";
 
 "view.forgetPassword.alert.title" = "We have sent a password reset link, check your email";
+"view.forgetPassword.alert.dismiss" = "Ok";
