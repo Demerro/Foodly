@@ -14,6 +14,7 @@ extension RegisterInteractor: RegisterBusinessLogic {
         Auth.auth().createUser(withEmail: request.email, password: request.password) { [weak self] result, error in
             if let error = error {
                 self?.presenter?.presentRegisterFailure(error.localizedDescription)
+                return
             }
             
             let response = RegisterModels.RegisterAction.Response()

@@ -1,23 +1,10 @@
 import UIKit
 
-protocol AuthRoutingLogic: AnyObject {
-    func navigateToRegister()
-    func navigateToForgetPassword()
-}
-
-final class Router {
-    weak var viewController: UIViewController?
-}
-
-// MARK: - AuthRoutingLogic
-extension Router: AuthRoutingLogic {
-    func navigateToRegister() {
-        let registerViewController = RegisterViewController()
-        viewController?.navigationController?.pushViewController(registerViewController, animated: true)
-    }
+class Router {
     
-    func navigateToForgetPassword() {
-        let forgetPasswordViewController = ForgetPasswordViewController()
-        viewController?.navigationController?.pushViewController(forgetPasswordViewController, animated: true)
+    weak var viewController: UIViewController?
+    
+    func pop() {
+        viewController?.navigationController?.popViewController(animated: true)
     }
 }

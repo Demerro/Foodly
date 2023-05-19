@@ -82,7 +82,9 @@ class LoginView: UIView {
     }()
     
     private let signUpStackView: UIStackView = {
-        return UIStackView()
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private let forgetPasswordStackView: UIStackView = {

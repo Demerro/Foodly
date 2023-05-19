@@ -35,22 +35,14 @@ class RegisterView: UIView {
         rootStackView.addArrangedSubview(registerButton)
         
         nameTextField.snp.makeConstraints {
-            $0.width.equalToSuperview()
             $0.height.equalTo(50)
         }
         
         emailTextField.snp.makeConstraints {
-            $0.width.equalToSuperview()
             $0.height.equalTo(50)
         }
         
         passwordTextField.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.height.equalTo(50)
-        }
-        
-        registerButton.snp.makeConstraints {
-            $0.width.equalToSuperview()
             $0.height.equalTo(50)
         }
     }
@@ -67,7 +59,6 @@ class RegisterView: UIView {
     private let rootStackView: UIStackView = {
         let stackView = UIStackView()
         
-        stackView.alignment = .center
         stackView.axis = .vertical
         stackView.spacing = 15
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -111,6 +102,7 @@ class RegisterView: UIView {
         var config = UIButton.Configuration.borderedProminent()
         config.title = String(localized: "view.register.button.register").uppercased()
         config.cornerStyle = .large
+        config.buttonSize = .large
         
         let button = UIButton()
         button.configuration = config

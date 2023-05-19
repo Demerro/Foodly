@@ -10,7 +10,7 @@ class LoginViewController: UIViewController {
     private let loginView = LoginView()
     
     private var interactor: LoginBusinessLogic?
-    private var router: AuthRoutingLogic?
+    private var router: AuthRouter?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
         let viewController = self
         let interactor = LoginInteractor()
         let presenter = LoginPresenter()
-        let router = Router()
+        let router = AuthRouter()
         
         viewController.interactor = interactor
         viewController.router = router
@@ -99,7 +99,9 @@ extension LoginViewController: LoginDisplayLogic {
             alert.addAction(action)
             
             self.present(alert, animated: true)
+            
             self.loginView.loginButton.isEnabled = true
+            self.loginView.loginButton.alpha = 1
         }
     }
 }

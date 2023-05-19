@@ -61,17 +61,11 @@ class RegisterViewController: UIViewController {
             self.interactor?.registerUser(request)
         }
     }
-    
-    private func saveAuthState() {
-        UserDefaults.standard.setValue(true, forKeyPath: "isLoggedIn")
-    }
 }
 
 // MARK: - RegisterDisplayLogic
 extension RegisterViewController: RegisterDisplayLogic {
     func makeRegisterEnabled() {
-        saveAuthState()
-        
         let button = registerView.registerButton
         
         button.isEnabled = true
@@ -87,7 +81,9 @@ extension RegisterViewController: RegisterDisplayLogic {
             alert.addAction(action)
             
             self.present(alert, animated: true)
+            
             self.registerView.registerButton.isEnabled = true
+            self.registerView.registerButton.alpha = 1
         }
     }
 }
