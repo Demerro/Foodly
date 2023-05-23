@@ -53,3 +53,6 @@
 
 "view.forgetPassword.alert.title" = "We have sent a password reset link, check your email";
 "view.forgetPassword.alert.dismiss" = "Ok";
+
+// MARK: - LocationView
+"view.location.title" = "Your Location";
