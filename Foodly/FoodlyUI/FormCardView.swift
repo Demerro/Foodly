@@ -82,12 +82,14 @@ final class FormCardView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .headline)
         return label
     }()
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .secondaryLabel
         return label
