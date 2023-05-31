@@ -56,3 +56,8 @@
 
 // MARK: - LocationView
 "view.location.title" = "Your Location";
+
+// MARK: - RestaurantCell
+"cell.restaurant.restaurant" = "Restaurant";
+"cell.restaurant.cafe" = "Cafe";
+"cell.restaurant.bakery" = "Bakery";

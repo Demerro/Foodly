@@ -1,10 +1,28 @@
 import UIKit
 import CoreLocation
 
+protocol HomeDisplayLogic: AnyObject {
+    func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel)
+}
+
 class HomeViewController: UIViewController {
     
     private let homeView = HomeView()
     private let locationManager = CLLocationManager()
+    private var sections = [HomeModels.HomeSections]()
+    private var interactor: HomeBusinessLogic?
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        setup()
+    }
     
     override func loadView() {
         view = homeView
@@ -15,11 +33,14 @@ class HomeViewController: UIViewController {
         
         setupNavBar()
         setupLocationManager()
+        
         setupCollectionViewLayout()
         registerCollectionLayoutCells()
         
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
+        
+        sections.append(.news)
     }
     
     private func setupNavBar() {
@@ -44,17 +65,11 @@ class HomeViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
             guard let self = self else { return nil }
             
-            switch sectionIndex {
-            case 0:
+            switch sections[sectionIndex] {
+            case .news:
                 return createNewsSection()
-            case 1:
-                return createFoodCategoriesSection()
-            case 2:
-                return createTrendingFoodSectionLayout()
-            case 3:
+            case .restaurants:
                 return createRestaurantsSectionLayout()
-            default:
-                return nil
             }
         }
         
@@ -62,7 +77,23 @@ class HomeViewController: UIViewController {
     }
     
     private func registerCollectionLayoutCells() {
-        homeView.collectionView.register(FoodCollectionViewCell.self, forCellWithReuseIdentifier: FoodCollectionViewCell.identifier)
+        homeView.collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        homeView.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: RestaurantCollectionViewCell.identifier)
+    }
+    
+    private func setup() {
+        let viewController = self
+        let interactor = HomeInteractor()
+        let presenter = HomePresenter()
+        
+        viewController.interactor = interactor
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+    }
+    
+    private func requestNearbyRestaurants(coordinate: CLLocationCoordinate2D) {
+        let request = HomeModels.RestaurantsAction.Request(coordinate: coordinate)
+        interactor?.getNearbyRestaurants(request)
     }
 }
 
@@ -73,13 +104,17 @@ extension HomeViewController: CLLocationManagerDelegate {
         let geocoder = CLGeocoder()
         
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            guard let self = self else { return }
+            
             if let error = error {
                 print(error)
                 return
             }
             
-            guard let placemark = placemarks?.first else { return }
-            self?.homeView.locationView.setLocation(placemark.name ?? "")
+            guard let placemarkName = placemarks?.first?.name else { return }
+            
+            homeView.locationView.setLocation(placemarkName)
+            requestNearbyRestaurants(coordinate: location.coordinate)
         }
     }
 }
@@ -92,15 +127,33 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        switch sections[section] {
+        case .news:
+            return 1
+        case let .restaurants(restaurants):
+            return restaurants.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath)
+        switch sections[indexPath.section] {
+        case .news:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
+            
+            cell.configureView(image: UIImage(named: "TopDeals")!)
+            return cell
+        case let .restaurants(restaurants):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantCollectionViewCell.identifier, for: indexPath) as! RestaurantCollectionViewCell
+            
+            let restaurant = restaurants[indexPath.row]
+            cell.configure(name: restaurant.name, location: restaurant.location, badgeTitle: restaurant.type, badgeColor: restaurant.color)
+            
+            return cell
+        }
     }
 }
 
@@ -164,7 +217,44 @@ extension HomeViewController {
     ) -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = scrollBehavior
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        section.interGroupSpacing = 20
         
         return section
+    }
+}
+
+// MARK: - HomeDisplayLogic
+extension HomeViewController: HomeDisplayLogic {
+    func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel) {
+        let index = sections.firstIndex {
+            if case .restaurants = $0 {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        if let index = index {
+            updateRestaurants(sectionIndex: index, restaurants: viewModel.restaurants)
+        } else {
+            addRestaurantsToEnd(restaurants: viewModel.restaurants)
+        }
+    }
+    
+    private func updateRestaurants(sectionIndex: Int, restaurants: [HomeModels.Restaurant]) {
+        sections[sectionIndex] = .restaurants(restaurants)
+        
+        DispatchQueue.main.async {
+            self.homeView.collectionView.reloadSections(IndexSet(integer: sectionIndex))
+        }
+    }
+    
+    private func addRestaurantsToEnd(restaurants: [HomeModels.Restaurant]) {
+        sections.append(.restaurants(restaurants))
+        
+        DispatchQueue.main.async {
+            self.homeView.collectionView.insertSections(IndexSet(integer: self.sections.count - 1))
+        }
     }
 }

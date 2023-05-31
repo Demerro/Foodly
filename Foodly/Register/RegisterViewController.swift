@@ -9,7 +9,7 @@ class RegisterViewController: UIViewController {
     
     private let registerView = RegisterView()
     
-    private var interactor: RegisterInteractor?
+    private var interactor: RegisterBusinessLogic?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

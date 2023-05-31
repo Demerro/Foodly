@@ -74,16 +74,10 @@ class LoginViewController: UIViewController {
             self.interactor?.loginUser(request)
         }
     }
-    
-    private func saveAuthState() {
-        UserDefaults.standard.setValue(true, forKey: "isLoggedIn")
-    }
 }
 
 extension LoginViewController: LoginDisplayLogic {
     func makeLoginEnabled() {
-        saveAuthState()
-        
         let button = loginView.loginButton
         
         button.isEnabled = true
