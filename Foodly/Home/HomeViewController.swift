@@ -2,6 +2,7 @@ import UIKit
 import CoreLocation
 
 protocol HomeDisplayLogic: AnyObject {
+    func displayTrendingFood(_ viewModel: HomeModels.TrendingFoodAction.ViewModel)
     func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel)
 }
 
@@ -43,6 +44,13 @@ class HomeViewController: UIViewController {
         sections.append(.news)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let request = HomeModels.TrendingFoodAction.Request()
+        interactor?.getTrendingFood(request)
+    }
+    
     private func setupNavBar() {
         guard let navBar = navigationController?.navigationBar else { return }
         navBar.addSubview(homeView.locationView)
@@ -68,17 +76,14 @@ class HomeViewController: UIViewController {
             switch sections[sectionIndex] {
             case .news:
                 return createNewsSection()
+            case .trendingFood:
+                return createTrendingFoodSectionLayout()
             case .restaurants:
                 return createRestaurantsSectionLayout()
             }
         }
         
         homeView.collectionView.collectionViewLayout = layout
-    }
-    
-    private func registerCollectionLayoutCells() {
-        homeView.collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
-        homeView.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: RestaurantCollectionViewCell.identifier)
     }
     
     private func setup() {
@@ -89,6 +94,12 @@ class HomeViewController: UIViewController {
         viewController.interactor = interactor
         interactor.presenter = presenter
         presenter.viewController = viewController
+    }
+    
+    private func registerCollectionLayoutCells() {
+        homeView.collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        homeView.collectionView.register(FoodCollectionViewCell.self, forCellWithReuseIdentifier: FoodCollectionViewCell.identifier)
+        homeView.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: RestaurantCollectionViewCell.identifier)
     }
     
     private func requestNearbyRestaurants(coordinate: CLLocationCoordinate2D) {
@@ -134,6 +145,8 @@ extension HomeViewController: UICollectionViewDataSource {
         switch sections[section] {
         case .news:
             return 1
+        case let .trendingFood(food):
+            return food.count
         case let .restaurants(restaurants):
             return restaurants.count
         }
@@ -145,6 +158,18 @@ extension HomeViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
             
             cell.configureView(image: UIImage(named: "TopDeals")!)
+            
+            return cell
+        case let .trendingFood(trendingFood):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath) as! FoodCollectionViewCell
+            
+            let food = trendingFood[indexPath.row]
+            cell.configure(
+                imageURL: URL(string: food.imageURL),
+                name: food.name,
+                price: food.price
+            )
+            
             return cell
         case let .restaurants(restaurants):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantCollectionViewCell.identifier, for: indexPath) as! RestaurantCollectionViewCell
@@ -191,7 +216,7 @@ extension HomeViewController {
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6), heightDimension: .fractionalHeight(0.2)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.3)),
             subitems: [item]
         )
         
@@ -217,7 +242,7 @@ extension HomeViewController {
     ) -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = scrollBehavior
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20)
         section.interGroupSpacing = 20
         
         return section
@@ -226,6 +251,14 @@ extension HomeViewController {
 
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
+    func displayTrendingFood(_ viewModel: HomeModels.TrendingFoodAction.ViewModel) {
+        sections.append(.trendingFood(viewModel.food))
+        
+        DispatchQueue.main.async {
+            self.homeView.collectionView.insertSections(IndexSet(integer: self.sections.count - 1))
+        }
+    }
+    
     func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel) {
         let index = sections.firstIndex {
             if case .restaurants = $0 {

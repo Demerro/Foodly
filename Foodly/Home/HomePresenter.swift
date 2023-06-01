@@ -1,6 +1,8 @@
 import MapKit
+import FirebaseFirestoreSwift
 
 protocol HomePresentationLogic: AnyObject {
+    func presentTrendingFood(_ response: HomeModels.TrendingFoodAction.Response)
     func presentNearbyRestaurants(_ response: HomeModels.RestaurantsAction.Response)
 }
 
@@ -10,6 +12,21 @@ class HomePresenter {
 
 // MARK: - HomePresentationLogic
 extension HomePresenter: HomePresentationLogic {
+    func presentTrendingFood(_ response: HomeModels.TrendingFoodAction.Response) {
+        let trendingFood = response.snapshots.compactMap { snapshot in
+            do {
+                return try snapshot.data(as: HomeModels.Food.self)
+            } catch {
+                print(error)
+            }
+            
+            return nil
+        }
+        
+        let viewModel = HomeModels.TrendingFoodAction.ViewModel(food: trendingFood)
+        viewController?.displayTrendingFood(viewModel)
+    }
+    
     func presentNearbyRestaurants(_ response: HomeModels.RestaurantsAction.Response) {
         let restaurants: [HomeModels.Restaurant] = response.mapItems.compactMap {
             guard let name = $0.placemark.name else { return nil }
