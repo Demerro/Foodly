@@ -40,7 +40,6 @@ final class RestaurantCollectionViewCell: UICollectionViewCell {
         textStackView.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(10)
             $0.trailing.equalToSuperview().offset(-10)
-            $0.bottom.equalTo(badgeContainer.snp.top)
         }
         
         badgeContainer.snp.makeConstraints {
