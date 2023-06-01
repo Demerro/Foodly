@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class NewsCollectionViewCell: UICollectionViewCell {
     
@@ -16,18 +17,16 @@ final class NewsCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        imageView.frame = self.bounds
-    }
-    
     func configureView(image: UIImage) {
         imageView.image = image
     }
     
     private func setupView() {
         addSubview(imageView)
+        
+        imageView.snp.makeConstraints {
+            $0.size.equalToSuperview()
+        }
     }
     
     private let imageView: UIImageView = {

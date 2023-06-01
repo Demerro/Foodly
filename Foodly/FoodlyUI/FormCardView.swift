@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class FormCardView: UIView {
     
@@ -19,19 +20,21 @@ final class FormCardView: UIView {
         addSubviews()
         configureViews()
         
-        addConstraints([
-            imageView.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor),
-            
-            imageContainerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            imageContainerView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            imageContainerView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
-            imageContainerView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
-            
-            labelStackView.leadingAnchor.constraint(equalTo: imageContainerView.trailingAnchor, constant: 10),
-            labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            labelStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        ])
+        imageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        imageContainerView.snp.makeConstraints {
+            $0.width.height.equalTo(self.snp.height).multipliedBy(0.7)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(10)
+        }
+        
+        labelStackView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(imageContainerView.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().offset(-10)
+        }
     }
     
     required init?(coder: NSCoder) {

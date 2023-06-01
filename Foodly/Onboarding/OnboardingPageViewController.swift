@@ -48,7 +48,9 @@ class OnboardingPageViewController: UIViewController {
     }()
     
     private let imageView: UIImageView = {
-        return UIImageView()
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     private let titleLabel: UILabel = {

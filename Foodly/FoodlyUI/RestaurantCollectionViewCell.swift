@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class RestaurantCollectionViewCell: UICollectionViewCell {
     
@@ -36,19 +37,21 @@ final class RestaurantCollectionViewCell: UICollectionViewCell {
         badgeContainer.addSubview(badgeLabel)
         self.addSubview(badgeContainer)
         
-        self.addConstraints([
-            textStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            textStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            textStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            
-            badgeContainer.widthAnchor.constraint(equalTo: badgeLabel.widthAnchor, constant: 20),
-            badgeContainer.heightAnchor.constraint(equalTo: badgeLabel.heightAnchor, constant: 20),
-            badgeContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            badgeContainer.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-            
-            badgeLabel.centerXAnchor.constraint(equalTo: badgeContainer.centerXAnchor),
-            badgeLabel.centerYAnchor.constraint(equalTo: badgeContainer.centerYAnchor)
-        ])
+        textStackView.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(10)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.bottom.equalTo(badgeContainer.snp.top)
+        }
+        
+        badgeContainer.snp.makeConstraints {
+            $0.width.height.equalTo(badgeLabel).offset(20)
+            $0.leading.equalToSuperview().offset(10)
+            $0.bottom.equalToSuperview().offset(-10)
+        }
+        
+        badgeLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
     
     private let textStackView: UIStackView = {
