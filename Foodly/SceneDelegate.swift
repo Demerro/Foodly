@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,8 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         }
         
-        let navigationController = UINavigationController(rootViewController: LoginViewController())
-        navigationController.navigationBar.prefersLargeTitles = true
-        return navigationController
+        if Auth.auth().currentUser == nil {
+            let navigationController = UINavigationController(rootViewController: LoginViewController())
+            navigationController.navigationBar.prefersLargeTitles = true
+            return navigationController
+        }
+        
+        return TabBarController()
     }
 }
