@@ -72,8 +72,8 @@ extension ForgetPasswordViewController: ForgetPasswordDisplayLogic {
         DispatchQueue.main.async {
             let title = String(localized: "view.forgetPassword.alert.title")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: String(localized: "view.forgetPassword.alert.dismiss"), style: .default) { [weak self] _ in
-                self?.router?.pop()
+            let action = UIAlertAction(title: String(localized: "view.forgetPassword.alert.dismiss"), style: .default) { [weak router = self.router] _ in
+                router?.pop()
             }
             alert.addAction(action)
             

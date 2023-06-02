@@ -11,14 +11,14 @@ class RegisterInteractor {
 // MARK: - RegisterBusinessLogic
 extension RegisterInteractor: RegisterBusinessLogic {
     func registerUser(_ request: RegisterModels.RegisterAction.Request) {
-        Auth.auth().createUser(withEmail: request.email, password: request.password) { [weak self] result, error in
+        Auth.auth().createUser(withEmail: request.email, password: request.password) { [weak presenter] result, error in
             if let error = error {
-                self?.presenter?.presentRegisterFailure(error.localizedDescription)
+                presenter?.presentRegisterFailure(error.localizedDescription)
                 return
             }
             
             let response = RegisterModels.RegisterAction.Response()
-            self?.presenter?.presentRegisterSuccess(response)
+            presenter?.presentRegisterSuccess(response)
         }
     }
 }

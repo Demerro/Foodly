@@ -51,12 +51,12 @@ class LoginViewController: UIViewController {
             self?.loginUser()
         }, for: .touchUpInside)
         
-        loginView.signUpButton.addAction(UIAction { [weak self] _ in
-            self?.router?.navigateToRegister()
+        loginView.signUpButton.addAction(UIAction { [weak router] _ in
+            router?.navigateToRegister()
         }, for: .touchUpInside)
         
-        loginView.forgetPasswordButton.addAction(UIAction { [weak self] _ in
-            self?.router?.navigateToForgetPassword()
+        loginView.forgetPasswordButton.addAction(UIAction { [weak router] _ in
+            router?.navigateToForgetPassword()
         }, for: .touchUpInside)
     }
     

@@ -11,14 +11,14 @@ class LoginInteractor {
 // MARK: - LoginBusinessLogic
 extension LoginInteractor: LoginBusinessLogic {
     func loginUser(_ request: LoginModels.LoginAction.Request) {
-        Auth.auth().signIn(withEmail: request.email, password: request.password) { [weak self] result, error in
+        Auth.auth().signIn(withEmail: request.email, password: request.password) { [weak presenter] result, error in
             if let error = error {
-                self?.presenter?.presentLoginError(message: error.localizedDescription)
+                presenter?.presentLoginError(message: error.localizedDescription)
                 return
             }
             
             let response = LoginModels.LoginAction.Response()
-            self?.presenter?.presentLoginSuccess(response)
+            presenter?.presentLoginSuccess(response)
         }
     }
 }

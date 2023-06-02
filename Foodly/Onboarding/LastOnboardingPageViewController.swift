@@ -7,12 +7,12 @@ final class LastOnboardingPageViewController: OnboardingPageViewController {
         
         stackView.addArrangedSubview(getStartedButton)
         
-        getStartedButton.addAction(UIAction { [weak self] _ in
+        getStartedButton.addAction(UIAction { [weak view] _ in
             UserDefaults.standard.setValue(true, forKey: "hasSeenOnboarding")
             
             let navigationController = UINavigationController(rootViewController: LoginViewController())
             navigationController.navigationBar.prefersLargeTitles = true
-            self?.view.window?.switchRootViewController(navigationController)
+            view?.window?.switchRootViewController(navigationController)
         }, for: .touchUpInside)
     }
     

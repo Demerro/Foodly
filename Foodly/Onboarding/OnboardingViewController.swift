@@ -45,12 +45,12 @@ final class OnboardingViewController: UIPageViewController {
             $0.bottom.equalTo(skipButton.snp.bottom)
         }
         
-        skipButton.addAction(UIAction { [weak self] _ in
+        skipButton.addAction(UIAction { [weak view] _ in
             UserDefaults.standard.setValue(true, forKey: "hasSeenOnboarding")
             
             let navigationController = UINavigationController(rootViewController: LoginViewController())
             navigationController.navigationBar.prefersLargeTitles = true
-            self?.view.window?.switchRootViewController(navigationController)
+            view?.window?.switchRootViewController(navigationController)
         }, for: .touchUpInside)
     }
     

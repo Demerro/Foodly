@@ -11,14 +11,14 @@ class ForgetPasswordInteractor {
 // MARK: - ForgetPasswordBusinessLogic
 extension ForgetPasswordInteractor: ForgetPasswordBusinessLogic {
     func sendPasswordReset(_ request: ForgetPasswordModels.SendPasswordReset.Request) {
-        Auth.auth().sendPasswordReset(withEmail: request.email) { [weak self] error in
+        Auth.auth().sendPasswordReset(withEmail: request.email) { [weak presenter] error in
             if let error = error {
-                self?.presenter?.presentSendPasswordFailure(error.localizedDescription)
+                presenter?.presentSendPasswordFailure(error.localizedDescription)
                 return
             }
             
             let response = ForgetPasswordModels.SendPasswordReset.Response()
-            self?.presenter?.presentSendPasswordResetSuccess(response)
+            presenter?.presentSendPasswordResetSuccess(response)
         }
     }
 }
