@@ -41,6 +41,7 @@
 		69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2D93E2A0E992800323A8A /* LoginView.swift */; };
 		69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2D9402A0E993700323A8A /* LoginViewController.swift */; };
 		69B9AD402A0BBD2500A48E05 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 69B9AD3F2A0BBD2500A48E05 /* SnapKit */; };
+		69BC39A02A29E44400545DBD /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC399F2A29E44400545DBD /* FoodCategoryCollectionViewCell.swift */; };
 		69D2202A2A1C94060011DE4C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D220292A1C94060011DE4C /* HomeView.swift */; };
 		69DC1A992A276A7E00B0C700 /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC1A982A276A7E00B0C700 /* NewsCollectionViewCell.swift */; };
 		69DC1A9C2A277C9E00B0C700 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 69DC1A9B2A277C9E00B0C700 /* FirebaseAuth */; };
@@ -89,6 +90,7 @@
 		699F3D2E2A163B1700F56A9C /* ForgetPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordPresenter.swift; sourceTree = "<group>"; };
 		69B2D93E2A0E992800323A8A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		69B2D9402A0E993700323A8A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		69BC399F2A29E44400545DBD /* FoodCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		69D220292A1C94060011DE4C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		69DC1A982A276A7E00B0C700 /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		69DC1A9F2A277E0F00B0C700 /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				692F01002A1CDC89005F4FB4 /* RestaurantCollectionViewCell.swift */,
 				69DC1A982A276A7E00B0C700 /* NewsCollectionViewCell.swift */,
 				69DC1A9F2A277E0F00B0C700 /* FoodCollectionViewCell.swift */,
+				69BC399F2A29E44400545DBD /* FoodCategoryCollectionViewCell.swift */,
 			);
 			path = FoodlyUI;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				6912DA322A10D215002785E3 /* Router.swift in Sources */,
 				6917A8342A151646002EFA5D /* ForgetPasswordViewController.swift in Sources */,
 				69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */,
+				69BC39A02A29E44400545DBD /* FoodCategoryCollectionViewCell.swift in Sources */,
 				69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */,
 				692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */,
 				69947D4D2A12A2F60062A04F /* UIWindow.swift in Sources */,

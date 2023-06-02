@@ -42,6 +42,12 @@ class HomeViewController: UIViewController {
         homeView.collectionView.dataSource = self
         
         sections.append(.news)
+        sections.append(.foodCategories([
+            HomeModels.FoodCategory(name: "Burgers", color: UIColor(named: "AccentColor")!, image: UIImage(named: "Burger")!),
+            HomeModels.FoodCategory(name: "Pizzas", color: .systemOrange, image: UIImage(named: "Pizza")!),
+            HomeModels.FoodCategory(name: "Cakes", color: .systemBlue, image: UIImage(named: "Cake")!),
+            HomeModels.FoodCategory(name: "Tacos", color: .systemGreen, image: UIImage(named: "Taco")!)
+        ]))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +82,8 @@ class HomeViewController: UIViewController {
             switch sections[sectionIndex] {
             case .news:
                 return createNewsSection()
+            case .foodCategories:
+                return createFoodCategoriesSection()
             case .trendingFood:
                 return createTrendingFoodSectionLayout()
             case .restaurants:
@@ -98,13 +106,9 @@ class HomeViewController: UIViewController {
     
     private func registerCollectionLayoutCells() {
         homeView.collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        homeView.collectionView.register(FoodCategoryCollectionViewCell.self, forCellWithReuseIdentifier: FoodCategoryCollectionViewCell.identifier)
         homeView.collectionView.register(FoodCollectionViewCell.self, forCellWithReuseIdentifier: FoodCollectionViewCell.identifier)
         homeView.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: RestaurantCollectionViewCell.identifier)
-    }
-    
-    private func requestNearbyRestaurants(coordinate: CLLocationCoordinate2D) {
-        let request = HomeModels.RestaurantsAction.Request(coordinate: coordinate)
-        interactor?.getNearbyRestaurants(request)
     }
 }
 
@@ -125,7 +129,9 @@ extension HomeViewController: CLLocationManagerDelegate {
             guard let placemarkName = placemarks?.first?.name else { return }
             
             homeView.locationView.setLocation(placemarkName)
-            requestNearbyRestaurants(coordinate: location.coordinate)
+            
+            let request = HomeModels.RestaurantsAction.Request(coordinate: location.coordinate)
+            interactor?.getNearbyRestaurants(request)
         }
     }
 }
@@ -145,6 +151,8 @@ extension HomeViewController: UICollectionViewDataSource {
         switch sections[section] {
         case .news:
             return 1
+        case let .foodCategories(categories):
+            return categories.count
         case let .trendingFood(food):
             return food.count
         case let .restaurants(restaurants):
@@ -160,22 +168,26 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.configureView(image: UIImage(named: "TopDeals")!)
             
             return cell
+            
+        case let .foodCategories(categories):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCollectionViewCell.identifier, for: indexPath) as! FoodCategoryCollectionViewCell
+            
+            let category = categories[indexPath.row]
+            cell.configureView(title: category.name, color: category.color, image: category.image)
+            
+            return cell
         case let .trendingFood(trendingFood):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath) as! FoodCollectionViewCell
             
             let food = trendingFood[indexPath.row]
-            cell.configure(
-                imageURL: URL(string: food.imageURL),
-                name: food.name,
-                price: food.price
-            )
+            cell.configureView(imageURL: URL(string: food.imageURL), name: food.name, price: food.price)
             
             return cell
         case let .restaurants(restaurants):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantCollectionViewCell.identifier, for: indexPath) as! RestaurantCollectionViewCell
             
             let restaurant = restaurants[indexPath.row]
-            cell.configure(name: restaurant.name, location: restaurant.location, badgeTitle: restaurant.type, badgeColor: restaurant.color)
+            cell.configureView(name: restaurant.name, location: restaurant.location, badgeTitle: restaurant.type, badgeColor: restaurant.color)
             
             return cell
         }
@@ -203,7 +215,7 @@ extension HomeViewController {
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4), heightDimension: .fractionalHeight(0.2)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(0.15)),
             subitems: [item]
         )
         

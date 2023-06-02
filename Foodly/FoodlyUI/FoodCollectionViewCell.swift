@@ -47,7 +47,7 @@ final class FoodCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configure(imageURL: URL?, name: String, price: Float) {
+    func configureView(imageURL: URL?, name: String, price: Float) {
         foodImageView.kf.setImage(with: imageURL, placeholder: UIImage(systemName: "fork.knife"))
         nameLabel.text = name
         priceLabel.attributedText = makePriceText(

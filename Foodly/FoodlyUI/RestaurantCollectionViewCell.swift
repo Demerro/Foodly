@@ -17,7 +17,7 @@ final class RestaurantCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
-    func configure(name: String, location: String, badgeTitle: String, badgeColor: UIColor) {
+    func configureView(name: String, location: String, badgeTitle: String, badgeColor: UIColor) {
         nameLabel.text = name
         locationLabel.text = location
         
