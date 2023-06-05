@@ -6,7 +6,7 @@ protocol HomeDisplayLogic: AnyObject {
     func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel)
 }
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     var interactor: HomeBusinessLogic?
     

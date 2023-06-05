@@ -5,7 +5,7 @@ protocol ForgetPasswordDisplayLogic: AnyObject {
     func displayErrorAlert(_ viewModel: ForgetPasswordModels.SendPasswordReset.ViewModelFailure)
 }
 
-class ForgetPasswordViewController: UIViewController {
+final class ForgetPasswordViewController: UIViewController {
     
     private let forgetPasswordView = ForgetPasswordView()
     

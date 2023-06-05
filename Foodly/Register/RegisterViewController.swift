@@ -5,7 +5,7 @@ protocol RegisterDisplayLogic: AnyObject {
     func displayErrorAlert(_ viewModel: RegisterModels.RegisterAction.ViewModelFailure)
 }
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     private let registerView = RegisterView()
     
