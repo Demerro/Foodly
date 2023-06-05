@@ -59,10 +59,25 @@ class HomeViewController: UIViewController {
     
     private func addCategories() {
         sections.append(.foodCategories([
-            HomeModels.FoodCategory(name: "Burgers", color: UIColor(named: "AccentColor")!, image: UIImage(named: "Burger")!),
-            HomeModels.FoodCategory(name: "Pizzas", color: .systemOrange, image: UIImage(named: "Pizza")!),
-            HomeModels.FoodCategory(name: "Cakes", color: .systemBlue, image: UIImage(named: "Cake")!),
-            HomeModels.FoodCategory(name: "Tacos", color: .systemGreen, image: UIImage(named: "Taco")!)
+            HomeModels.FoodCategory(
+                name: String(localized: "cell.foodCategory.title.burgers"),
+                color: UIColor(named: "AccentColor")!,
+                image: UIImage(named: "Burger")!
+            ),
+            HomeModels.FoodCategory(
+                name: String(localized: "cell.foodCategory.title.pizzas"),
+                color: .systemOrange,
+                image: UIImage(named: "Pizza")!),
+            HomeModels.FoodCategory(
+                name: String(localized: "cell.foodCategory.title.cakes"),
+                color: .systemBlue,
+                image: UIImage(named: "Cake")!
+            ),
+            HomeModels.FoodCategory(
+                name: String(localized: "cell.foodCategory.title.tacos"),
+                color: .systemGreen,
+                image: UIImage(named: "Taco")!
+            )
         ]))
     }
     
