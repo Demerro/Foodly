@@ -9,11 +9,11 @@ class LoginPresenter {
 
 extension LoginPresenter: LoginPresentationLogic {
     func presentLoginSuccess(_ response: LoginModels.LoginAction.Response) {
-        viewController?.makeLoginEnabled()
+        viewController?.displayLoginSuccess()
     }
     
     func presentLoginError(message: String) {
         let viewModel = LoginModels.LoginAction.ViewModelFailure(errorMessage: message)
-        viewController?.presentErrorAlert(viewModel)
+        viewController?.displayErrorAlert(viewModel)
     }
 }

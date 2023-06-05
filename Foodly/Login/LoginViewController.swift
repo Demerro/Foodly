@@ -1,8 +1,8 @@
 import UIKit
 
 protocol LoginDisplayLogic: AnyObject {
-    func makeLoginEnabled()
-    func presentErrorAlert(_ viewModel: LoginModels.LoginAction.ViewModelFailure)
+    func displayLoginSuccess()
+    func displayErrorAlert(_ viewModel: LoginModels.LoginAction.ViewModelFailure)
 }
 
 class LoginViewController: UIViewController {
@@ -74,10 +74,8 @@ class LoginViewController: UIViewController {
             self.interactor?.loginUser(request)
         }
     }
-}
-
-extension LoginViewController: LoginDisplayLogic {
-    func makeLoginEnabled() {
+    
+    private func makeLoginEnabled() {
         let button = loginView.loginButton
         
         button.isEnabled = true
@@ -85,8 +83,17 @@ extension LoginViewController: LoginDisplayLogic {
             button.alpha = 1
         }
     }
+}
+
+extension LoginViewController: LoginDisplayLogic {
+    func displayLoginSuccess() {
+        DispatchQueue.main.async {
+            self.loginView.window?.switchRootViewController(TabBarController())
+            self.makeLoginEnabled()
+        }
+    }
     
-    func presentErrorAlert(_ viewModel: LoginModels.LoginAction.ViewModelFailure) {
+    func displayErrorAlert(_ viewModel: LoginModels.LoginAction.ViewModelFailure) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: viewModel.errorMessage, message: nil, preferredStyle: .alert)
             let action = UIAlertAction(title: String(localized: "view.login.alert.action.dismiss"), style: .default)

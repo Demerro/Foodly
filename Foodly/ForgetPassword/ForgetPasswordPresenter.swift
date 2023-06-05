@@ -10,11 +10,11 @@ class ForgetPasswordPresenter {
 // MARK: - ForgetPasswordPresentationLogic
 extension ForgetPasswordPresenter: ForgetPasswordPresentationLogic {
     func presentSendPasswordResetSuccess(_ response: ForgetPasswordModels.SendPasswordReset.Response) {
-        viewController?.presentSuccessAlert()
+        viewController?.displaySuccessAlert()
     }
     
     func presentSendPasswordFailure(_ errorMessage: String) {
         let viewModel = ForgetPasswordModels.SendPasswordReset.ViewModelFailure(errorMessage: errorMessage)
-        viewController?.presentErrorAlert(viewModel)
+        viewController?.displayErrorAlert(viewModel)
     }
 }

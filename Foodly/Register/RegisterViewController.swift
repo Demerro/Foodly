@@ -1,8 +1,8 @@
 import UIKit
 
 protocol RegisterDisplayLogic: AnyObject {
-    func makeRegisterEnabled()
-    func presentErrorAlert(_ viewModel: RegisterModels.RegisterAction.ViewModelFailure)
+    func displayRegisterSuccess()
+    func displayErrorAlert(_ viewModel: RegisterModels.RegisterAction.ViewModelFailure)
 }
 
 class RegisterViewController: UIViewController {
@@ -61,11 +61,8 @@ class RegisterViewController: UIViewController {
             self.interactor?.registerUser(request)
         }
     }
-}
-
-// MARK: - RegisterDisplayLogic
-extension RegisterViewController: RegisterDisplayLogic {
-    func makeRegisterEnabled() {
+    
+    private func makeRegisterEnabled() {
         let button = registerView.registerButton
         
         button.isEnabled = true
@@ -73,8 +70,18 @@ extension RegisterViewController: RegisterDisplayLogic {
             button.alpha = 1
         }
     }
+}
+
+// MARK: - RegisterDisplayLogic
+extension RegisterViewController: RegisterDisplayLogic {
+    func displayRegisterSuccess() {
+        DispatchQueue.main.async {
+            self.registerView.window?.switchRootViewController(TabBarController())
+            self.makeRegisterEnabled()
+        }
+    }
     
-    func presentErrorAlert(_ viewModel: RegisterModels.RegisterAction.ViewModelFailure) {
+    func displayErrorAlert(_ viewModel: RegisterModels.RegisterAction.ViewModelFailure) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: viewModel.errorMessage, message: nil, preferredStyle: .alert)
             let action = UIAlertAction(title: String(localized: "view.register.alert.action.dismiss"), style: .default)

@@ -10,11 +10,11 @@ class RegisterPresenter {
 // MARK: - RegisterPresentationLogic
 extension RegisterPresenter: RegisterPresentationLogic {
     func presentRegisterSuccess(_ response: RegisterModels.RegisterAction.Response) {
-        viewController?.makeRegisterEnabled()
+        viewController?.displayRegisterSuccess()
     }
     
     func presentRegisterFailure(_ errorMessage: String) {
         let viewModel = RegisterModels.RegisterAction.ViewModelFailure(errorMessage: errorMessage)
-        viewController?.presentErrorAlert(viewModel)
+        viewController?.displayErrorAlert(viewModel)
     }
 }

@@ -1,8 +1,8 @@
 import UIKit
 
 protocol ForgetPasswordDisplayLogic: AnyObject {
-    func presentSuccessAlert()
-    func presentErrorAlert(_ viewModel: ForgetPasswordModels.SendPasswordReset.ViewModelFailure)
+    func displaySuccessAlert()
+    func displayErrorAlert(_ viewModel: ForgetPasswordModels.SendPasswordReset.ViewModelFailure)
 }
 
 class ForgetPasswordViewController: UIViewController {
@@ -68,7 +68,7 @@ class ForgetPasswordViewController: UIViewController {
 
 // MARK: - ForgetPasswordDisplayLogic
 extension ForgetPasswordViewController: ForgetPasswordDisplayLogic {
-    func presentSuccessAlert() {
+    func displaySuccessAlert() {
         DispatchQueue.main.async {
             let title = String(localized: "view.forgetPassword.alert.title")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -84,7 +84,7 @@ extension ForgetPasswordViewController: ForgetPasswordDisplayLogic {
         }
     }
     
-    func presentErrorAlert(_ viewModel: ForgetPasswordModels.SendPasswordReset.ViewModelFailure) {
+    func displayErrorAlert(_ viewModel: ForgetPasswordModels.SendPasswordReset.ViewModelFailure) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: viewModel.errorMessage, message: nil, preferredStyle: .alert)
             let action = UIAlertAction(title: String(localized: "view.forgetPassword.alert.dismiss"), style: .default)
