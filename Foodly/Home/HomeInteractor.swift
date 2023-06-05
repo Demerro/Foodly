@@ -6,10 +6,9 @@ protocol HomeBusinessLogic: AnyObject {
 }
 
 class HomeInteractor {
-    
-    private let database = Firestore.firestore()
-    
     var presenter: HomePresentationLogic?
+    var trendingFoodWorker: TrendingFoodWorkerLogic?
+    var restaurantsWorker: RestaurantsWorkerLogic?
 }
 
 // MARK: - HomeBusinessLogic
@@ -17,32 +16,12 @@ extension HomeInteractor: HomeBusinessLogic {
     func getTrendingFood(_ request: HomeModels.TrendingFoodAction.Request) {
         Task {
             do {
-                let references = try await getTrendingFoodReferences()
-                
-                let trendingFoodSnapshots = try await withThrowingTaskGroup(of: DocumentSnapshot.self, returning: [DocumentSnapshot].self) { taskGroup in
-                    for reference in references {
-                        taskGroup.addTask { try await reference.getDocument() }
-                    }
-                    
-                    var snapshots = [DocumentSnapshot]()
-                    for try await result in taskGroup {
-                        snapshots.append(result)
-                    }
-                    
-                    return snapshots
+                if let response = try await trendingFoodWorker?.getTrendingFood() {
+                    presenter?.presentTrendingFood(response)
                 }
-                
-                let response = HomeModels.TrendingFoodAction.Response(snapshots: trendingFoodSnapshots)
-                presenter?.presentTrendingFood(response)
             } catch {
                 print(error)
             }
-        }
-    }
-    
-    private func getTrendingFoodReferences() async throws -> [DocumentReference] {
-        try await database.collection("trendingNow").getDocuments().documents.compactMap {
-            return $0.data().values.first as? DocumentReference
         }
     }
     
@@ -51,14 +30,9 @@ extension HomeInteractor: HomeBusinessLogic {
         
         Task {
             do {
-                let searchResult = try await searcher.search(
-                    coordinate: request.coordinate,
-                    including: [.restaurant, .cafe, .bakery],
-                    radius: 300
-                )
-                
-                let response = HomeModels.RestaurantsAction.Response(mapItems: searchResult)
-                presenter?.presentNearbyRestaurants(response)
+                if let response = try await restaurantsWorker?.getNearbyRestaurants(request) {
+                    presenter?.presentNearbyRestaurants(response)
+                }
             } catch {
                 print(error)
             }

@@ -44,7 +44,7 @@ extension HomePresenter: HomePresentationLogic {
                 type = String(localized: "cell.restaurant.cafe")
                 
             case MKPointOfInterestCategory.bakery:
-                color = .systemYellow
+                color = .systemOrange
                 type = String(localized: "cell.restaurant.bakery")
                 
             default:

@@ -8,22 +8,11 @@ protocol HomeDisplayLogic: AnyObject {
 
 class HomeViewController: UIViewController {
     
+    var interactor: HomeBusinessLogic?
+    
     private let homeView = HomeView()
     private let locationManager = CLLocationManager()
     private var sections = [HomeModels.HomeSections]()
-    private var interactor: HomeBusinessLogic?
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        setup()
-    }
     
     override func loadView() {
         view = homeView
@@ -41,13 +30,8 @@ class HomeViewController: UIViewController {
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
         
-        sections.append(.news)
-        sections.append(.foodCategories([
-            HomeModels.FoodCategory(name: "Burgers", color: UIColor(named: "AccentColor")!, image: UIImage(named: "Burger")!),
-            HomeModels.FoodCategory(name: "Pizzas", color: .systemOrange, image: UIImage(named: "Pizza")!),
-            HomeModels.FoodCategory(name: "Cakes", color: .systemBlue, image: UIImage(named: "Cake")!),
-            HomeModels.FoodCategory(name: "Tacos", color: .systemGreen, image: UIImage(named: "Taco")!)
-        ]))
+        addNews()
+        addCategories()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +51,21 @@ class HomeViewController: UIViewController {
         ])
     }
     
+    private func addNews() {
+        sections.append(.news([
+            HomeModels.News(image: UIImage(named: "TopDeals")!)
+        ]))
+    }
+    
+    private func addCategories() {
+        sections.append(.foodCategories([
+            HomeModels.FoodCategory(name: "Burgers", color: UIColor(named: "AccentColor")!, image: UIImage(named: "Burger")!),
+            HomeModels.FoodCategory(name: "Pizzas", color: .systemOrange, image: UIImage(named: "Pizza")!),
+            HomeModels.FoodCategory(name: "Cakes", color: .systemBlue, image: UIImage(named: "Cake")!),
+            HomeModels.FoodCategory(name: "Tacos", color: .systemGreen, image: UIImage(named: "Taco")!)
+        ]))
+    }
+    
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -78,30 +77,21 @@ class HomeViewController: UIViewController {
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
             guard let self = self else { return nil }
+            let layoutCreator = SectionLayoutCreator()
             
             switch sections[sectionIndex] {
             case .news:
-                return createNewsSection()
+                return layoutCreator.createNewsSection()
             case .foodCategories:
-                return createFoodCategoriesSection()
+                return layoutCreator.createFoodCategoriesSection()
             case .trendingFood:
-                return createTrendingFoodSectionLayout()
+                return layoutCreator.createTrendingFoodSectionLayout()
             case .restaurants:
-                return createRestaurantsSectionLayout()
+                return layoutCreator.createRestaurantsSectionLayout()
             }
         }
         
         homeView.collectionView.collectionViewLayout = layout
-    }
-    
-    private func setup() {
-        let viewController = self
-        let interactor = HomeInteractor()
-        let presenter = HomePresenter()
-        
-        viewController.interactor = interactor
-        interactor.presenter = presenter
-        presenter.viewController = viewController
     }
     
     private func registerCollectionLayoutCells() {
@@ -149,8 +139,8 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch sections[section] {
-        case .news:
-            return 1
+        case let .news(news):
+            return news.count
         case let .foodCategories(categories):
             return categories.count
         case let .trendingFood(food):
@@ -162,10 +152,10 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch sections[indexPath.section] {
-        case .news:
+        case let .news(news):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
             
-            cell.configureView(image: UIImage(named: "TopDeals")!)
+            cell.configureView(image: news[indexPath.row].image)
             
             return cell
             
@@ -194,80 +184,13 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - CollectionViewLayout Sections
-extension HomeViewController {
-    private func createNewsSection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.2)),
-            subitems: [item]
-        )
-        
-        return createLayoutSection(group: group, scrollBehavior: .none)
-    }
-    
-    private func createFoodCategoriesSection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(0.15)),
-            subitems: [item]
-        )
-        
-        return createLayoutSection(group: group, scrollBehavior: .continuous)
-    }
-    
-    private func createTrendingFoodSectionLayout() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.3)),
-            subitems: [item]
-        )
-        
-        return createLayoutSection(group: group, scrollBehavior: .continuous)
-    }
-    
-    private func createRestaurantsSectionLayout() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.2)),
-            subitems: [item]
-        )
-        
-        return createLayoutSection(group: group, scrollBehavior: .continuous)
-    }
-    
-    private func createLayoutSection(
-        group: NSCollectionLayoutGroup,
-        scrollBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior
-    ) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = scrollBehavior
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20)
-        section.interGroupSpacing = 20
-        
-        return section
-    }
-}
-
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func displayTrendingFood(_ viewModel: HomeModels.TrendingFoodAction.ViewModel) {
-        sections.append(.trendingFood(viewModel.food))
+        sections.insert(.trendingFood(viewModel.food), at: 2)
         
         DispatchQueue.main.async {
-            self.homeView.collectionView.insertSections(IndexSet(integer: self.sections.count - 1))
+            self.homeView.collectionView.insertSections(IndexSet(integer: 2))
         }
     }
     
@@ -279,7 +202,7 @@ extension HomeViewController: HomeDisplayLogic {
                 return false
             }
         }
-        
+
         if let index = index {
             updateRestaurants(sectionIndex: index, restaurants: viewModel.restaurants)
         } else {
@@ -290,8 +213,8 @@ extension HomeViewController: HomeDisplayLogic {
     private func updateRestaurants(sectionIndex: Int, restaurants: [HomeModels.Restaurant]) {
         sections[sectionIndex] = .restaurants(restaurants)
         
-        DispatchQueue.main.async {
-            self.homeView.collectionView.reloadSections(IndexSet(integer: sectionIndex))
+        DispatchQueue.main.async { [homeView] in
+            homeView.collectionView.reloadSections(IndexSet(integer: sectionIndex))
         }
     }
     

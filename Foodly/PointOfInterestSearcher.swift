@@ -1,5 +1,4 @@
 import MapKit
-import Dependencies
 
 public final class PointOfInterestSearcher {
     /**

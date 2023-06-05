@@ -3,7 +3,7 @@ import MapKit
 
 struct HomeModels {
     enum HomeSections {
-        case news
+        case news([News])
         case foodCategories([FoodCategory])
         case trendingFood([Food])
         case restaurants([Restaurant])
@@ -35,18 +35,22 @@ struct HomeModels {
         }
     }
     
-    struct Food: Decodable {
-        let name: String
-        let description: String
-        let imageURL: String
-        let calories: Int
-        let price: Float
+    struct News {
+        let image: UIImage
     }
     
     struct FoodCategory {
         let name: String
         let color: UIColor
         let image: UIImage
+    }
+    
+    struct Food: Decodable {
+        let name: String
+        let description: String
+        let imageURL: String
+        let calories: Int
+        let price: Float
     }
     
     struct Restaurant {

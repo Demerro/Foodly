@@ -5,8 +5,11 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let homeFactory = DefaultHomeFactory()
+        homeFactory.homeConfigurator = HomeDefaultConfigurator()
+        
         let viewControllers = [
-            getNavigationController(rootViewController: HomeViewController())
+            getNavigationController(rootViewController: homeFactory.makeScene())
         ]
         
         setViewControllers(viewControllers, animated: false)
