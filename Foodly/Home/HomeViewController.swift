@@ -32,13 +32,7 @@ final class HomeViewController: UIViewController {
         
         addNews()
         addCategories()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let request = HomeModels.TrendingFoodAction.Request()
-        interactor?.getTrendingFood(request)
+        addTrendingFood()
     }
     
     private func setupNavBar() {
@@ -79,6 +73,11 @@ final class HomeViewController: UIViewController {
                 image: UIImage(named: "Taco")!
             )
         ]))
+    }
+    
+    private func addTrendingFood() {
+        let request = HomeModels.TrendingFoodAction.Request()
+        interactor?.getTrendingFood(request)
     }
     
     private func setupLocationManager() {
@@ -217,7 +216,7 @@ extension HomeViewController: HomeDisplayLogic {
                 return false
             }
         }
-
+        
         if let index = index {
             updateRestaurants(sectionIndex: index, restaurants: viewModel.restaurants)
         } else {
