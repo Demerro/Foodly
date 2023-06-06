@@ -1,3 +1,7 @@
+// MARK: - TabBar
+"tabBar.title.home" = "Home";
+"tabBar.title.profile" = "Profile";
+
 // MARK: - OnboardingScene
 
 "view.onboardingPage.title.0" = "Order Your Food";
@@ -39,6 +43,7 @@
 "view.register.button.register" = "Register";
 
 "view.register.alert.action.dismiss" = "Ok";
+"view.register.alert.error.nameEmpty" = "Name field can't be empty";
 
 // MARK: - ForgetPasswordScene
 

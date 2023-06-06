@@ -48,9 +48,10 @@ final class RegisterViewController: UIViewController {
     }
     
     private func registerUser() {
+        let name = registerView.nameTextField.text ?? ""
         let email = registerView.emailTextField.text ?? ""
         let password = registerView.passwordTextField.text ?? ""
-        let request = RegisterModels.RegisterAction.Request(email: email, password: password)
+        let request = RegisterModels.RegisterAction.Request(name: name, email: email, password: password)
         
         let button = registerView.registerButton
         
