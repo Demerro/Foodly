@@ -37,7 +37,12 @@ class SectionLayoutCreator {
             subitems: [item]
         )
         
-        return createLayoutSection(group: group, scrollBehavior: .continuous)
+        return createLayoutSection(
+            group: group,
+            scrollBehavior: .continuous,
+            contentInsets: NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20),
+            boundarySupplementaryItems: [createHeader()]
+        )
     }
     
     func createRestaurantsSectionLayout() -> NSCollectionLayoutSection {
@@ -50,18 +55,34 @@ class SectionLayoutCreator {
             subitems: [item]
         )
         
-        return createLayoutSection(group: group, scrollBehavior: .continuous)
+        return createLayoutSection(
+            group: group,
+            scrollBehavior: .continuous,
+            contentInsets: NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20),
+            boundarySupplementaryItems: [createHeader()]
+        )
     }
     
     private func createLayoutSection(
         group: NSCollectionLayoutGroup,
-        scrollBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior
+        scrollBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior,
+        contentInsets: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20),
+        boundarySupplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem] = []
     ) -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = scrollBehavior
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20)
+        section.contentInsets = contentInsets
         section.interGroupSpacing = 20
+        section.boundarySupplementaryItems = boundarySupplementaryItems
         
         return section
+    }
+    
+    private func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        return NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
     }
 }

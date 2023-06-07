@@ -6,7 +6,31 @@ struct HomeModels {
         case news([News])
         case foodCategories([FoodCategory])
         case trendingFood([Food])
-        case restaurants([Restaurant])
+        case nearbyRestaurants([Restaurant])
+        
+        var count: Int {
+            switch self {
+            case let .news(news):
+                return news.count
+            case let .foodCategories(categories):
+                return categories.count
+            case let .trendingFood(food):
+                return food.count
+            case let .nearbyRestaurants(restaurants):
+                return restaurants.count
+            }
+        }
+        
+        var title: String {
+            switch self {
+            case .trendingFood:
+                return String(localized: "view.home.sections.trendingFood.header")
+            case .nearbyRestaurants:
+                return String(localized: "view.home.sections.nearbyRestaurants.header")
+            default:
+                return ""
+            }
+        }
     }
     
     struct TrendingFoodAction {

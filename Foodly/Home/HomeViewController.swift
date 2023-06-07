@@ -25,7 +25,8 @@ final class HomeViewController: UIViewController {
         setupLocationManager()
         
         setupCollectionViewLayout()
-        registerCollectionLayoutCells()
+        registerCollectionViewCells()
+        registerCollectionViewSupplementaryElements()
         
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
@@ -100,7 +101,7 @@ final class HomeViewController: UIViewController {
                 return layoutCreator.createFoodCategoriesSection()
             case .trendingFood:
                 return layoutCreator.createTrendingFoodSectionLayout()
-            case .restaurants:
+            case .nearbyRestaurants:
                 return layoutCreator.createRestaurantsSectionLayout()
             }
         }
@@ -108,11 +109,19 @@ final class HomeViewController: UIViewController {
         homeView.collectionView.collectionViewLayout = layout
     }
     
-    private func registerCollectionLayoutCells() {
+    private func registerCollectionViewCells() {
         homeView.collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
         homeView.collectionView.register(FoodCategoryCollectionViewCell.self, forCellWithReuseIdentifier: FoodCategoryCollectionViewCell.identifier)
         homeView.collectionView.register(FoodCollectionViewCell.self, forCellWithReuseIdentifier: FoodCollectionViewCell.identifier)
         homeView.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: RestaurantCollectionViewCell.identifier)
+    }
+    
+    private func registerCollectionViewSupplementaryElements() {
+        homeView.collectionView.register(
+            CollectionViewHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: CollectionViewHeader.identifier
+        )
     }
 }
 
@@ -152,16 +161,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch sections[section] {
-        case let .news(news):
-            return news.count
-        case let .foodCategories(categories):
-            return categories.count
-        case let .trendingFood(food):
-            return food.count
-        case let .restaurants(restaurants):
-            return restaurants.count
-        }
+        return sections[section].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -187,13 +187,26 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.configureView(imageURL: URL(string: food.imageURL), name: food.name, price: food.price)
             
             return cell
-        case let .restaurants(restaurants):
+        case let .nearbyRestaurants(restaurants):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantCollectionViewCell.identifier, for: indexPath) as! RestaurantCollectionViewCell
             
             let restaurant = restaurants[indexPath.row]
             cell.configureView(name: restaurant.name, location: restaurant.location, badgeTitle: restaurant.type, badgeColor: restaurant.color)
             
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeader.identifier, for: indexPath) as! CollectionViewHeader
+            
+            header.configureView(text: sections[indexPath.section].title)
+            
+            return header
+        default:
+            return UICollectionReusableView()
         }
     }
 }
@@ -210,7 +223,7 @@ extension HomeViewController: HomeDisplayLogic {
     
     func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel) {
         let index = sections.firstIndex {
-            if case .restaurants = $0 {
+            if case .nearbyRestaurants = $0 {
                 return true
             } else {
                 return false
@@ -225,7 +238,7 @@ extension HomeViewController: HomeDisplayLogic {
     }
     
     private func updateRestaurants(sectionIndex: Int, restaurants: [HomeModels.Restaurant]) {
-        sections[sectionIndex] = .restaurants(restaurants)
+        sections[sectionIndex] = .nearbyRestaurants(restaurants)
         
         DispatchQueue.main.async { [homeView] in
             homeView.collectionView.reloadSections(IndexSet(integer: sectionIndex))
@@ -233,7 +246,7 @@ extension HomeViewController: HomeDisplayLogic {
     }
     
     private func addRestaurantsToEnd(restaurants: [HomeModels.Restaurant]) {
-        sections.append(.restaurants(restaurants))
+        sections.append(.nearbyRestaurants(restaurants))
         
         DispatchQueue.main.async {
             self.homeView.collectionView.insertSections(IndexSet(integer: self.sections.count - 1))

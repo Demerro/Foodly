@@ -72,3 +72,7 @@
 "cell.foodCategory.title.pizzas" = "Pizzas";
 "cell.foodCategory.title.cakes" = "Cakes";
 "cell.foodCategory.title.tacos" = "Tacos";
+
+// MARK: - HomeScene
+"view.home.sections.trendingFood.header" = "Trending Now";
+"view.home.sections.nearbyRestaurants.header" = "Restaurants Near You";
