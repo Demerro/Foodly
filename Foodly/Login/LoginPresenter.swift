@@ -1,6 +1,6 @@
 protocol LoginPresentationLogic: AnyObject {
     func presentLoginSuccess(_ response: LoginModels.LoginAction.Response)
-    func presentLoginError(message: String)
+    func presentLoginFailure(_ errorMessage: String)
 }
 
 class LoginPresenter {
@@ -12,7 +12,7 @@ extension LoginPresenter: LoginPresentationLogic {
         viewController?.displayLoginSuccess()
     }
     
-    func presentLoginError(message: String) {
+    func presentLoginFailure(_ errorMessage: String) {
         let viewModel = LoginModels.LoginAction.ViewModelFailure(errorMessage: message)
         viewController?.displayErrorAlert(viewModel)
     }

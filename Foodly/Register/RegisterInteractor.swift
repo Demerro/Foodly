@@ -16,23 +16,19 @@ extension RegisterInteractor: RegisterBusinessLogic {
             return
         }
         
-        Auth.auth().createUser(withEmail: request.email, password: request.password) { [weak presenter] result, error in
-            if let error = error {
+        Task {
+            do {
+                let authResult = try await Auth.auth().createUser(withEmail: request.email, password: request.password)
+                
+                let changeRequest = authResult.user.createProfileChangeRequest()
+                changeRequest.displayName = request.name
+                try await changeRequest.commitChanges()
+                
+                let response = RegisterModels.RegisterAction.Response()
+                presenter?.presentRegisterSuccess(response)
+            } catch {
                 presenter?.presentRegisterFailure(error.localizedDescription)
-                return
             }
-        }
-        
-        guard let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() else { return }
-        changeRequest.displayName = request.name
-        changeRequest.commitChanges { [weak presenter] error in
-            if let error = error {
-                presenter?.presentRegisterFailure(error.localizedDescription)
-                return
-            }
-            
-            let response = RegisterModels.RegisterAction.Response()
-            presenter?.presentRegisterSuccess(response)
         }
     }
 }
