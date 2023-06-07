@@ -61,6 +61,7 @@
 
 // MARK: - LocationView
 "view.location.title" = "Your Location";
+"view.location.error" = "Pleace enable location permissions.";
 
 // MARK: - RestaurantCollectionViewCell
 "cell.restaurant.restaurant" = "Restaurant";

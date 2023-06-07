@@ -64,6 +64,7 @@ final class LocationView: UIView {
     private let locationLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = String(localized: "view.location.error")
         label.numberOfLines = 1
         return label
     }()
