@@ -131,16 +131,13 @@ extension HomeViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         let geocoder = CLGeocoder()
         
-        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
-            guard let self = self else { return }
-            
+        geocoder.reverseGeocodeLocation(location) { [homeView, interactor] placemarks, error in
             if let error = error {
                 print(error)
                 return
             }
             
             guard let placemarkName = placemarks?.first?.name else { return }
-            
             homeView.locationView.setLocation(placemarkName)
             
             let request = HomeModels.RestaurantsAction.Request(coordinate: location.coordinate)
