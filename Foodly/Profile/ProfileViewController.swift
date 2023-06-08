@@ -1,13 +1,29 @@
 import UIKit
-import FirebaseAuth
+
+protocol ProfileDisplayLogic: AnyObject {
+    func displayUserProfileImage(_ viewModel: ProfileModels.UserProfileImageAction.ViewModel)
+    func displayUserName(_ viewModel: ProfileModels.UserNameAction.ViewModel)
+    func displayUserEmail(_ viewModel: ProfileModels.UserEmailAction.ViewModel)
+    func displayLogout(_ viewModel: ProfileModels.LogoutAction.ViewModel)
+}
 
 final class ProfileViewController: UIViewController {
     
     private let profileView = ProfileView()
+    private var interactor: ProfileBusinessLogic?
+    private var rows = [Row]()
     
-    private let rows = [
-        Row(title: "Customer support", image: UIImage(systemName: "questionmark.circle")!, handler: {})
-    ]
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        setup()
+    }
     
     override func loadView() {
         self.view = profileView
@@ -22,11 +38,7 @@ final class ProfileViewController: UIViewController {
         profileView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
         
         configureHeader()
-    }
-    
-    private func configureHeader() {
-        profileView.headerNameLabel.text = Auth.auth().currentUser!.displayName
-        profileView.headerEmailLabel.text = Auth.auth().currentUser!.email
+        addRows()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +51,37 @@ final class ProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    private func configureHeader() {
+        interactor?.getUserProfileImage(ProfileModels.UserProfileImageAction.Request())
+        interactor?.getUserName(ProfileModels.UserNameAction.Request())
+        interactor?.getUserEmail(ProfileModels.UserEmailAction.Request())
+    }
+    
+    private func addRows() {
+        rows += [
+            Row(
+                title: String(localized: "view.profile.tableView.row.preferences"),
+                image: UIImage(systemName: "gearshape")!,
+                handler: { }
+            ),
+            Row(
+                title: String(localized: "view.profile.tableView.row.logout"),
+                image: UIImage(systemName: "rectangle.portrait.and.arrow.right")!,
+                handler: { [interactor] in interactor?.logout(ProfileModels.LogoutAction.Request()) }
+            )
+        ]
+    }
+    
+    private func setup() {
+        let viewController = self
+        let interactor = ProfileInteractor()
+        let presenter = ProfilePresenter()
+        
+        viewController.interactor = interactor
+        interactor.presenter = presenter
+        presenter.viewController = viewController
     }
 }
 
@@ -54,14 +97,40 @@ extension ProfileViewController: UITableViewDataSource {
         
         config.text = model.title
         config.image = model.image
+        
         cell.contentConfiguration = config
+        
+        if indexPath.row != rows.count - 1 {
+            cell.accessoryType = .disclosureIndicator
+        }
         
         return cell
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        rows[indexPath.row].handler()
+    }
+}
+
+// MARK: - ProfileDisplayLogic
+extension ProfileViewController: ProfileDisplayLogic {
+    func displayUserProfileImage(_ viewModel: ProfileModels.UserProfileImageAction.ViewModel) {
+        profileView.headerImageView.kf.setImage(with: viewModel.imageURL)
+    }
+    
+    func displayUserName(_ viewModel: ProfileModels.UserNameAction.ViewModel) {
+        profileView.headerNameLabel.text = viewModel.name
+    }
+    
+    func displayUserEmail(_ viewModel: ProfileModels.UserEmailAction.ViewModel) {
+        profileView.headerEmailLabel.text = viewModel.email
+    }
+    
+    func displayLogout(_ viewModel: ProfileModels.LogoutAction.ViewModel) {
+        self.view.window?.switchRootViewController(LoginViewController())
     }
 }

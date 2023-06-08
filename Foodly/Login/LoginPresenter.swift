@@ -13,7 +13,7 @@ extension LoginPresenter: LoginPresentationLogic {
     }
     
     func presentLoginFailure(_ errorMessage: String) {
-        let viewModel = LoginModels.LoginAction.ViewModelFailure(errorMessage: message)
+        let viewModel = LoginModels.LoginAction.ViewModelFailure(errorMessage: errorMessage)
         viewController?.displayErrorAlert(viewModel)
     }
 }

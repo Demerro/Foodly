@@ -77,3 +77,7 @@
 // MARK: - HomeScene
 "view.home.sections.trendingFood.header" = "Trending Now";
 "view.home.sections.nearbyRestaurants.header" = "Restaurants Near You";
+
+// MARK: - ProfileScene
+"view.profile.tableView.row.preferences" = "Preferences";
+"view.profile.tableView.row.logout" = "Logout";
