@@ -26,8 +26,6 @@ extension HomeInteractor: HomeBusinessLogic {
     }
     
     func getNearbyRestaurants(_ request: HomeModels.RestaurantsAction.Request) {
-        let searcher = PointOfInterestSearcher()
-        
         Task {
             do {
                 if let response = try await restaurantsWorker?.getNearbyRestaurants(request) {
