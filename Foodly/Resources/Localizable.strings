@@ -81,3 +81,13 @@
 // MARK: - ProfileScene
 "view.profile.tableView.row.preferences" = "Preferences";
 "view.profile.tableView.row.logout" = "Logout";
+
+// MARK: - PreferencesScene
+"view.preferences.tableView.row.accountInformation.title" = "Account Information";
+"view.preferences.tableView.row.accountInformation.subtitle" = "Change your Account information";
+
+"view.preferences.tableView.row.password.title" = "Password";
+"view.preferences.tableView.row.password.subtitle" = "Change your Password";
+
+"view.preferences.tableView.row.deliveryLocations.title" = "Delivery Locations";
+"view.preferences.tableView.row.deliveryLocations.subtitle" = "Edit Or Change Your Daily Delivery Locations";
