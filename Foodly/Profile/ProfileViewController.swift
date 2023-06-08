@@ -11,6 +11,7 @@ final class ProfileViewController: UIViewController {
     
     private let profileView = ProfileView()
     private var interactor: ProfileBusinessLogic?
+    private var router: ProfileRouter?
     private var rows = [Row]()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -64,7 +65,7 @@ final class ProfileViewController: UIViewController {
             Row(
                 title: String(localized: "view.profile.tableView.row.preferences"),
                 image: UIImage(systemName: "gearshape")!,
-                handler: { }
+                handler: { [router] in router?.navigateToPreferences() }
             ),
             Row(
                 title: String(localized: "view.profile.tableView.row.logout"),
@@ -78,10 +79,13 @@ final class ProfileViewController: UIViewController {
         let viewController = self
         let interactor = ProfileInteractor()
         let presenter = ProfilePresenter()
+        let router = ProfileRouter()
         
         viewController.interactor = interactor
+        viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
+        router.viewController = viewController
     }
 }
 
