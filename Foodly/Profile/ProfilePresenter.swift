@@ -1,5 +1,5 @@
 protocol ProfilePresentationLogic: AnyObject {
-    func presentUserProfileImage(_ response: ProfileModels.UserProfileImageAction.Response)
+    func presentUserProfileImage(_ response: ProfileModels.GetUserProfileImageAction.Response)
     func presentUserName(_ response: ProfileModels.UserNameAction.Response)
     func presentUserEmail(_ response: ProfileModels.UserEmailAction.Response)
     func presentLogout(_ response: ProfileModels.LogoutAction.Response)
@@ -11,8 +11,8 @@ class ProfilePresenter {
 
 // MARK: - ProfilePresentationLogic
 extension ProfilePresenter: ProfilePresentationLogic {
-    func presentUserProfileImage(_ response: ProfileModels.UserProfileImageAction.Response) {
-        let viewModel = ProfileModels.UserProfileImageAction.ViewModel(imageURL: response.imageURL)
+    func presentUserProfileImage(_ response: ProfileModels.GetUserProfileImageAction.Response) {
+        let viewModel = ProfileModels.GetUserProfileImageAction.ViewModel(imageURL: response.imageURL)
         viewController?.displayUserProfileImage(viewModel)
     }
     

@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ProfileDisplayLogic: AnyObject {
-    func displayUserProfileImage(_ viewModel: ProfileModels.UserProfileImageAction.ViewModel)
+    func displayUserProfileImage(_ viewModel: ProfileModels.GetUserProfileImageAction.ViewModel)
     func displayUserName(_ viewModel: ProfileModels.UserNameAction.ViewModel)
     func displayUserEmail(_ viewModel: ProfileModels.UserEmailAction.ViewModel)
     func displayLogout(_ viewModel: ProfileModels.LogoutAction.ViewModel)
@@ -55,9 +55,12 @@ final class ProfileViewController: UIViewController {
     }
     
     private func configureHeader() {
-        interactor?.getUserProfileImage(ProfileModels.UserProfileImageAction.Request())
+        interactor?.getUserProfileImage(ProfileModels.GetUserProfileImageAction.Request())
         interactor?.getUserName(ProfileModels.UserNameAction.Request())
         interactor?.getUserEmail(ProfileModels.UserEmailAction.Request())
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleHeaderTap))
+        profileView.headerStackView.addGestureRecognizer(gestureRecognizer)
     }
     
     private func addRows() {
@@ -86,6 +89,19 @@ final class ProfileViewController: UIViewController {
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
+    }
+    
+    @objc private func handleHeaderTap(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: profileView.headerStackView)
+        if profileView.headerImageView.frame.contains(location) || profileView.headerChangeImageView.frame.contains(location) {
+            showImagePicker()
+        }
+    }
+    
+    private func showImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true)
     }
 }
 
@@ -120,9 +136,23 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] as? UIImage else { return }
+        
+        profileView.headerImageView.image = image
+        
+        let request = ProfileModels.SetUserProfileImageAction.Request(image: image)
+        interactor?.setUserProfileImage(request)
+        
+        self.dismiss(animated: true)
+    }
+}
+
 // MARK: - ProfileDisplayLogic
 extension ProfileViewController: ProfileDisplayLogic {
-    func displayUserProfileImage(_ viewModel: ProfileModels.UserProfileImageAction.ViewModel) {
+    func displayUserProfileImage(_ viewModel: ProfileModels.GetUserProfileImageAction.ViewModel) {
         profileView.headerImageView.kf.setImage(with: viewModel.imageURL)
     }
     

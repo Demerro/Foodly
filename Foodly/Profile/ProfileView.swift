@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class ProfileView: UIView {
     override init(frame: CGRect) {
@@ -33,17 +34,23 @@ final class ProfileView: UIView {
     private func configureTableViewHeader() {
         let container = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width / 2))
         container.addSubview(headerStackView)
+        container.addSubview(headerChangeImageView)
         
         headerStackView.addArrangedSubview(headerImageView)
         headerStackView.addArrangedSubview(headerNameLabel)
         headerStackView.addArrangedSubview(headerEmailLabel)
         
         headerStackView.snp.makeConstraints {
-            $0.center.equalTo(container.snp.center)
+            $0.center.equalTo(container)
         }
         
         headerImageView.snp.makeConstraints {
-            $0.width.height.equalTo(100)
+            $0.size.equalTo(100)
+        }
+        
+        headerChangeImageView.snp.makeConstraints {
+            $0.size.equalTo(32)
+            $0.trailing.bottom.equalTo(headerImageView)
         }
         
         tableView.tableHeaderView = container
@@ -58,8 +65,20 @@ final class ProfileView: UIView {
     let headerImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.kf.indicatorType = .activity
         imageView.image = UIImage(named: "ProfilePlaceholder")!
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 50
+        return imageView
+    }()
+    
+    let headerChangeImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "photo.circle")!)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .systemGroupedBackground
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 16
         return imageView
     }()
     
@@ -80,6 +99,7 @@ final class ProfileView: UIView {
     let headerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isUserInteractionEnabled = true
         stackView.axis = .vertical
         stackView.alignment = .center
         return stackView

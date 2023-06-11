@@ -1,7 +1,8 @@
 import Foundation
+import UIKit
 
 struct ProfileModels {
-    struct UserProfileImageAction {
+    struct GetUserProfileImageAction {
         struct Request { }
         
         struct Response {
@@ -35,6 +36,16 @@ struct ProfileModels {
         struct ViewModel {
             let email: String
         }
+    }
+    
+    struct SetUserProfileImageAction {
+        struct Request {
+            let image: UIImage
+        }
+        
+        struct Response { }
+        
+        struct ViewModel { }
     }
     
     struct LogoutAction {
