@@ -10,6 +10,7 @@ protocol ProfileDisplayLogic: AnyObject {
 final class ProfileViewController: UIViewController {
     
     private let profileView = ProfileView()
+    private let imagePicker = UIImagePickerController()
     private var interactor: ProfileBusinessLogic?
     private var router: ProfileRouter?
     private var rows = [Row]()
@@ -33,6 +34,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imagePicker.delegate = self
         profileView.tableView.dataSource = self
         profileView.tableView.delegate = self
         
@@ -94,14 +96,8 @@ final class ProfileViewController: UIViewController {
     @objc private func handleHeaderTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: profileView.headerStackView)
         if profileView.headerImageView.frame.contains(location) || profileView.headerChangeImageView.frame.contains(location) {
-            showImagePicker()
+            self.present(imagePicker, animated: true)
         }
-    }
-    
-    private func showImagePicker() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        self.present(imagePicker, animated: true)
     }
 }
 
