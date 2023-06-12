@@ -48,7 +48,7 @@ final class FoodCollectionViewCell: UICollectionViewCell {
     }
     
     func configureView(imageURL: URL?, name: String, price: Float) {
-        foodImageView.kf.setImage(with: imageURL, placeholder: UIImage(systemName: "fork.knife"))
+        foodImageView.kf.setImage(with: imageURL)
         nameLabel.text = name
         priceLabel.attributedText = makePriceText(
             value: price,
@@ -83,6 +83,7 @@ final class FoodCollectionViewCell: UICollectionViewCell {
     private let foodImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.kf.indicatorType = .activity
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
