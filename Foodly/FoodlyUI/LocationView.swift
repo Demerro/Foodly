@@ -1,6 +1,13 @@
 import UIKit
 
 final class LocationView: UIView {
+    
+    var location: String? {
+        didSet {
+            locationLabel.text = location
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -23,10 +30,6 @@ final class LocationView: UIView {
         rootStackView.addArrangedSubview(locationLabel)
 
         addSubview(rootStackView)
-    }
-    
-    func setLocation(_ location: String) {
-        locationLabel.text = location
     }
     
     private let rootStackView: UIStackView = {

@@ -3,23 +3,63 @@ import SnapKit
 
 final class FormCardView: UIView {
     
-    let title: String
-    let subtitle: String?
-    let image: UIImage
+    var image: UIImage! {
+        didSet {
+            imageView.image = image
+        }
+    }
     
-    init(title: String, subtitle: String? = nil, image: UIImage) {
-        self.title = title
-        self.subtitle = subtitle
-        self.image = image
+    var title: String! {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+    
+    var subtitle: String? {
+        didSet {
+            subtitleLabel.text = subtitle
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .secondarySystemGroupedBackground
-        layer.cornerRadius = 15
-        
+        self.backgroundColor = .secondarySystemGroupedBackground
+        configureCorners()
         addSubviews()
-        configureViews()
+        addConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         
+        self.backgroundColor = .secondarySystemGroupedBackground
+        configureCorners()
+        addSubviews()
+        addConstraints()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        imageContainerView.layer.cornerRadius = imageContainerView.bounds.height / 2
+    }
+    
+    private func configureCorners() {
+        self.layer.cornerCurve = .continuous
+        self.layer.cornerRadius = 15
+    }
+    
+    private func addSubviews() {
+        imageContainerView.addSubview(imageView)
+        addSubview(imageContainerView)
+        
+        labelStackView.addArrangedSubview(titleLabel)
+        labelStackView.addArrangedSubview(subtitleLabel)
+        addSubview(labelStackView)
+    }
+    
+    private func addConstraints() {
         imageView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
@@ -37,31 +77,6 @@ final class FormCardView: UIView {
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        imageContainerView.layer.cornerRadius = imageContainerView.bounds.height / 2
-    }
-    
-    private func addSubviews() {
-        imageContainerView.addSubview(imageView)
-        addSubview(imageContainerView)
-        
-        labelStackView.addArrangedSubview(titleLabel)
-        labelStackView.addArrangedSubview(subtitleLabel)
-        addSubview(labelStackView)
-    }
-    
-    private func configureViews() {
-        imageView.image = image
-        titleLabel.text = title
-        subtitleLabel.text = subtitle
-    }
-    
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +88,7 @@ final class FormCardView: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: "AccentColor")!.withAlphaComponent(0.2)
+        view.layer.cornerCurve = .continuous
         return view
     }()
     

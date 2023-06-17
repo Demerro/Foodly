@@ -2,26 +2,29 @@ import UIKit
 
 final class FormTextField: UITextField {
     
-    let leftImage: UIImage?
+    var leftImage: UIImage? {
+        didSet {
+            configureLeftView()
+        }
+    }
     
-    init(leadingImage: UIImage?) {
-        self.leftImage = leadingImage
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 15
-        
+        self.layer.cornerRadius = 15
         configureColors()
-        configureLeftView()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        
+        self.layer.cornerRadius = 15
+        configureColors()
     }
     
     private func configureColors() {
-        backgroundColor = .secondarySystemGroupedBackground
-        tintColor = UIColor(named: "AccentColor")
+        self.backgroundColor = .secondarySystemGroupedBackground
+        self.tintColor = UIColor(named: "AccentColor")
     }
     
     private func configureLeftView() {
@@ -34,7 +37,7 @@ final class FormTextField: UITextField {
         
         containerView.addSubview(imageView)
         
-        leftViewMode = .always
-        leftView = containerView
+        self.leftViewMode = .always
+        self.leftView = containerView
     }
 }

@@ -63,16 +63,21 @@ class ForgetPasswordView: UIView {
     }()
     
     private let cardView: FormCardView = {
-        return FormCardView(
-            title: String(localized: "view.forgetPassword.cardView.email.title"),
-            subtitle: String(localized: "view.forgetPassword.cardView.email.subtitle"),
-            image: UIImage(systemName: "envelope")!
-        )
+        let cardView = FormCardView()
+        
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        cardView.title = String(localized: "view.forgetPassword.cardView.email.title")
+        cardView.subtitle = String(localized: "view.forgetPassword.cardView.email.subtitle")
+        cardView.image = UIImage(systemName: "envelope")!
+        
+        return cardView
     }()
     
     let emailTextField: FormTextField = {
-        let textField = FormTextField(leadingImage: UIImage(systemName: "envelope")!)
+        let textField = FormTextField()
         
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.leftImage = UIImage(systemName: "envelope")!
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none

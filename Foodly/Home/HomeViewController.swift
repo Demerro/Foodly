@@ -138,7 +138,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             }
             
             guard let placemarkName = placemarks?.first?.name else { return }
-            homeView.locationView.setLocation(placemarkName)
+            homeView.locationView.location = placemarkName
             
             let request = HomeModels.RestaurantsAction.Request(coordinate: location.coordinate)
             interactor?.getNearbyRestaurants(request)

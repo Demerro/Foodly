@@ -97,8 +97,10 @@ class LoginView: UIView {
     }()
     
     let emailTextField: FormTextField = {
-        let textField = FormTextField(leadingImage: UIImage(systemName: "envelope")!)
+        let textField = FormTextField()
         
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.leftImage = UIImage(systemName: "envelope")!
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -109,8 +111,10 @@ class LoginView: UIView {
     }()
     
     let passwordTextField: FormTextField = {
-        let textField = FormTextField(leadingImage: UIImage(systemName: "lock")!)
+        let textField = FormTextField()
         
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.leftImage = UIImage(systemName: "lock")!
         textField.textContentType = .password
         textField.isSecureTextEntry = true
         textField.placeholder = String(localized: "view.login.textField.placeholder.password")

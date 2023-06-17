@@ -67,8 +67,10 @@ class RegisterView: UIView {
     }()
     
     let nameTextField: FormTextField = {
-        let textField = FormTextField(leadingImage: UIImage(systemName: "person")!)
+        let textField = FormTextField()
         
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.leftImage = UIImage(systemName: "person")!
         textField.textContentType = .name
         textField.keyboardType = .namePhonePad
         textField.placeholder = String(localized: "view.register.textField.placeholder.name")
@@ -77,8 +79,10 @@ class RegisterView: UIView {
     }()
     
     let emailTextField: FormTextField = {
-        let textField = FormTextField(leadingImage: UIImage(systemName: "envelope")!)
+        let textField = FormTextField()
         
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.leftImage = UIImage(systemName: "envelope")!
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -89,8 +93,10 @@ class RegisterView: UIView {
     }()
     
     let passwordTextField: FormTextField = {
-        let textField = FormTextField(leadingImage: UIImage(systemName: "lock")!)
+        let textField = FormTextField()
         
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.leftImage = UIImage(systemName: "lock")!
         textField.textContentType = .password
         textField.isSecureTextEntry = true
         textField.placeholder = String(localized: "view.register.textField.placeholder.password")
