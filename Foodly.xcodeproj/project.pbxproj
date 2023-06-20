@@ -40,11 +40,15 @@
 		6976576B2A18A43400DF38EA /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976576A2A18A43400DF38EA /* TabBarController.swift */; };
 		6976576E2A18A4A800DF38EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976576D2A18A4A800DF38EA /* HomeViewController.swift */; };
 		697A68D62A306525007CE40C /* CollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A68D52A306525007CE40C /* CollectionViewHeader.swift */; };
+		698BF3E62A3CC1BF00AE3F8E /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BF3E52A3CC1BF00AE3F8E /* Stepper.swift */; };
 		69905F002A180DFC0037516C /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69905EFF2A180DFC0037516C /* AuthRouter.swift */; };
 		69947D432A1283AB0062A04F /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D422A1283AB0062A04F /* LoginModels.swift */; };
 		69947D4D2A12A2F60062A04F /* UIWindow + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D4C2A12A2F60062A04F /* UIWindow + Extensions.swift */; };
 		69947D502A12A7C00062A04F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69947D4F2A12A7C00062A04F /* RegisterViewController.swift */; };
 		6994BBF72A2DAE7B00673850 /* HomeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6994BBF62A2DAE7B00673850 /* HomeConfigurator.swift */; };
+		6999B3DF2A38BB5100E83C9E /* FoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6999B3DE2A38BB5100E83C9E /* FoodDetailsViewController.swift */; };
+		6999B3E12A38BC2900E83C9E /* FoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6999B3E02A38BC2900E83C9E /* FoodDetailsView.swift */; };
+		6999B3E32A38D96700E83C9E /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6999B3E22A38D96700E83C9E /* PriceView.swift */; };
 		699F3D2B2A16381400F56A9C /* ForgetPasswordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F3D2A2A16381400F56A9C /* ForgetPasswordModels.swift */; };
 		699F3D2D2A163A8D00F56A9C /* ForgetPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F3D2C2A163A8D00F56A9C /* ForgetPasswordInteractor.swift */; };
 		699F3D2F2A163B1700F56A9C /* ForgetPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F3D2E2A163B1700F56A9C /* ForgetPasswordPresenter.swift */; };
@@ -108,11 +112,15 @@
 		6976576A2A18A43400DF38EA /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		6976576D2A18A4A800DF38EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		697A68D52A306525007CE40C /* CollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeader.swift; sourceTree = "<group>"; };
+		698BF3E52A3CC1BF00AE3F8E /* Stepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
 		69905EFF2A180DFC0037516C /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		69947D422A1283AB0062A04F /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		69947D4C2A12A2F60062A04F /* UIWindow + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow + Extensions.swift"; sourceTree = "<group>"; };
 		69947D4F2A12A7C00062A04F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		6994BBF62A2DAE7B00673850 /* HomeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeConfigurator.swift; sourceTree = "<group>"; };
+		6999B3DE2A38BB5100E83C9E /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
+		6999B3E02A38BC2900E83C9E /* FoodDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsView.swift; sourceTree = "<group>"; };
+		6999B3E22A38D96700E83C9E /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		699F3D2A2A16381400F56A9C /* ForgetPasswordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordModels.swift; sourceTree = "<group>"; };
 		699F3D2C2A163A8D00F56A9C /* ForgetPasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordInteractor.swift; sourceTree = "<group>"; };
 		699F3D2E2A163B1700F56A9C /* ForgetPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -162,6 +170,8 @@
 				69DC1A9F2A277E0F00B0C700 /* FoodCollectionViewCell.swift */,
 				69BC399F2A29E44400545DBD /* FoodCategoryCollectionViewCell.swift */,
 				697A68D52A306525007CE40C /* CollectionViewHeader.swift */,
+				6999B3E22A38D96700E83C9E /* PriceView.swift */,
+				698BF3E52A3CC1BF00AE3F8E /* Stepper.swift */,
 			);
 			path = FoodlyUI;
 			sourceTree = "<group>";
@@ -197,6 +207,7 @@
 		692247682A0A9DEB0025C682 /* Foodly */ = {
 			isa = PBXGroup;
 			children = (
+				6999B3DD2A38BB4200E83C9E /* FoodDetails */,
 				69E3D9B42A31E1A200F411CF /* AccountInformation */,
 				69E3D9AF2A31DA5400F411CF /* Preferences */,
 				69E3D9AE2A31D9EC00F411CF /* FoodlyCore */,
@@ -289,6 +300,15 @@
 				6917A8302A14E29F002EFA5D /* RegisterPresenter.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		6999B3DD2A38BB4200E83C9E /* FoodDetails */ = {
+			isa = PBXGroup;
+			children = (
+				6999B3DE2A38BB5100E83C9E /* FoodDetailsViewController.swift */,
+				6999B3E02A38BC2900E83C9E /* FoodDetailsView.swift */,
+			);
+			path = FoodDetails;
 			sourceTree = "<group>";
 		};
 		69B2D93D2A0E991900323A8A /* Login */ = {
@@ -419,8 +439,10 @@
 				6917A8362A151664002EFA5D /* ForgetPasswordView.swift in Sources */,
 				6912DA322A10D215002785E3 /* Router.swift in Sources */,
 				6917A8342A151646002EFA5D /* ForgetPasswordViewController.swift in Sources */,
+				6999B3DF2A38BB5100E83C9E /* FoodDetailsViewController.swift in Sources */,
 				69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */,
 				69BC39A02A29E44400545DBD /* FoodCategoryCollectionViewCell.swift in Sources */,
+				6999B3E32A38D96700E83C9E /* PriceView.swift in Sources */,
 				69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */,
 				692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */,
 				6932F8DA2A2B80D900AD1633 /* RestaurantsWorker.swift in Sources */,
@@ -460,12 +482,14 @@
 				69947D432A1283AB0062A04F /* LoginModels.swift in Sources */,
 				69DC1A992A276A7E00B0C700 /* NewsCollectionViewCell.swift in Sources */,
 				699F3D2B2A16381400F56A9C /* ForgetPasswordModels.swift in Sources */,
+				6999B3E12A38BC2900E83C9E /* FoodDetailsView.swift in Sources */,
 				69905F002A180DFC0037516C /* AuthRouter.swift in Sources */,
 				69544D1E2A2DDAB3008AF4BC /* SceneFactory.swift in Sources */,
 				695E8D232A1A8795009F381B /* LocationView.swift in Sources */,
 				6912DA302A10C379002785E3 /* LoginInteractor.swift in Sources */,
 				69544D212A2DE3F2008AF4BC /* ProfileViewController.swift in Sources */,
 				69DC1AA02A277E0F00B0C700 /* FoodCollectionViewCell.swift in Sources */,
+				698BF3E62A3CC1BF00AE3F8E /* Stepper.swift in Sources */,
 				6922476C2A0A9DEB0025C682 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
