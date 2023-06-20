@@ -56,6 +56,8 @@
 		69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2D9402A0E993700323A8A /* LoginViewController.swift */; };
 		69B9AD402A0BBD2500A48E05 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 69B9AD3F2A0BBD2500A48E05 /* SnapKit */; };
 		69BC39A02A29E44400545DBD /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC399F2A29E44400545DBD /* FoodCategoryCollectionViewCell.swift */; };
+		69CA7CB92A41B94B007E24C1 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA7CB82A41B94B007E24C1 /* HomeRouter.swift */; };
+		69CA7CBC2A41C2D5007E24C1 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA7CBB2A41C2D5007E24C1 /* Food.swift */; };
 		69D2202A2A1C94060011DE4C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D220292A1C94060011DE4C /* HomeView.swift */; };
 		69DC1A992A276A7E00B0C700 /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC1A982A276A7E00B0C700 /* NewsCollectionViewCell.swift */; };
 		69DC1AA02A277E0F00B0C700 /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC1A9F2A277E0F00B0C700 /* FoodCollectionViewCell.swift */; };
@@ -127,6 +129,8 @@
 		69B2D93E2A0E992800323A8A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		69B2D9402A0E993700323A8A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		69BC399F2A29E44400545DBD /* FoodCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		69CA7CB82A41B94B007E24C1 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		69CA7CBB2A41C2D5007E24C1 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		69D220292A1C94060011DE4C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		69DC1A982A276A7E00B0C700 /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		69DC1A9F2A277E0F00B0C700 /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 		692247682A0A9DEB0025C682 /* Foodly */ = {
 			isa = PBXGroup;
 			children = (
+				69CA7CBA2A41C282007E24C1 /* Models */,
 				6999B3DD2A38BB4200E83C9E /* FoodDetails */,
 				69E3D9B42A31E1A200F411CF /* AccountInformation */,
 				69E3D9AF2A31DA5400F411CF /* Preferences */,
@@ -227,6 +232,7 @@
 				69FCCBE52A1FCE1F00E34D14 /* PointOfInterestSearcher.swift */,
 				69544D1D2A2DDAB3008AF4BC /* SceneFactory.swift */,
 				69E3D9B22A31DD5900F411CF /* ProfileRouter.swift */,
+				69CA7CB82A41B94B007E24C1 /* HomeRouter.swift */,
 			);
 			path = Foodly;
 			sourceTree = "<group>";
@@ -321,6 +327,14 @@
 				69947D422A1283AB0062A04F /* LoginModels.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		69CA7CBA2A41C282007E24C1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				69CA7CBB2A41C2D5007E24C1 /* Food.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		69E3D9AE2A31D9EC00F411CF /* FoodlyCore */ = {
@@ -466,7 +480,9 @@
 				69E3D9B12A31DA6200F411CF /* PreferencesViewController.swift in Sources */,
 				6932F8D62A2B69F200AD1633 /* SectionLayoutCreator.swift in Sources */,
 				69E3D9AB2A31BE9E00F411CF /* ProfilePresenter.swift in Sources */,
+				69CA7CBC2A41C2D5007E24C1 /* Food.swift in Sources */,
 				69FCCBE22A1FCACB00E34D14 /* HomeInteractor.swift in Sources */,
+				69CA7CB92A41B94B007E24C1 /* HomeRouter.swift in Sources */,
 				69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */,
 				69E3D9B62A31E1B000F411CF /* AccountInformationViewController.swift in Sources */,
 				69FCCBE42A1FCAD300E34D14 /* HomePresenter.swift in Sources */,

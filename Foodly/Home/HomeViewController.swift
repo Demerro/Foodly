@@ -9,6 +9,7 @@ protocol HomeDisplayLogic: AnyObject {
 final class HomeViewController: UIViewController {
     
     var interactor: HomeBusinessLogic?
+    var router: HomeRouter?
     
     private let homeView = HomeView()
     private let locationManager = CLLocationManager()
@@ -148,7 +149,11 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if case let .trendingFood(food) = sections[indexPath.section] {
+            router?.navigateToFoodDetails(food: food[indexPath.row])
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource

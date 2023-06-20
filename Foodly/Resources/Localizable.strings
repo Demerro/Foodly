@@ -78,6 +78,11 @@
 "view.home.sections.trendingFood.header" = "Trending Now";
 "view.home.sections.nearbyRestaurants.header" = "Restaurants Near You";
 
+// MARK: - FoodDetailsScene
+"view.foodDetails.label.foodDescription" = "Description";
+"view.foodDetails.label.foodCalories.%lld" = "%lld calories";
+"view.foodDetails.button.addToCart" = "Add to cart";
+
 // MARK: - ProfileScene
 "view.profile.tableView.row.preferences" = "Preferences";
 "view.profile.tableView.row.logout" = "Logout";
