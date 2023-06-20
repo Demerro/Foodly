@@ -12,7 +12,7 @@ final class ProfileViewController: UIViewController {
     private let profileView = ProfileView()
     private let imagePicker = UIImagePickerController()
     private var interactor: ProfileBusinessLogic?
-    private var router: ProfileRouter?
+    private var router: ProfileRoutingLogic?
     private var rows = [Row]()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

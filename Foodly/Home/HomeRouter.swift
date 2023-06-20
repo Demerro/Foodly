@@ -1,6 +1,6 @@
 import UIKit
 
-protocol HomeRoutingLogic {
+protocol HomeRoutingLogic: AnyObject {
     func routeToFoodDetails()
 }
 

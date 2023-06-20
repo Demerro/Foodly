@@ -10,7 +10,7 @@ final class LoginViewController: UIViewController {
     private let loginView = LoginView()
     
     private var interactor: LoginBusinessLogic?
-    private var router: AuthRouter?
+    private var router: LoginRoutingLogic?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -37,7 +37,7 @@ final class LoginViewController: UIViewController {
         let viewController = self
         let interactor = LoginInteractor()
         let presenter = LoginPresenter()
-        let router = AuthRouter()
+        let router = LoginRouter()
         
         viewController.interactor = interactor
         viewController.router = router

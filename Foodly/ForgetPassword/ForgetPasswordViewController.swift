@@ -10,7 +10,6 @@ final class ForgetPasswordViewController: UIViewController {
     private let forgetPasswordView = ForgetPasswordView()
     
     private var interactor: ForgetPasswordBusinessLogic?
-    private var router: AuthRouter?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -42,13 +41,10 @@ final class ForgetPasswordViewController: UIViewController {
         let viewController = self
         let interactor = ForgetPasswordInteractor()
         let presenter = ForgetPasswordPresenter()
-        let router = AuthRouter()
         
         viewController.interactor = interactor
-        viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
-        router.viewController = viewController
     }
     
     private func resetPassword() {
@@ -72,8 +68,8 @@ extension ForgetPasswordViewController: ForgetPasswordDisplayLogic {
         DispatchQueue.main.async {
             let title = String(localized: "view.forgetPassword.alert.title")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: String(localized: "view.forgetPassword.alert.dismiss"), style: .default) { [weak router = self.router] _ in
-                router?.pop()
+            let action = UIAlertAction(title: String(localized: "view.forgetPassword.alert.dismiss"), style: .default) { _ in
+                self.dismiss(animated: true)
             }
             alert.addAction(action)
             
