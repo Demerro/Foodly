@@ -14,8 +14,12 @@ final class TabBarController: UITabBarController {
                 tabBarItem: UITabBarItem(title: String(localized: "tabBar.title.home"), image: UIImage(systemName: "house"), tag: 0)
             ),
             getNavigationController(
+                rootViewController: CartViewController(),
+                tabBarItem: UITabBarItem(title: String(localized: "tabBar.title.cart"), image: UIImage(systemName: "cart"), tag: 1)
+            ),
+            getNavigationController(
                 rootViewController: ProfileViewController(),
-                tabBarItem: UITabBarItem(title: String(localized: "tabBar.title.profile"), image: UIImage(systemName: "person"), tag: 0)
+                tabBarItem: UITabBarItem(title: String(localized: "tabBar.title.profile"), image: UIImage(systemName: "person"), tag: 2)
             )
         ]
         

@@ -6,8 +6,6 @@ protocol TrendingFoodWorkerLogic: AnyObject {
 
 class TrendingFoodWorker: TrendingFoodWorkerLogic {
     
-    private let database = Firestore.firestore()
-    
     func getTrendingFood() async throws -> HomeModels.TrendingFoodAction.Response {
         let references = try await getTrendingFoodReferences()
         
@@ -28,8 +26,10 @@ class TrendingFoodWorker: TrendingFoodWorkerLogic {
     }
     
     private func getTrendingFoodReferences() async throws -> [DocumentReference] {
-        try await database.collection("trendingNow").getDocuments().documents.compactMap {
-            return $0.data().values.first as? DocumentReference
+        let trendingFoodCollection = Firestore.firestore().collection("trendingNow")
+        
+        return try await trendingFoodCollection.getDocuments().documents.compactMap {
+            $0.data()["food"] as? DocumentReference
         }
     }
 }

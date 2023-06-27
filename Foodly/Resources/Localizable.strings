@@ -1,5 +1,6 @@
 // MARK: - TabBar
 "tabBar.title.home" = "Home";
+"tabBar.title.cart" = "Cart";
 "tabBar.title.profile" = "Profile";
 
 // MARK: - OnboardingScene
