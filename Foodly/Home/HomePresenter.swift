@@ -15,7 +15,9 @@ extension HomePresenter: HomePresentationLogic {
     func presentTrendingFood(_ response: HomeModels.TrendingFoodAction.Response) {
         let trendingFood = response.snapshots.compactMap { snapshot in
             do {
-                return try snapshot.data(as: Food.self)
+                var food = try snapshot.data(as: Food.self)
+                food.documentReference = snapshot.reference
+                return food
             } catch {
                 print(error)
             }

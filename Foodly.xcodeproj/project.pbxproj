@@ -78,6 +78,10 @@
 		69E3D9B32A31DD5900F411CF /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9B22A31DD5900F411CF /* ProfileRouter.swift */; };
 		69E3D9B62A31E1B000F411CF /* AccountInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9B52A31E1B000F411CF /* AccountInformationViewController.swift */; };
 		69E3D9B82A31E21600F411CF /* AccountInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9B72A31E21600F411CF /* AccountInformationView.swift */; };
+		69F7FA092A4AD687007F5D26 /* FoodDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7FA082A4AD687007F5D26 /* FoodDetailsInteractor.swift */; };
+		69F7FA0B2A4AD6C6007F5D26 /* FoodDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7FA0A2A4AD6C6007F5D26 /* FoodDetailsPresenter.swift */; };
+		69F7FA0D2A4B1DE2007F5D26 /* FoodDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7FA0C2A4B1DE2007F5D26 /* FoodDetailsModels.swift */; };
+		69F7FA0F2A4B26C1007F5D26 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7FA0E2A4B26C1007F5D26 /* CartItem.swift */; };
 		69FCCBE22A1FCACB00E34D14 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FCCBE12A1FCACB00E34D14 /* HomeInteractor.swift */; };
 		69FCCBE42A1FCAD300E34D14 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FCCBE32A1FCAD300E34D14 /* HomePresenter.swift */; };
 		69FCCBE62A1FCE1F00E34D14 /* PointOfInterestSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FCCBE52A1FCE1F00E34D14 /* PointOfInterestSearcher.swift */; };
@@ -152,6 +156,10 @@
 		69E3D9B22A31DD5900F411CF /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		69E3D9B52A31E1B000F411CF /* AccountInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationViewController.swift; sourceTree = "<group>"; };
 		69E3D9B72A31E21600F411CF /* AccountInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationView.swift; sourceTree = "<group>"; };
+		69F7FA082A4AD687007F5D26 /* FoodDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsInteractor.swift; sourceTree = "<group>"; };
+		69F7FA0A2A4AD6C6007F5D26 /* FoodDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsPresenter.swift; sourceTree = "<group>"; };
+		69F7FA0C2A4B1DE2007F5D26 /* FoodDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsModels.swift; sourceTree = "<group>"; };
+		69F7FA0E2A4B26C1007F5D26 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		69FCCBE12A1FCACB00E34D14 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		69FCCBE32A1FCAD300E34D14 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		69FCCBE52A1FCE1F00E34D14 /* PointOfInterestSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterestSearcher.swift; sourceTree = "<group>"; };
@@ -234,8 +242,8 @@
 		692247682A0A9DEB0025C682 /* Foodly */ = {
 			isa = PBXGroup;
 			children = (
-				691A78E42A45B3480005944A /* Cart */,
 				69CA7CBA2A41C282007E24C1 /* Models */,
+				691A78E42A45B3480005944A /* Cart */,
 				6999B3DD2A38BB4200E83C9E /* FoodDetails */,
 				69E3D9B42A31E1A200F411CF /* AccountInformation */,
 				69E3D9AF2A31DA5400F411CF /* Preferences */,
@@ -335,6 +343,9 @@
 			children = (
 				6999B3DE2A38BB5100E83C9E /* FoodDetailsViewController.swift */,
 				6999B3E02A38BC2900E83C9E /* FoodDetailsView.swift */,
+				69F7FA082A4AD687007F5D26 /* FoodDetailsInteractor.swift */,
+				69F7FA0A2A4AD6C6007F5D26 /* FoodDetailsPresenter.swift */,
+				69F7FA0C2A4B1DE2007F5D26 /* FoodDetailsModels.swift */,
 			);
 			path = FoodDetails;
 			sourceTree = "<group>";
@@ -356,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				69CA7CBB2A41C2D5007E24C1 /* Food.swift */,
+				69F7FA0E2A4B26C1007F5D26 /* CartItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -478,6 +490,7 @@
 				6917A8342A151646002EFA5D /* ForgetPasswordViewController.swift in Sources */,
 				6999B3DF2A38BB5100E83C9E /* FoodDetailsViewController.swift in Sources */,
 				69B2D9412A0E993700323A8A /* LoginViewController.swift in Sources */,
+				69F7FA0B2A4AD6C6007F5D26 /* FoodDetailsPresenter.swift in Sources */,
 				69BC39A02A29E44400545DBD /* FoodCategoryCollectionViewCell.swift in Sources */,
 				6999B3E32A38D96700E83C9E /* PriceView.swift in Sources */,
 				69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */,
@@ -485,6 +498,8 @@
 				6932F8DA2A2B80D900AD1633 /* RestaurantsWorker.swift in Sources */,
 				69947D4D2A12A2F60062A04F /* UIWindow + Extensions.swift in Sources */,
 				6917A82F2A14E248002EFA5D /* RegisterInteractor.swift in Sources */,
+				69F7FA0F2A4B26C1007F5D26 /* CartItem.swift in Sources */,
+				69F7FA0D2A4B1DE2007F5D26 /* FoodDetailsModels.swift in Sources */,
 				6994BBF72A2DAE7B00673850 /* HomeConfigurator.swift in Sources */,
 				6912DA2E2A10C175002785E3 /* LoginPresenter.swift in Sources */,
 				6917A82B2A13F5D1002EFA5D /* RegisterView.swift in Sources */,
@@ -530,6 +545,7 @@
 				691A78E62A45B3530005944A /* CartViewController.swift in Sources */,
 				695E8D232A1A8795009F381B /* LocationView.swift in Sources */,
 				6912DA302A10C379002785E3 /* LoginInteractor.swift in Sources */,
+				69F7FA092A4AD687007F5D26 /* FoodDetailsInteractor.swift in Sources */,
 				69544D212A2DE3F2008AF4BC /* ProfileViewController.swift in Sources */,
 				691A78E82A45B3660005944A /* CartInteractor.swift in Sources */,
 				69DC1AA02A277E0F00B0C700 /* FoodCollectionViewCell.swift in Sources */,

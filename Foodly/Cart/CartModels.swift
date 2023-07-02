@@ -1,9 +1,4 @@
 struct CartModels {
-    struct CartItem {
-        let food: Food
-        let amount: Int
-    }
-    
     struct FoodAction {
         struct Request { }
         

@@ -6,9 +6,9 @@ final class CartTableViewCell: UITableViewCell {
     
     static let identifier = "CartTableViewCell"
     
-    var imageURL: URL! {
+    var imageURL: String! {
         didSet {
-            foodImageView.kf.setImage(with: imageURL)
+            foodImageView.kf.setImage(with: URL(string: imageURL))
         }
     }
     

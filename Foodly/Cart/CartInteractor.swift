@@ -17,7 +17,7 @@ extension CartInteractor: CartBusinessLogic {
         let cart = Firestore.firestore().collection("users").document(userID).collection("cart")
         
         Task {
-            var products = [CartModels.CartItem]()
+            var products = [CartItem]()
             
             do {
                 let cartDocuments = try await cart.getDocuments().documents
@@ -27,7 +27,7 @@ extension CartInteractor: CartBusinessLogic {
                     let food = try await foodReference.getDocument().data(as: Food.self)
                     let amount = document.data()["amount"] as! Int
                     
-                    products.append(CartModels.CartItem(food: food, amount: amount))
+                    products.append(CartItem(food: food, amount: amount))
                 }
             } catch {
                 print(error)

@@ -8,7 +8,7 @@ final class CartViewController: UIViewController {
     
     private let cartView = CartView()
     private var interactor: CartBusinessLogic?
-    private var cartItems = [CartModels.CartItem]()
+    private var cartItems = [CartItem]()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -64,7 +64,7 @@ extension CartViewController: UITableViewDataSource {
         
         cell.amount = amount
         cell.foodName = food.name
-        cell.imageURL = URL(string: food.imageURL)!
+        cell.imageURL = food.imageURL
         cell.price = food.price
         
         return cell
