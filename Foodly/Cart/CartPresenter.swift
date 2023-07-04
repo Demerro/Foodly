@@ -1,5 +1,6 @@
 protocol CartPresentationLogic: AnyObject {
-    func presentCartFood(_ response: CartModels.FoodAction.Response)
+    func presentCartFood(_ response: CartModels.GetFoodAction.Response)
+    func presentRemoveFood(_ response: CartModels.RemoveFoodAction.Response)
 }
 
 class CartPresenter {
@@ -8,8 +9,13 @@ class CartPresenter {
 
 // MARK: - CartPresentationLogic
 extension CartPresenter: CartPresentationLogic {
-    func presentCartFood(_ response: CartModels.FoodAction.Response) {
-        let viewModel = CartModels.FoodAction.ViewModel(cartItems: response.cartItems)
+    func presentCartFood(_ response: CartModels.GetFoodAction.Response) {
+        let viewModel = CartModels.GetFoodAction.ViewModel(cartItems: response.cartItems)
         viewController?.displayCartFood(viewModel)
+    }
+    
+    func presentRemoveFood(_ response: CartModels.RemoveFoodAction.Response) {
+        let viewModel = CartModels.RemoveFoodAction.ViewModel()
+        viewController?.displayRemoveFood(viewModel)
     }
 }

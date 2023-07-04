@@ -1,9 +1,9 @@
 import FirebaseAuth
 import FirebaseFirestore
-import os
 
 protocol CartBusinessLogic: AnyObject {
-    func getCartFood(_ request: CartModels.FoodAction.Request)
+    func getCartFood(_ request: CartModels.GetFoodAction.Request)
+    func removeCartFood(_ request: CartModels.RemoveFoodAction.Request)
 }
 
 class CartInteractor {
@@ -12,7 +12,7 @@ class CartInteractor {
 
 // MARK: - CartBusinessLogic
 extension CartInteractor: CartBusinessLogic {
-    func getCartFood(_ request: CartModels.FoodAction.Request) {
+    func getCartFood(_ request: CartModels.GetFoodAction.Request) {
         let userID = Auth.auth().currentUser!.uid
         let cart = Firestore.firestore().collection("users").document(userID).collection("cart")
         
@@ -24,17 +24,34 @@ extension CartInteractor: CartBusinessLogic {
                 
                 for document in cartDocuments {
                     let foodReference = document.data()["foodReference"] as! DocumentReference
-                    let food = try await foodReference.getDocument().data(as: Food.self)
+                    var food = try await foodReference.getDocument().data(as: Food.self)
+                    food.documentReference = foodReference
                     let amount = document.data()["amount"] as! Int
                     
-                    products.append(CartItem(food: food, amount: amount))
+                    products.append(CartItem(id: document.documentID, food: food, amount: amount))
                 }
             } catch {
                 print(error)
             }
             
-            let response = CartModels.FoodAction.Response(cartItems: products)
+            let response = CartModels.GetFoodAction.Response(cartItems: products)
             presenter?.presentCartFood(response)
+        }
+    }
+    
+    func removeCartFood(_ request: CartModels.RemoveFoodAction.Request) {
+        let userID = Auth.auth().currentUser!.uid
+        let cart = Firestore.firestore().collection("users").document(userID).collection("cart")
+        
+        Task {
+            do {
+                try await cart.document(request.id).delete()
+            } catch {
+                print(error)
+            }
+            
+            let response = CartModels.RemoveFoodAction.Response()
+            presenter?.presentRemoveFood(response)
         }
     }
 }

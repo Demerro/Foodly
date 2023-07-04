@@ -1,7 +1,8 @@
 import UIKit
 
 protocol CartDisplayLogic: AnyObject {
-    func displayCartFood(_ viewModel: CartModels.FoodAction.ViewModel)
+    func displayCartFood(_ viewModel: CartModels.GetFoodAction.ViewModel)
+    func displayRemoveFood(_ viewModel: CartModels.RemoveFoodAction.ViewModel)
 }
 
 final class CartViewController: UIViewController {
@@ -33,9 +34,12 @@ final class CartViewController: UIViewController {
         cartView.tableView.delegate = self
         
         cartView.tableView.register(CartTableViewCell.self, forCellReuseIdentifier: CartTableViewCell.identifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let request = CartModels.FoodAction.Request()
-        interactor?.getCartFood(request)
+        getCartFood()
     }
     
     private func setup() {
@@ -46,6 +50,18 @@ final class CartViewController: UIViewController {
         viewController.interactor = interactor
         interactor.presenter = presenter
         presenter.viewController = viewController
+    }
+    
+    private func getCartFood() {
+        let request = CartModels.GetFoodAction.Request()
+        interactor?.getCartFood(request)
+    }
+    
+    private func removeCartFood(at index: Int) {
+        if let id = cartItems[index].id {
+            let request = CartModels.RemoveFoodAction.Request(id: id)
+            interactor?.removeCartFood(request)
+        }
     }
 }
 
@@ -83,6 +99,7 @@ extension CartViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            removeCartFood(at: indexPath.row)
             cartItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -91,11 +108,13 @@ extension CartViewController: UITableViewDelegate {
 
 // MARK: - CartDisplayLogic
 extension CartViewController: CartDisplayLogic {
-    func displayCartFood(_ viewModel: CartModels.FoodAction.ViewModel) {
+    func displayCartFood(_ viewModel: CartModels.GetFoodAction.ViewModel) {
         cartItems = viewModel.cartItems
         
         DispatchQueue.main.async {
             self.cartView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
+    
+    func displayRemoveFood(_ viewModel: CartModels.RemoveFoodAction.ViewModel) {}
 }

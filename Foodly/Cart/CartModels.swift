@@ -1,5 +1,5 @@
 struct CartModels {
-    struct FoodAction {
+    struct GetFoodAction {
         struct Request { }
         
         struct Response {
@@ -9,5 +9,15 @@ struct CartModels {
         struct ViewModel {
             let cartItems: [CartItem]
         }
+    }
+    
+    struct RemoveFoodAction {
+        struct Request {
+            let id: String
+        }
+        
+        struct Response {}
+        
+        struct ViewModel {}
     }
 }
