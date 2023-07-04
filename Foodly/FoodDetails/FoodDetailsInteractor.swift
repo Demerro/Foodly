@@ -25,6 +25,9 @@ extension FoodDetailsInteractor: FoodDetailsBusinessLogic {
             } catch {
                 print(error)
             }
+            
+            let response = FoodDetailsModels.AddToCartAction.Response()
+            presenter?.presentFoodAddedToCart(response)
         }
     }
 }

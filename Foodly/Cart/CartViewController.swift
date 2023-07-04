@@ -63,6 +63,13 @@ final class CartViewController: UIViewController {
             interactor?.removeCartFood(request)
         }
     }
+    
+    private func setCartBadgeValue() {
+        let cartPageTag = Page.cart.rawValue
+        guard let cartItem = tabBarController?.tabBar.items?[cartPageTag] else { return }
+        
+        cartItem.badgeValue = "\(cartItems.count)"
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -113,6 +120,7 @@ extension CartViewController: CartDisplayLogic {
         
         DispatchQueue.main.async {
             self.cartView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            self.setCartBadgeValue()
         }
     }
     

@@ -60,6 +60,15 @@ final class FoodDetailsViewController: UIViewController {
         let request = FoodDetailsModels.AddToCartAction.Request(cartItem: cartItem)
         interactor?.addFoodToCart(request)
     }
+    
+    private func increaseBadge() {
+        let cartPageTag = Page.cart.rawValue
+        guard let parentViewController = self.presentingViewController as? UITabBarController,
+              let cartItem = parentViewController.tabBar.items?[cartPageTag]
+        else { return }
+        
+        cartItem.badgeValue = "\(Int(cartItem.badgeValue ?? "0")! + 1)"
+    }
 }
 
 // MARK: - StepperDelegate
@@ -73,8 +82,9 @@ extension FoodDetailsViewController: StepperDelegate {
 extension FoodDetailsViewController: FoodDetailsDisplayLogic {
     func displayFoodAddedToCart(_ viewModel: FoodDetailsModels.AddToCartAction.ViewModel) {
         DispatchQueue.main.async {
-            self.dismiss(animated: true)
+            self.increaseBadge()
             UINotificationFeedbackGenerator().notificationOccurred(.success)
+            self.dismiss(animated: true)
         }
     }
 }
