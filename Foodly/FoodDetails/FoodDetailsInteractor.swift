@@ -17,7 +17,19 @@ extension FoodDetailsInteractor: FoodDetailsBusinessLogic {
         
         Task {
             do {
-                try cart.addDocument(from: request.cartItem)
+                let query = cart.whereField("foodReference", isEqualTo: request.cartItem.foodReference).limit(to: 1)
+                let documents = try await query.getDocuments().documents
+                
+                if documents.isEmpty {
+                    try cart.addDocument(from: request.cartItem)
+                } else {
+                    let document = try documents.first!.data(as: CartItem.self)
+                    let data: [String: Any] = [
+                        "amount": document.amount + request.cartItem.amount,
+                        "totalPrice": document.totalPrice + request.cartItem.totalPrice
+                    ]
+                    try await cart.document(document.id!).updateData(data)
+                }
             } catch {
                 print(error)
             }

@@ -20,7 +20,7 @@ final class CartTableViewCell: UITableViewCell {
     
     var price: Float! {
         didSet {
-            priceLabel.text = "$\(price.formatted())"
+            priceLabel.text = String(format: "%.2f", price)
         }
     }
     
