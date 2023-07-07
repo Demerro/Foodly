@@ -1,5 +1,6 @@
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 protocol CartBusinessLogic: AnyObject {
     func getCartFood(_ request: CartModels.GetFoodAction.Request)
@@ -21,14 +22,10 @@ extension CartInteractor: CartBusinessLogic {
             
             do {
                 let cartDocuments = try await cart.getDocuments().documents
-                
-                for document in cartDocuments {
-                    let foodReference = document.data()["foodReference"] as! DocumentReference
-                    var food = try await foodReference.getDocument().data(as: Food.self)
-                    food.documentReference = foodReference
-                    let amount = document.data()["amount"] as! Int
-                    
-                    products.append(CartItem(id: document.documentID, food: food, amount: amount))
+                for cartDocument in cartDocuments {
+                    var item = try cartDocument.data(as: CartItem.self)
+                    item.food = try await item.foodReference.getDocument(as: Food.self)
+                    products.append(item)
                 }
             } catch {
                 print(error)

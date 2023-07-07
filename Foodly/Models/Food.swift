@@ -11,6 +11,6 @@ struct Food: Codable, Identifiable {
     var documentReference: DocumentReference?
     
     private enum CodingKeys: String, CodingKey {
-        case name, description, imageURL, calories, price
+        case id, name, description, imageURL, calories, price
     }
 }

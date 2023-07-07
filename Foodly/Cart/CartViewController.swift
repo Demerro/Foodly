@@ -86,9 +86,9 @@ extension CartViewController: UITableViewDataSource {
         let amount = item.amount
         
         cell.amount = amount
-        cell.foodName = food.name
-        cell.imageURL = food.imageURL
-        cell.price = food.price
+        cell.foodName = food!.name
+        cell.imageURL = food!.imageURL
+        cell.price = food!.price
         
         return cell
     }

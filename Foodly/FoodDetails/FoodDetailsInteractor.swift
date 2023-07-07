@@ -14,15 +14,10 @@ extension FoodDetailsInteractor: FoodDetailsBusinessLogic {
     func addFoodToCart(_ request: FoodDetailsModels.AddToCartAction.Request) {
         let userID = Auth.auth().currentUser!.uid
         let cart = Firestore.firestore().collection("users").document(userID).collection("cart")
-        let data: [String: Any] = [
-            "amount": request.cartItem.amount,
-            "foodReference": request.cartItem.food.documentReference!,
-            "dateAdded": Date()
-        ]
         
         Task {
             do {
-                try await cart.addDocument(data: data)
+                try cart.addDocument(from: request.cartItem)
             } catch {
                 print(error)
             }

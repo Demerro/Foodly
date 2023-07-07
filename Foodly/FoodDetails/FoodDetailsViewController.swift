@@ -56,7 +56,7 @@ final class FoodDetailsViewController: UIViewController {
     }
     
     private func addToCart() {
-        let cartItem = CartItem(food: food, amount: foodDetailsView.stepper.value)
+        let cartItem = CartItem(amount: foodDetailsView.stepper.value, foodReference: food.documentReference!)
         let request = FoodDetailsModels.AddToCartAction.Request(cartItem: cartItem)
         interactor?.addFoodToCart(request)
     }
