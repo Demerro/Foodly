@@ -16,7 +16,8 @@ extension FoodDetailsInteractor: FoodDetailsBusinessLogic {
         let cart = Firestore.firestore().collection("users").document(userID).collection("cart")
         let data: [String: Any] = [
             "amount": request.cartItem.amount,
-            "foodReference": request.cartItem.food.documentReference!
+            "foodReference": request.cartItem.food.documentReference!,
+            "dateAdded": Date()
         ]
         
         Task {

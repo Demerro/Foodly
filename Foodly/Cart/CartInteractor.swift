@@ -14,7 +14,7 @@ class CartInteractor {
 extension CartInteractor: CartBusinessLogic {
     func getCartFood(_ request: CartModels.GetFoodAction.Request) {
         let userID = Auth.auth().currentUser!.uid
-        let cart = Firestore.firestore().collection("users").document(userID).collection("cart")
+        let cart = Firestore.firestore().collection("users").document(userID).collection("cart").order(by: "dateAdded", descending: true)
         
         Task {
             var products = [CartItem]()
