@@ -15,6 +15,18 @@ final class HomeViewController: UIViewController {
     private let locationManager = CLLocationManager()
     private var sections = [HomeModels.HomeSections]()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        configure()
+    }
+    
     override func loadView() {
         view = homeView
     }
@@ -35,6 +47,24 @@ final class HomeViewController: UIViewController {
         addNews()
         addCategories()
         addTrendingFood()
+    }
+    
+    private func configure() {
+        let trendingFoodWorker = TrendingFoodWorker()
+        let restaurantsWorker = RestaurantsWorker()
+        let viewController = self
+        let interactor = HomeInteractor()
+        let presenter = HomePresenter()
+        let router = HomeRouter()
+        
+        viewController.interactor = interactor
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        viewController.router = router
+        
+        interactor.restaurantsWorker = restaurantsWorker
+        interactor.trendingFoodWorker = trendingFoodWorker
     }
     
     private func setupNavBar() {

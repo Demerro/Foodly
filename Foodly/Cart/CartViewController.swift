@@ -7,8 +7,9 @@ protocol CartDisplayLogic: AnyObject {
 
 final class CartViewController: UIViewController {
     
+    var interactor: CartBusinessLogic?
+    
     private let cartView = CartView()
-    private var interactor: CartBusinessLogic?
     private var cartItems = [CartItem]()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -46,10 +47,13 @@ final class CartViewController: UIViewController {
         let viewController = self
         let interactor = CartInteractor()
         let presenter = CartPresenter()
+        let cartWorker = FirebaseCartWorker()
         
         viewController.interactor = interactor
         interactor.presenter = presenter
         presenter.viewController = viewController
+        
+        interactor.cartWorker = cartWorker
     }
     
     private func getCartFood() {

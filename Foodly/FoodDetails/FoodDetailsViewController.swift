@@ -49,10 +49,13 @@ final class FoodDetailsViewController: UIViewController {
         let viewController = self
         let interactor = FoodDetailsInteractor()
         let presenter = FoodDetailsPresenter()
+        let cartWorker = FirebaseCartWorker()
         
         viewController.interactor = interactor
         interactor.presenter = presenter
         presenter.viewController = viewController
+        
+        interactor.cartWorker = cartWorker
     }
     
     private func addToCart() {

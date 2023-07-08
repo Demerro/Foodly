@@ -11,12 +11,9 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let homeFactory = DefaultHomeFactory()
-        homeFactory.homeConfigurator = HomeDefaultConfigurator()
-        
         let viewControllers = [
             getNavigationController(
-                rootViewController: homeFactory.makeScene(),
+                rootViewController: HomeViewController(),
                 tabBarItem: UITabBarItem(title: String(localized: "tabBar.title.home"), image: UIImage(systemName: "house"), tag: Page.home.rawValue)
             ),
             getNavigationController(

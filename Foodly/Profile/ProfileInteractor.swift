@@ -38,7 +38,7 @@ extension ProfileInteractor: ProfileBusinessLogic {
     
     func setUserProfileImage(_ request: ProfileModels.SetUserProfileImageAction.Request) {
         guard let jpegData = request.image.jpegData(compressionQuality: 0.5) else { return }
-        guard let currentUser = Auth.auth().currentUser else { return }
+        let currentUser = Auth.auth().currentUser!
         let reference = Storage.storage().reference().child("profileImageURLs").child("\(currentUser.uid).jpeg")
         
         Task {
