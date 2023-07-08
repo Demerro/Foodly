@@ -59,6 +59,16 @@ struct HomeModels {
         }
     }
     
+    struct AddFoodToCartAction {
+        struct Request {
+            let food: Food
+        }
+        
+        struct Response {}
+        
+        struct ViewModel {}
+    }
+    
     struct News {
         let image: UIImage
     }

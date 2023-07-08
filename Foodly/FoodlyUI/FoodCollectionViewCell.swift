@@ -6,6 +6,36 @@ final class FoodCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "FoodCollectionViewCell"
     
+    var imageURL: URL! {
+        didSet {
+            foodImageView.kf.setImage(with: imageURL)
+        }
+    }
+    
+    var name: String! {
+        didSet {
+            nameLabel.text = name
+        }
+    }
+    
+    var price: Float! {
+        didSet {
+            priceLabel.attributedText = makePriceText(
+                value: price,
+                integerFont: .preferredFont(forTextStyle: .title3, compatibleWith: UITraitCollection(legibilityWeight: .bold)),
+                decimalFont: .preferredFont(forTextStyle: .callout, compatibleWith: UITraitCollection(legibilityWeight: .bold))
+            )
+        }
+    }
+    
+    var buttonAction: UIAction? {
+        didSet {
+            if let buttonAction = buttonAction {
+                cartButton.addAction(buttonAction, for: .touchUpInside)
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -45,16 +75,6 @@ final class FoodCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(backgroundContainerView).offset(10)
             $0.bottom.trailing.equalTo(backgroundContainerView).offset(-10)
         }
-    }
-    
-    func configureView(imageURL: URL?, name: String, price: Float) {
-        foodImageView.kf.setImage(with: imageURL)
-        nameLabel.text = name
-        priceLabel.attributedText = makePriceText(
-            value: price,
-            integerFont: .preferredFont(forTextStyle: .title3, compatibleWith: UITraitCollection(legibilityWeight: .bold)),
-            decimalFont: .preferredFont(forTextStyle: .callout, compatibleWith: UITraitCollection(legibilityWeight: .bold))
-        )
     }
     
     private let backgroundContainerView: UIView = {

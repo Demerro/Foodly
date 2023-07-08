@@ -4,6 +4,7 @@ import CoreLocation
 protocol HomeDisplayLogic: AnyObject {
     func displayTrendingFood(_ viewModel: HomeModels.TrendingFoodAction.ViewModel)
     func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel)
+    func displayAddFoodToCart(_ viewModel: HomeModels.AddFoodToCartAction.ViewModel)
 }
 
 final class HomeViewController: UIViewController {
@@ -52,6 +53,7 @@ final class HomeViewController: UIViewController {
     private func configure() {
         let trendingFoodWorker = TrendingFoodWorker()
         let restaurantsWorker = RestaurantsWorker()
+        let cartWorker = FirebaseCartWorker()
         let viewController = self
         let interactor = HomeInteractor()
         let presenter = HomePresenter()
@@ -65,6 +67,7 @@ final class HomeViewController: UIViewController {
         
         interactor.restaurantsWorker = restaurantsWorker
         interactor.trendingFoodWorker = trendingFoodWorker
+        interactor.cartWorker = cartWorker
     }
     
     private func setupNavBar() {
@@ -216,7 +219,13 @@ extension HomeViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath) as! FoodCollectionViewCell
             
             let food = trendingFood[indexPath.row]
-            cell.configureView(imageURL: URL(string: food.imageURL), name: food.name, price: food.price)
+            cell.imageURL = URL(string: food.imageURL)!
+            cell.name = food.name
+            cell.price = food.price
+            cell.buttonAction = UIAction { [interactor] _ in
+                let request = HomeModels.AddFoodToCartAction.Request(food: food)
+                interactor?.addFoodToCart(request)
+            }
             
             return cell
         case let .nearbyRestaurants(restaurants):
@@ -283,5 +292,9 @@ extension HomeViewController: HomeDisplayLogic {
         DispatchQueue.main.async {
             self.homeView.collectionView.insertSections(IndexSet(integer: self.sections.count - 1))
         }
+    }
+    
+    func displayAddFoodToCart(_ viewModel: HomeModels.AddFoodToCartAction.ViewModel) {
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
     }
 }

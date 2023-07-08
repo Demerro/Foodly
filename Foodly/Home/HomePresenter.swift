@@ -4,6 +4,7 @@ import FirebaseFirestoreSwift
 protocol HomePresentationLogic: AnyObject {
     func presentTrendingFood(_ response: HomeModels.TrendingFoodAction.Response)
     func presentNearbyRestaurants(_ response: HomeModels.RestaurantsAction.Response)
+    func presentAddFoodToCart(_ response: HomeModels.AddFoodToCartAction.Response)
 }
 
 class HomePresenter {
@@ -58,5 +59,10 @@ extension HomePresenter: HomePresentationLogic {
         
         let viewModel = HomeModels.RestaurantsAction.ViewModel(restaurants: restaurants)
         viewController?.displayRestaurants(viewModel)
+    }
+    
+    func presentAddFoodToCart(_ response: HomeModels.AddFoodToCartAction.Response) {
+        let viewModel = HomeModels.AddFoodToCartAction.ViewModel()
+        viewController?.displayAddFoodToCart(viewModel)
     }
 }
