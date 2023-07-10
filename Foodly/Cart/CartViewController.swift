@@ -62,9 +62,9 @@ final class CartViewController: UIViewController {
         interactor?.getCartFood(request)
     }
     
-    private func removeCartFood(at index: Int) {
-        if let id = cartItems[index].id {
-            let request = CartModels.RemoveCartItemAction.Request(id: id)
+    private func removeCartFood(at indexPath: IndexPath) {
+        if let id = cartItems[indexPath.row].id {
+            let request = CartModels.RemoveCartItemAction.Request(id: id, indexPath: indexPath)
             interactor?.removeCartFood(request)
         }
     }
@@ -122,9 +122,7 @@ extension CartViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            removeCartFood(at: indexPath.row)
-            cartItems.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            removeCartFood(at: indexPath)
         }
     }
 }
@@ -140,12 +138,17 @@ extension CartViewController: CartDisplayLogic {
         }
     }
     
-    func displayRemoveFood(_ viewModel: CartModels.RemoveCartItemAction.ViewModel) {}
+    func displayRemoveFood(_ viewModel: CartModels.RemoveCartItemAction.ViewModel) {
+        DispatchQueue.main.async {
+            self.cartItems.remove(at: viewModel.indexPath.row)
+            self.cartView.tableView.deleteRows(at: [viewModel.indexPath], with: .automatic)
+        }
+    }
     
     func displayCartItemAmountChange(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModel) {
         DispatchQueue.main.async {
             self.cartItems[viewModel.indexPath.row] = viewModel.updatedCartItem
-            self.cartView.tableView.reloadRows(at: [viewModel.indexPath], with: .automatic)
+            self.cartView.tableView.reloadRows(at: [viewModel.indexPath], with: .none)
         }
     }
 }

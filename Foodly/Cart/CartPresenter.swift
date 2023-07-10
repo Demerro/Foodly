@@ -16,7 +16,7 @@ extension CartPresenter: CartPresentationLogic {
     }
     
     func presentRemoveFood(_ response: CartModels.RemoveCartItemAction.Response) {
-        let viewModel = CartModels.RemoveCartItemAction.ViewModel()
+        let viewModel = CartModels.RemoveCartItemAction.ViewModel(indexPath: response.indexPath)
         viewController?.displayRemoveFood(viewModel)
     }
     

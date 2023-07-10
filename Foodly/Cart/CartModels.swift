@@ -16,11 +16,16 @@ struct CartModels {
     struct RemoveCartItemAction {
         struct Request {
             let id: String
+            let indexPath: IndexPath
         }
         
-        struct Response {}
+        struct Response {
+            let indexPath: IndexPath
+        }
         
-        struct ViewModel {}
+        struct ViewModel {
+            let indexPath: IndexPath
+        }
     }
     
     struct ChangeCartItemAmountAction {
