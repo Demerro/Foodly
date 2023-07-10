@@ -1,8 +1,9 @@
 import UIKit
 
 protocol CartDisplayLogic: AnyObject {
-    func displayCartFood(_ viewModel: CartModels.GetFoodAction.ViewModel)
-    func displayRemoveFood(_ viewModel: CartModels.RemoveFoodAction.ViewModel)
+    func displayCartFood(_ viewModel: CartModels.GetCartItemsAction.ViewModel)
+    func displayRemoveFood(_ viewModel: CartModels.RemoveCartItemAction.ViewModel)
+    func displayCartItemAmountChange(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModel)
 }
 
 final class CartViewController: UIViewController {
@@ -57,13 +58,13 @@ final class CartViewController: UIViewController {
     }
     
     private func getCartFood() {
-        let request = CartModels.GetFoodAction.Request()
+        let request = CartModels.GetCartItemsAction.Request()
         interactor?.getCartFood(request)
     }
     
     private func removeCartFood(at index: Int) {
         if let id = cartItems[index].id {
-            let request = CartModels.RemoveFoodAction.Request(id: id)
+            let request = CartModels.RemoveCartItemAction.Request(id: id)
             interactor?.removeCartFood(request)
         }
     }
@@ -94,6 +95,17 @@ extension CartViewController: UITableViewDataSource {
         cell.imageURL = food!.imageURL
         cell.price = food!.price
         
+        cell.increaseButtonTappedAction = { [interactor] in
+            let request = CartModels.ChangeCartItemAmountAction.Request(cartItem: item, difference: 1, indexPath: indexPath)
+            interactor?.changeCartFoodAmount(request)
+        }
+        cell.decreaseButtonTappedAction = { [interactor] in
+            guard item.amount > 1 else { return }
+            
+            let request = CartModels.ChangeCartItemAmountAction.Request(cartItem: item, difference: -1, indexPath: indexPath)
+            interactor?.changeCartFoodAmount(request)
+        }
+        
         return cell
     }
 }
@@ -119,7 +131,7 @@ extension CartViewController: UITableViewDelegate {
 
 // MARK: - CartDisplayLogic
 extension CartViewController: CartDisplayLogic {
-    func displayCartFood(_ viewModel: CartModels.GetFoodAction.ViewModel) {
+    func displayCartFood(_ viewModel: CartModels.GetCartItemsAction.ViewModel) {
         cartItems = viewModel.cartItems
         
         DispatchQueue.main.async {
@@ -128,5 +140,12 @@ extension CartViewController: CartDisplayLogic {
         }
     }
     
-    func displayRemoveFood(_ viewModel: CartModels.RemoveFoodAction.ViewModel) {}
+    func displayRemoveFood(_ viewModel: CartModels.RemoveCartItemAction.ViewModel) {}
+    
+    func displayCartItemAmountChange(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModel) {
+        DispatchQueue.main.async {
+            self.cartItems[viewModel.indexPath.row] = viewModel.updatedCartItem
+            self.cartView.tableView.reloadRows(at: [viewModel.indexPath], with: .automatic)
+        }
+    }
 }

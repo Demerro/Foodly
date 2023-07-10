@@ -27,6 +27,7 @@ final class CartView: UIView {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .systemGroupedBackground
+        tableView.allowsSelection = false
         
         return tableView
     }()

@@ -22,6 +22,14 @@ struct FirebaseCartWorker: CartWorkerLogic {
         return products
     }
     
+    func getCartItem(id: String) async throws -> CartItem {
+        let document = try await cart.getDocuments().documents.first { $0.documentID == id }!
+        var cartItem = try document.data(as: CartItem.self)
+        cartItem.food = try await cartItem.foodReference.getDocument(as: Food.self)
+        
+        return cartItem
+    }
+    
     func addToCart(item: CartItem) async throws {
         let query = cart.whereField(K.Field.foodReference, isEqualTo: item.foodReference).limit(to: 1)
         let documents = try await query.getDocuments().documents
@@ -31,14 +39,26 @@ struct FirebaseCartWorker: CartWorkerLogic {
             return
         }
         
+        try await changeCartItemAmount(item: item, difference: 1)
+    }
+    
+    func removeCartItem(id: String) async throws {
+        try await cart.document(id).delete()
+    }
+    
+    func changeCartItemAmount(item: CartItem, difference: Int) async throws {
+        let query = cart.whereField(K.Field.foodReference, isEqualTo: item.foodReference).limit(to: 1)
+        let documents = try await query.getDocuments().documents
+        
         let _ = try await Firestore.firestore().runTransaction { transaction, errorPointer in
             do {
                 let document = documents.first!
                 let cartItem = try document.data(as: CartItem.self)
+                let newAmount = cartItem.amount + difference
                 
                 let data: [String: Any] = [
-                    K.Field.amount: cartItem.amount + item.amount,
-                    K.Field.totalPrice: cartItem.totalPrice + item.totalPrice
+                    K.Field.amount: newAmount,
+                    K.Field.totalPrice: item.food!.price * Float(newAmount)
                 ]
                 
                 transaction.updateData(data, forDocument: document.reference)
@@ -48,10 +68,6 @@ struct FirebaseCartWorker: CartWorkerLogic {
             
             return
         }
-    }
-    
-    func removeCartItem(id: String) async throws {
-        try await cart.document(id).delete()
     }
     
     // MARK: - Constants

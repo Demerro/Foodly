@@ -30,6 +30,22 @@ final class CartTableViewCell: UITableViewCell {
         }
     }
     
+    var increaseButtonTappedAction: (() -> Void)? {
+        didSet {
+            increaseButton.addAction(UIAction { [weak self] _ in
+                self?.increaseButtonTappedAction?()
+            }, for: .touchUpInside)
+        }
+    }
+    
+    var decreaseButtonTappedAction: (() -> Void)? {
+        didSet {
+            decreaseButton.addAction(UIAction { [weak self] _ in
+                self?.decreaseButtonTappedAction?()
+            }, for: .touchUpInside)
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -43,7 +59,6 @@ final class CartTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        self.selectionStyle = .none
         self.backgroundColor = .secondarySystemGroupedBackground
         
         textStackView.addArrangedSubview(foodNameLabel)
@@ -55,7 +70,7 @@ final class CartTableViewCell: UITableViewCell {
         
         addSubview(foodImageView)
         addSubview(textStackView)
-        addSubview(buttonsStackView)
+        self.contentView.addSubview(buttonsStackView)
         
         foodImageView.snp.makeConstraints {
             $0.height.centerY.equalToSuperview()

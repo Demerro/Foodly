@@ -3,7 +3,7 @@ import FirebaseFirestore
 
 struct CartItem: Codable, Identifiable {
     @DocumentID var id: String?
-    let amount: Int
+    var amount: Int
     let totalPrice: Float
     let dateAdded = Date()
     let foodReference: DocumentReference

@@ -1,5 +1,7 @@
+import Foundation
+
 struct CartModels {
-    struct GetFoodAction {
+    struct GetCartItemsAction {
         struct Request { }
         
         struct Response {
@@ -11,7 +13,7 @@ struct CartModels {
         }
     }
     
-    struct RemoveFoodAction {
+    struct RemoveCartItemAction {
         struct Request {
             let id: String
         }
@@ -19,5 +21,23 @@ struct CartModels {
         struct Response {}
         
         struct ViewModel {}
+    }
+    
+    struct ChangeCartItemAmountAction {
+        struct Request {
+            let cartItem: CartItem
+            let difference: Int
+            let indexPath: IndexPath
+        }
+        
+        struct Response {
+            let indexPath: IndexPath
+            let updatedCartItem: CartItem
+        }
+        
+        struct ViewModel {
+            let indexPath: IndexPath
+            let updatedCartItem: CartItem
+        }
     }
 }

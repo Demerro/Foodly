@@ -43,7 +43,7 @@ extension HomeInteractor: HomeBusinessLogic {
         Task {
             do {
                 let food = request.food
-                let item = CartItem(amount: 1, totalPrice: food.price, foodReference: food.documentReference!)
+                let item = CartItem(amount: 1, totalPrice: food.price, foodReference: food.documentReference!, food: food)
                 try await cartWorker?.addToCart(item: item)
                 
                 let response = HomeModels.AddFoodToCartAction.Response()
