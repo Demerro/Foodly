@@ -36,13 +36,16 @@ struct CartModels {
         }
         
         struct Response {
+            var error: Error?
             let indexPath: IndexPath
-            let updatedCartItem: CartItem
+            let difference: Int
         }
         
-        struct ViewModel {
+        struct ViewModelSuccess {}
+        
+        struct ViewModelFailure {
             let indexPath: IndexPath
-            let updatedCartItem: CartItem
+            let difference: Int
         }
     }
 }

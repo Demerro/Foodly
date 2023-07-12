@@ -3,7 +3,8 @@ import UIKit
 protocol CartDisplayLogic: AnyObject {
     func displayCartFood(_ viewModel: CartModels.GetCartItemsAction.ViewModel)
     func displayRemoveFood(_ viewModel: CartModels.RemoveCartItemAction.ViewModel)
-    func displayCartItemAmountChange(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModel)
+    func displayCartItemAmountChangeSuccess(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelSuccess)
+    func displayCartItemAmountChangeFailure(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelFailure)
 }
 
 final class CartViewController: UIViewController {
@@ -62,13 +63,6 @@ final class CartViewController: UIViewController {
         interactor?.getCartFood(request)
     }
     
-    private func removeCartFood(at indexPath: IndexPath) {
-        if let id = cartItems[indexPath.row].id {
-            let request = CartModels.RemoveCartItemAction.Request(id: id, indexPath: indexPath)
-            interactor?.removeCartFood(request)
-        }
-    }
-    
     private func setCartBadgeValue() {
         let cartPageTag = Page.cart.rawValue
         guard let cartItem = tabBarController?.tabBar.items?[cartPageTag] else { return }
@@ -95,12 +89,25 @@ extension CartViewController: UITableViewDataSource {
         cell.imageURL = food!.imageURL
         cell.price = food!.price
         
-        cell.increaseButtonTappedAction = { [interactor] in
+        cell.increaseButtonTappedAction = { [weak self, interactor] in
+            guard let self else { return }
+            
+            self.cartItems[indexPath.row].amount += 1
+            DispatchQueue.main.async {
+                self.cartView.tableView.reloadRows(at: [indexPath], with: .none)
+            }
+            
             let request = CartModels.ChangeCartItemAmountAction.Request(cartItem: item, difference: 1, indexPath: indexPath)
             interactor?.changeCartFoodAmount(request)
         }
-        cell.decreaseButtonTappedAction = { [interactor] in
-            guard item.amount > 1 else { return }
+        
+        cell.decreaseButtonTappedAction = { [weak self, interactor] in
+            guard item.amount > 1, let self else { return }
+            
+            self.cartItems[indexPath.row].amount -= 1
+            DispatchQueue.main.async {
+                self.cartView.tableView.reloadRows(at: [indexPath], with: .none)
+            }
             
             let request = CartModels.ChangeCartItemAmountAction.Request(cartItem: item, difference: -1, indexPath: indexPath)
             interactor?.changeCartFoodAmount(request)
@@ -122,7 +129,10 @@ extension CartViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            removeCartFood(at: indexPath)
+            guard let id = cartItems[indexPath.row].id else { return }
+            
+            let request = CartModels.RemoveCartItemAction.Request(id: id, indexPath: indexPath)
+            interactor?.removeCartFood(request)
         }
     }
 }
@@ -145,9 +155,11 @@ extension CartViewController: CartDisplayLogic {
         }
     }
     
-    func displayCartItemAmountChange(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModel) {
+    func displayCartItemAmountChangeSuccess(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelSuccess) {}
+    
+    func displayCartItemAmountChangeFailure(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelFailure) {
         DispatchQueue.main.async {
-            self.cartItems[viewModel.indexPath.row] = viewModel.updatedCartItem
+            self.cartItems[viewModel.indexPath.row].amount += viewModel.difference
             self.cartView.tableView.reloadRows(at: [viewModel.indexPath], with: .none)
         }
     }

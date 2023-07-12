@@ -40,20 +40,25 @@ extension CartInteractor: CartBusinessLogic {
     }
     
     func changeCartFoodAmount(_ request: CartModels.ChangeCartItemAmountAction.Request) {
-        guard let worker = cartWorker else { return }
         Task {
+            let response: CartModels.ChangeCartItemAmountAction.Response
+            
             do {
-                try await worker.changeCartItemAmount(item: request.cartItem, difference: request.difference)
-                let updatedCartItem = try await worker.getCartItem(id: request.cartItem.id!)
-                
-                let response = CartModels.ChangeCartItemAmountAction.Response(
+                try await cartWorker?.changeCartItemAmount(item: request.cartItem, difference: request.difference)
+                response = CartModels.ChangeCartItemAmountAction.Response(
                     indexPath: request.indexPath,
-                    updatedCartItem: updatedCartItem
+                    difference: request.difference
                 )
-                presenter?.presentCartItemAmountChange(response)
             } catch {
                 print(error)
+                response = CartModels.ChangeCartItemAmountAction.Response(
+                    error: error,
+                    indexPath: request.indexPath,
+                    difference: request.difference
+                )
             }
+            
+            presenter?.presentCartItemAmountChange(response)
         }
     }
 }

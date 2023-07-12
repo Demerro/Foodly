@@ -21,10 +21,16 @@ extension CartPresenter: CartPresentationLogic {
     }
     
     func presentCartItemAmountChange(_ response: CartModels.ChangeCartItemAmountAction.Response) {
-        let viewModel = CartModels.ChangeCartItemAmountAction.ViewModel(
-            indexPath: response.indexPath,
-            updatedCartItem: response.updatedCartItem
-        )
-        viewController?.displayCartItemAmountChange(viewModel)
+        if response.error != nil {
+            let viewModel = CartModels.ChangeCartItemAmountAction.ViewModelFailure(
+                indexPath: response.indexPath,
+                difference: response.difference
+            )
+            viewController?.displayCartItemAmountChangeFailure(viewModel)
+            return
+        }
+        
+        let viewModel = CartModels.ChangeCartItemAmountAction.ViewModelSuccess()
+        viewController?.displayCartItemAmountChangeSuccess(viewModel)
     }
 }
