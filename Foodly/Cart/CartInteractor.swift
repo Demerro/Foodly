@@ -30,8 +30,11 @@ extension CartInteractor: CartBusinessLogic {
     func removeCartFood(_ request: CartModels.RemoveCartItemAction.Request) {
         Task {
             do {
-                try await cartWorker?.removeCartItem(id: request.id)
-                let response = CartModels.RemoveCartItemAction.Response(indexPath: request.indexPath)
+                try await cartWorker?.removeCartItem(id: request.cartItem.id!)
+                let response = CartModels.RemoveCartItemAction.Response(
+                    indexPath: request.indexPath,
+                    cartItem: request.cartItem
+                )
                 presenter?.presentRemoveFood(response)
             } catch {
                 print(error)

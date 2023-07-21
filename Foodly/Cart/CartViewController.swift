@@ -2,8 +2,7 @@ import UIKit
 
 protocol CartDisplayLogic: AnyObject {
     func displayCartFood(_ viewModel: CartModels.GetCartItemsAction.ViewModel)
-    func displayRemoveFood(_ viewModel: CartModels.RemoveCartItemAction.ViewModel)
-    func displayCartItemAmountChangeSuccess(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelSuccess)
+    func displayRemoveFoodFailure(_ viewModel: CartModels.RemoveCartItemAction.ViewModelFailure)
     func displayCartItemAmountChangeFailure(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelFailure)
 }
 
@@ -129,9 +128,12 @@ extension CartViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let id = cartItems[indexPath.row].id else { return }
+            let cartItem = cartItems[indexPath.row]
             
-            let request = CartModels.RemoveCartItemAction.Request(id: id, indexPath: indexPath)
+            cartItems.remove(at: indexPath.row)
+            cartView.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            let request = CartModels.RemoveCartItemAction.Request(indexPath: indexPath, cartItem: cartItem)
             interactor?.removeCartFood(request)
         }
     }
@@ -148,14 +150,12 @@ extension CartViewController: CartDisplayLogic {
         }
     }
     
-    func displayRemoveFood(_ viewModel: CartModels.RemoveCartItemAction.ViewModel) {
+    func displayRemoveFoodFailure(_ viewModel: CartModels.RemoveCartItemAction.ViewModelFailure) {
         DispatchQueue.main.async {
-            self.cartItems.remove(at: viewModel.indexPath.row)
-            self.cartView.tableView.deleteRows(at: [viewModel.indexPath], with: .automatic)
+            self.cartItems.insert(viewModel.cartItem, at: viewModel.indexPath.row)
+            self.cartView.tableView.reloadRows(at: [viewModel.indexPath], with: .automatic)
         }
     }
-    
-    func displayCartItemAmountChangeSuccess(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelSuccess) {}
     
     func displayCartItemAmountChangeFailure(_ viewModel: CartModels.ChangeCartItemAmountAction.ViewModelFailure) {
         DispatchQueue.main.async {

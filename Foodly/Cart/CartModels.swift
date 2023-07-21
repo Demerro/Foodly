@@ -15,16 +15,19 @@ struct CartModels {
     
     struct RemoveCartItemAction {
         struct Request {
-            let id: String
             let indexPath: IndexPath
+            let cartItem: CartItem
         }
         
         struct Response {
+            var error: Error?
             let indexPath: IndexPath
+            let cartItem: CartItem
         }
         
-        struct ViewModel {
+        struct ViewModelFailure {
             let indexPath: IndexPath
+            let cartItem: CartItem
         }
     }
     
@@ -40,8 +43,6 @@ struct CartModels {
             let indexPath: IndexPath
             let difference: Int
         }
-        
-        struct ViewModelSuccess {}
         
         struct ViewModelFailure {
             let indexPath: IndexPath

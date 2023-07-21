@@ -16,8 +16,13 @@ extension CartPresenter: CartPresentationLogic {
     }
     
     func presentRemoveFood(_ response: CartModels.RemoveCartItemAction.Response) {
-        let viewModel = CartModels.RemoveCartItemAction.ViewModel(indexPath: response.indexPath)
-        viewController?.displayRemoveFood(viewModel)
+        if response.error != nil {
+            let viewModel = CartModels.RemoveCartItemAction.ViewModelFailure(
+                indexPath: response.indexPath,
+                cartItem: response.cartItem
+            )
+            viewController?.displayRemoveFoodFailure(viewModel)
+        }
     }
     
     func presentCartItemAmountChange(_ response: CartModels.ChangeCartItemAmountAction.Response) {
@@ -27,10 +32,6 @@ extension CartPresenter: CartPresentationLogic {
                 difference: response.difference
             )
             viewController?.displayCartItemAmountChangeFailure(viewModel)
-            return
         }
-        
-        let viewModel = CartModels.ChangeCartItemAmountAction.ViewModelSuccess()
-        viewController?.displayCartItemAmountChangeSuccess(viewModel)
     }
 }
