@@ -30,21 +30,9 @@ final class CartTableViewCell: UITableViewCell {
         }
     }
     
-    var increaseButtonTappedAction: (() -> Void)? {
-        didSet {
-            increaseButton.addAction(UIAction { [weak self] _ in
-                self?.increaseButtonTappedAction?()
-            }, for: .touchUpInside)
-        }
-    }
+    var increaseButtonTappedAction: (() -> Void)?
     
-    var decreaseButtonTappedAction: (() -> Void)? {
-        didSet {
-            decreaseButton.addAction(UIAction { [weak self] _ in
-                self?.decreaseButtonTappedAction?()
-            }, for: .touchUpInside)
-        }
-    }
+    var decreaseButtonTappedAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -92,6 +80,18 @@ final class CartTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().offset(-10)
             $0.centerY.equalToSuperview()
         }
+        
+        setupButtonActions()
+    }
+    
+    private func setupButtonActions() {
+        increaseButton.addAction(UIAction { [weak self] _ in
+            self?.increaseButtonTappedAction?()
+        }, for: .touchUpInside)
+        
+        decreaseButton.addAction(UIAction { [weak self] _ in
+            self?.decreaseButtonTappedAction?()
+        }, for: .touchUpInside)
     }
     
     private let textStackView: UIStackView = {
