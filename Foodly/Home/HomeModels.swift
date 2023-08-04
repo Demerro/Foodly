@@ -73,12 +73,6 @@ struct HomeModels {
         let image: UIImage
     }
     
-    struct FoodCategory {
-        let name: String
-        let color: UIColor
-        let image: UIImage
-    }
-    
     struct Restaurant {
         let name: String
         let location: String

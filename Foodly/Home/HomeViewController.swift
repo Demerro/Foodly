@@ -35,7 +35,6 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavBar()
         setupLocationManager()
         
         setupCollectionViewLayout()
@@ -48,6 +47,18 @@ final class HomeViewController: UIViewController {
         addNews()
         addCategories()
         addTrendingFood()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupNavBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        clearNavBar()
     }
     
     private func configure() {
@@ -80,6 +91,11 @@ final class HomeViewController: UIViewController {
         ])
     }
     
+    private func clearNavBar() {
+        guard let navBar = navigationController?.navigationBar else { return }
+        navBar.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private func addNews() {
         sections.append(.news([
             HomeModels.News(image: UIImage(named: "TopDeals")!)
@@ -88,22 +104,26 @@ final class HomeViewController: UIViewController {
     
     private func addCategories() {
         sections.append(.foodCategories([
-            HomeModels.FoodCategory(
-                name: String(localized: "cell.foodCategory.title.burgers"),
+            FoodCategory(
+                localizedName: String(localized: "cell.foodCategory.title.burgers"),
+                name: .burgers,
                 color: UIColor(named: "AccentColor")!,
                 image: UIImage(named: "Burger")!
             ),
-            HomeModels.FoodCategory(
-                name: String(localized: "cell.foodCategory.title.pizzas"),
+            FoodCategory(
+                localizedName: String(localized: "cell.foodCategory.title.pizzas"),
+                name: .pizzas,
                 color: .systemOrange,
                 image: UIImage(named: "Pizza")!),
-            HomeModels.FoodCategory(
-                name: String(localized: "cell.foodCategory.title.cakes"),
+            FoodCategory(
+                localizedName: String(localized: "cell.foodCategory.title.cakes"),
+                name: .cakes,
                 color: .systemBlue,
                 image: UIImage(named: "Cake")!
             ),
-            HomeModels.FoodCategory(
-                name: String(localized: "cell.foodCategory.title.tacos"),
+            FoodCategory(
+                localizedName: String(localized: "cell.foodCategory.title.tacos"),
+                name: .tacos,
                 color: .systemGreen,
                 image: UIImage(named: "Taco")!
             )
@@ -183,8 +203,15 @@ extension HomeViewController: CLLocationManagerDelegate {
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if case let .trendingFood(food) = sections[indexPath.section] {
-            router?.navigateToFoodDetails(food: food[indexPath.row])
+        switch sections[indexPath.section] {
+        case let .foodCategories(categories):
+            router?.routeToFoodGroup(category: categories[indexPath.row])
+            
+        case let .trendingFood(food):
+            router?.routeToFoodDetails(food: food[indexPath.row])
+            
+        default:
+            break
         }
     }
 }
@@ -212,7 +239,7 @@ extension HomeViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCollectionViewCell.identifier, for: indexPath) as! FoodCategoryCollectionViewCell
             
             let category = categories[indexPath.row]
-            cell.configureView(title: category.name, color: category.color, image: category.image)
+            cell.configureView(title: category.localizedName, color: category.color, image: category.image)
             
             return cell
         case let .trendingFood(trendingFood):
