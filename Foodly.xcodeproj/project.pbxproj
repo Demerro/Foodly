@@ -76,6 +76,7 @@
 		69DFC7432A34C18D00BBA122 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 69DFC7422A34C18D00BBA122 /* FirebaseAuth */; };
 		69DFC7452A34C18D00BBA122 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69DFC7442A34C18D00BBA122 /* FirebaseFirestoreSwift */; };
 		69DFC7472A34C18D00BBA122 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 69DFC7462A34C18D00BBA122 /* FirebaseStorage */; };
+		69E01FAA2A8A51A000839EF5 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E01FA92A8A51A000839EF5 /* Restaurant.swift */; };
 		69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */; };
 		69E3D9A92A31BE0500F411CF /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9A82A31BE0500F411CF /* ProfileInteractor.swift */; };
 		69E3D9AB2A31BE9E00F411CF /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9AA2A31BE9E00F411CF /* ProfilePresenter.swift */; };
@@ -160,6 +161,7 @@
 		69D220292A1C94060011DE4C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		69DC1A982A276A7E00B0C700 /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		69DC1A9F2A277E0F00B0C700 /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
+		69E01FA92A8A51A000839EF5 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastOnboardingPageViewController.swift; sourceTree = "<group>"; };
 		69E3D9A82A31BE0500F411CF /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		69E3D9AA2A31BE9E00F411CF /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				69CA7CBB2A41C2D5007E24C1 /* Food.swift */,
 				69F7FA0E2A4B26C1007F5D26 /* CartItem.swift */,
 				6902D3912A7CF601007EE76E /* FoodCategory.swift */,
+				69E01FA92A8A51A000839EF5 /* Restaurant.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				69E3D9B32A31DD5900F411CF /* ProfileRouter.swift in Sources */,
 				6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */,
 				69E3D9B12A31DA6200F411CF /* PreferencesViewController.swift in Sources */,
+				69E01FAA2A8A51A000839EF5 /* Restaurant.swift in Sources */,
 				6932F8D62A2B69F200AD1633 /* SectionLayoutCreator.swift in Sources */,
 				69E3D9AB2A31BE9E00F411CF /* ProfilePresenter.swift in Sources */,
 				69CA7CBC2A41C2D5007E24C1 /* Food.swift in Sources */,

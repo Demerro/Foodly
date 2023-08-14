@@ -4,29 +4,7 @@ import Kingfisher
 
 final class FoodCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "FoodCollectionViewCell"
-    
-    var imageURL: URL! {
-        didSet {
-            foodImageView.kf.setImage(with: imageURL)
-        }
-    }
-    
-    var name: String! {
-        didSet {
-            nameLabel.text = name
-        }
-    }
-    
-    var price: Float! {
-        didSet {
-            priceLabel.attributedText = makePriceText(
-                value: price,
-                integerFont: .preferredFont(forTextStyle: .title3, compatibleWith: UITraitCollection(legibilityWeight: .bold)),
-                decimalFont: .preferredFont(forTextStyle: .callout, compatibleWith: UITraitCollection(legibilityWeight: .bold))
-            )
-        }
-    }
+    static let identifier = NSStringFromClass(FoodCollectionViewCell.self)
     
     var buttonAction: UIAction? {
         didSet {
@@ -46,6 +24,18 @@ final class FoodCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
         
         setupView()
+    }
+    
+    func configureView(with food: Food) {
+        foodImageView.kf.setImage(with: URL(string: food.imageURL)!)
+        
+        nameLabel.text = food.name
+        
+        priceLabel.attributedText = makePriceText(
+            value: food.price,
+            integerFont: .preferredFont(forTextStyle: .title3, compatibleWith: UITraitCollection(legibilityWeight: .bold)),
+            decimalFont: .preferredFont(forTextStyle: .callout, compatibleWith: UITraitCollection(legibilityWeight: .bold))
+        )
     }
     
     private func setupView() {

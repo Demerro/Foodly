@@ -3,7 +3,7 @@ import SnapKit
 
 final class RestaurantCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "RestaurantCollectionViewCell"
+    static let identifier = NSStringFromClass(RestaurantCollectionViewCell.self)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,13 +17,13 @@ final class RestaurantCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
-    func configureView(name: String, location: String, badgeTitle: String, badgeColor: UIColor) {
-        nameLabel.text = name
-        locationLabel.text = location
+    func configureView(with restaurant: Restaurant) {
+        nameLabel.text = restaurant.name
+        locationLabel.text = restaurant.location
         
-        badgeLabel.text = badgeTitle
-        badgeLabel.textColor = badgeColor
-        badgeContainer.backgroundColor = badgeColor.withAlphaComponent(0.2)
+        badgeLabel.text = restaurant.type
+        badgeLabel.textColor = restaurant.color
+        badgeContainer.backgroundColor = restaurant.color.withAlphaComponent(0.2)
     }
     
     private func setupView() {

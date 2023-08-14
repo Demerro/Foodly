@@ -31,9 +31,11 @@ extension HomePresenter: HomePresentationLogic {
     }
     
     func presentNearbyRestaurants(_ response: HomeModels.RestaurantsAction.Response) {
-        let restaurants: [HomeModels.Restaurant] = response.mapItems.compactMap {
-            guard let name = $0.placemark.name else { return nil }
-            guard let location = $0.placemark.title else { return nil }
+        let restaurants: [Restaurant] = response.mapItems.compactMap {
+            guard let name = $0.placemark.name,
+                  let location = $0.placemark.title
+            else { return nil }
+            
             var color: UIColor = .clear
             var type: String = ""
             
@@ -54,7 +56,7 @@ extension HomePresenter: HomePresentationLogic {
                 break
             }
             
-            return HomeModels.Restaurant(name: name, location: location, type: type, color: color)
+            return Restaurant(name: name, location: location, type: type, color: color)
         }
         
         let viewModel = HomeModels.RestaurantsAction.ViewModel(restaurants: restaurants)

@@ -9,12 +9,41 @@ protocol HomeDisplayLogic: AnyObject {
 
 final class HomeViewController: UIViewController {
     
+    typealias DataSource = UICollectionViewDiffableDataSource<HomeModels.HomeSection, AnyHashable>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<HomeModels.HomeSection, AnyHashable>
+    
     var interactor: HomeBusinessLogic?
     var router: HomeRouter?
     
     private let homeView = HomeView()
     private let locationManager = CLLocationManager()
-    private var sections = [HomeModels.HomeSections]()
+    
+    private lazy var dataSource = DataSource(collectionView: homeView.collectionView) { collectionView, indexPath, hashable in
+        switch hashable {
+        case let news as HomeModels.News:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
+            cell.configureView(image: news.image)
+            return cell
+            
+        case let category as FoodCategory:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCollectionViewCell.identifier, for: indexPath) as! FoodCategoryCollectionViewCell
+            cell.configureView(title: category.localizedName, color: category.color, image: category.image)
+            return cell
+            
+        case let food as Food:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath) as! FoodCollectionViewCell
+            cell.configureView(with: food)
+            return cell
+            
+        case let restaurant as Restaurant:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantCollectionViewCell.identifier, for: indexPath) as! RestaurantCollectionViewCell
+            cell.configureView(with: restaurant)
+            return cell
+            
+        default:
+            fatalError("Unknown hashable type.")
+        }
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -37,12 +66,14 @@ final class HomeViewController: UIViewController {
         
         setupLocationManager()
         
-        setupCollectionViewLayout()
         registerCollectionViewCells()
         registerCollectionViewSupplementaryElements()
+        homeView.collectionView.dataSource = dataSource
+        setupSections()
+        setupCollectionViewLayout()
+        setupSupplementaryViewProvider()
         
         homeView.collectionView.delegate = self
-        homeView.collectionView.dataSource = self
         
         addNews()
         addCategories()
@@ -97,13 +128,14 @@ final class HomeViewController: UIViewController {
     }
     
     private func addNews() {
-        sections.append(.news([
-            HomeModels.News(image: UIImage(named: "TopDeals")!)
-        ]))
+        let news = [HomeModels.News(image: UIImage(named: "TopDeals")!)]
+        var snapshot = dataSource.snapshot(for: .news)
+        snapshot.append(news)
+        dataSource.apply(snapshot, to: .news)
     }
     
     private func addCategories() {
-        sections.append(.foodCategories([
+        let categories = [
             FoodCategory(
                 localizedName: String(localized: "cell.foodCategory.title.burgers"),
                 name: .burgers,
@@ -127,7 +159,10 @@ final class HomeViewController: UIViewController {
                 color: .systemGreen,
                 image: UIImage(named: "Taco")!
             )
-        ]))
+        ]
+        var snapshot = dataSource.snapshot(for: .foodCategories)
+        snapshot.append(categories)
+        dataSource.apply(snapshot, to: .foodCategories)
     }
     
     private func addTrendingFood() {
@@ -145,10 +180,12 @@ final class HomeViewController: UIViewController {
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            guard let self = self else { return nil }
-            let layoutCreator = SectionLayoutCreator()
+            guard let self else { return nil }
             
-            switch sections[sectionIndex] {
+            let layoutCreator = SectionLayoutCreator()
+            let section = dataSource.sectionIdentifier(for: sectionIndex)!
+
+            switch section {
             case .news:
                 return layoutCreator.createNewsSection()
             case .foodCategories:
@@ -159,7 +196,7 @@ final class HomeViewController: UIViewController {
                 return layoutCreator.createRestaurantsSectionLayout()
             }
         }
-        
+
         homeView.collectionView.collectionViewLayout = layout
     }
     
@@ -176,6 +213,24 @@ final class HomeViewController: UIViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: CollectionViewHeader.identifier
         )
+    }
+    
+    private func setupSections() {
+        var snapshot = Snapshot()
+        snapshot.appendSections([.news, .foodCategories, .trendingFood])
+        dataSource.apply(snapshot)
+    }
+    
+    private func setupSupplementaryViewProvider() {
+        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeader.identifier, for: indexPath) as! CollectionViewHeader
+            guard let self else { return header }
+            
+            let section = dataSource.sectionIdentifier(for: indexPath.section)!
+            header.configureView(text: section.title)
+            
+            return header
+        }
     }
 }
 
@@ -203,78 +258,16 @@ extension HomeViewController: CLLocationManagerDelegate {
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch sections[indexPath.section] {
-        case let .foodCategories(categories):
-            router?.routeToFoodGroup(category: categories[indexPath.row])
-            
-        case let .trendingFood(food):
-            router?.routeToFoodDetails(food: food[indexPath.row])
-            
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        switch item {
+        case let category as FoodCategory:
+            router?.routeToFoodGroup(category: category)
+
+        case let food as Food:
+            router?.routeToFoodDetails(food: food)
+
         default:
             break
-        }
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section].count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch sections[indexPath.section] {
-        case let .news(news):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
-            
-            cell.configureView(image: news[indexPath.row].image)
-            
-            return cell
-            
-        case let .foodCategories(categories):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCollectionViewCell.identifier, for: indexPath) as! FoodCategoryCollectionViewCell
-            
-            let category = categories[indexPath.row]
-            cell.configureView(title: category.localizedName, color: category.color, image: category.image)
-            
-            return cell
-        case let .trendingFood(trendingFood):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath) as! FoodCollectionViewCell
-            
-            let food = trendingFood[indexPath.row]
-            cell.imageURL = URL(string: food.imageURL)!
-            cell.name = food.name
-            cell.price = food.price
-            cell.buttonAction = UIAction { [interactor] _ in
-                let request = HomeModels.AddFoodToCartAction.Request(food: food)
-                interactor?.addFoodToCart(request)
-            }
-            
-            return cell
-        case let .nearbyRestaurants(restaurants):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantCollectionViewCell.identifier, for: indexPath) as! RestaurantCollectionViewCell
-            
-            let restaurant = restaurants[indexPath.row]
-            cell.configureView(name: restaurant.name, location: restaurant.location, badgeTitle: restaurant.type, badgeColor: restaurant.color)
-            
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeader.identifier, for: indexPath) as! CollectionViewHeader
-            
-            header.configureView(text: sections[indexPath.section].title)
-            
-            return header
-        default:
-            return UICollectionReusableView()
         }
     }
 }
@@ -282,42 +275,21 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func displayTrendingFood(_ viewModel: HomeModels.TrendingFoodAction.ViewModel) {
-        sections.insert(.trendingFood(viewModel.food), at: 2)
+        var snapshot = dataSource.snapshot(for: .trendingFood)
+        snapshot.append(viewModel.food)
         
         DispatchQueue.main.async {
-            self.homeView.collectionView.insertSections(IndexSet(integer: 2))
+            self.dataSource.apply(snapshot, to: .trendingFood)
         }
     }
     
     func displayRestaurants(_ viewModel: HomeModels.RestaurantsAction.ViewModel) {
-        let index = sections.firstIndex {
-            if case .nearbyRestaurants = $0 {
-                return true
-            } else {
-                return false
-            }
-        }
-        
-        if let index = index {
-            updateRestaurants(sectionIndex: index, restaurants: viewModel.restaurants)
-        } else {
-            addRestaurantsToEnd(restaurants: viewModel.restaurants)
-        }
-    }
-    
-    private func updateRestaurants(sectionIndex: Int, restaurants: [HomeModels.Restaurant]) {
-        sections[sectionIndex] = .nearbyRestaurants(restaurants)
-        
-        DispatchQueue.main.async { [homeView] in
-            homeView.collectionView.reloadSections(IndexSet(integer: sectionIndex))
-        }
-    }
-    
-    private func addRestaurantsToEnd(restaurants: [HomeModels.Restaurant]) {
-        sections.append(.nearbyRestaurants(restaurants))
+        var snapshot = dataSource.snapshot(for: .nearbyRestaurants)
+        snapshot.deleteAll()
+        snapshot.append(viewModel.restaurants)
         
         DispatchQueue.main.async {
-            self.homeView.collectionView.insertSections(IndexSet(integer: self.sections.count - 1))
+            self.dataSource.apply(snapshot, to: .nearbyRestaurants)
         }
     }
     

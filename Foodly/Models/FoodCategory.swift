@@ -1,6 +1,6 @@
 import UIKit
 
-struct FoodCategory {
+struct FoodCategory: Hashable {
     let localizedName: String
     let name: FoodCategoryName
     let color: UIColor

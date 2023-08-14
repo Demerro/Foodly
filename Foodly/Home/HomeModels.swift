@@ -2,24 +2,11 @@ import FirebaseFirestore
 import MapKit
 
 struct HomeModels {
-    enum HomeSections {
-        case news([News])
-        case foodCategories([FoodCategory])
-        case trendingFood([Food])
-        case nearbyRestaurants([Restaurant])
-        
-        var count: Int {
-            switch self {
-            case let .news(news):
-                return news.count
-            case let .foodCategories(categories):
-                return categories.count
-            case let .trendingFood(food):
-                return food.count
-            case let .nearbyRestaurants(restaurants):
-                return restaurants.count
-            }
-        }
+    enum HomeSection: Hashable {
+        case news
+        case foodCategories
+        case trendingFood
+        case nearbyRestaurants
         
         var title: String {
             switch self {
@@ -69,14 +56,7 @@ struct HomeModels {
         struct ViewModel {}
     }
     
-    struct News {
+    struct News: Hashable {
         let image: UIImage
-    }
-    
-    struct Restaurant {
-        let name: String
-        let location: String
-        let type: String
-        let color: UIColor
     }
 }

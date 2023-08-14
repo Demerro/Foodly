@@ -1,7 +1,7 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Food: Codable, Identifiable {
+struct Food: Codable, Identifiable, Hashable {
     @DocumentID var id: String?
     let name: String
     let description: String

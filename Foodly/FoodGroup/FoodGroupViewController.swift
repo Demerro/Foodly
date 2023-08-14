@@ -76,13 +76,7 @@ extension FoodGroupViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath) as! FoodCollectionViewCell
         
         let foodItem = filteredFoodItems[indexPath.row]
-        cell.name = foodItem.name
-        cell.price = foodItem.price
-        cell.imageURL = URL(string: foodItem.imageURL)!
-        cell.buttonAction = UIAction { [interactor] _ in
-            let request = FoodGroupModels.AddFoodToCartAction.Request(food: foodItem)
-            interactor?.addFoodToCart(request)
-        }
+        cell.configureView(with: foodItem)
         
         return cell
     }
