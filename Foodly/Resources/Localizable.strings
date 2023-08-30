@@ -103,3 +103,8 @@
 "view.searchResults.segmentedControl.restaurants" = "Restaurants";
 "view.searchResults.noResultsFound.title" = "No Results Found!";
 "view.searchResults.noResultsFound.subtitle" = "We can’t find any item matching your search.";
+
+// MARK: - CartScene
+"view.totalPrice.subtotal" = "Subtotal";
+"view.totalPrice.delivery" = "Delivery";
+"view.totalPrice.total" = "Total";

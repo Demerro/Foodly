@@ -93,6 +93,7 @@
 		69E01FAF2A8A62D800839EF5 /* FoodWorkerLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E01FAE2A8A62D800839EF5 /* FoodWorkerLogic.swift */; };
 		69E01FB12A8A633D00839EF5 /* FirebaseFoodWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E01FB02A8A633D00839EF5 /* FirebaseFoodWorker.swift */; };
 		69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */; };
+		69E0FD7A2A9F5330008688E9 /* TotalPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0FD792A9F5330008688E9 /* TotalPriceView.swift */; };
 		69E3D9A92A31BE0500F411CF /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9A82A31BE0500F411CF /* ProfileInteractor.swift */; };
 		69E3D9AB2A31BE9E00F411CF /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9AA2A31BE9E00F411CF /* ProfilePresenter.swift */; };
 		69E3D9AD2A31C47600F411CF /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9AC2A31C47600F411CF /* ProfileModels.swift */; };
@@ -201,6 +202,7 @@
 		69E01FAE2A8A62D800839EF5 /* FoodWorkerLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodWorkerLogic.swift; sourceTree = "<group>"; };
 		69E01FB02A8A633D00839EF5 /* FirebaseFoodWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFoodWorker.swift; sourceTree = "<group>"; };
 		69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastOnboardingPageViewController.swift; sourceTree = "<group>"; };
+		69E0FD792A9F5330008688E9 /* TotalPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPriceView.swift; sourceTree = "<group>"; };
 		69E3D9A82A31BE0500F411CF /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		69E3D9AA2A31BE9E00F411CF /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		69E3D9AC2A31C47600F411CF /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				691A78E92A45BD720005944A /* CartModels.swift */,
 				69825D992A4871E400D7988C /* CartPresenter.swift */,
 				69825D9B2A48772F00D7988C /* CartView.swift */,
+				69E0FD792A9F5330008688E9 /* TotalPriceView.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				69FCCBE42A1FCAD300E34D14 /* HomePresenter.swift in Sources */,
 				69825D9E2A48799400D7988C /* CartTableViewCell.swift in Sources */,
 				69947D502A12A7C00062A04F /* RegisterViewController.swift in Sources */,
+				69E0FD7A2A9F5330008688E9 /* TotalPriceView.swift in Sources */,
 				6917A8382A1516BC002EFA5D /* FormCardView.swift in Sources */,
 				69FCCBE62A1FCE1F00E34D14 /* PointOfInterestSearcher.swift in Sources */,
 				69E3D9AD2A31C47600F411CF /* ProfileModels.swift in Sources */,

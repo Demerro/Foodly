@@ -11,7 +11,9 @@ final class CartViewController: UIViewController {
     var interactor: CartBusinessLogic?
     
     private let cartView = CartView()
-    private var cartItems = [CartItem]()
+    private var cartItems = [CartItem]() {
+        didSet { DispatchQueue.main.async { self.updateTableViewFooter() } }
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -68,6 +70,11 @@ final class CartViewController: UIViewController {
         
         cartItem.badgeValue = "\(cartItems.count)"
     }
+    
+    private func updateTableViewFooter() {
+        let subtotalPrice = cartItems.reduce(into: 0, { $0 += $1.totalPrice })
+        cartView.totalPriceView.configureView(subtotalPrice: subtotalPrice, deliveryPrice: 5) // TODO: Change
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -93,6 +100,7 @@ extension CartViewController: UITableViewDataSource {
             cartItems[indexPath.row].amount += 1
             DispatchQueue.main.async {
                 self.cartView.tableView.reloadRows(at: [indexPath], with: .none)
+                self.updateTableViewFooter()
             }
             
             let request = CartModels.ChangeCartItemAmountAction.Request(cartItem: item, difference: 1, indexPath: indexPath)
@@ -103,8 +111,9 @@ extension CartViewController: UITableViewDataSource {
             guard let self, item.amount > 1 else { return }
             
             cartItems[indexPath.row].amount -= 1
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 self.cartView.tableView.reloadRows(at: [indexPath], with: .none)
+                self.updateTableViewFooter()
             }
             
             let request = CartModels.ChangeCartItemAmountAction.Request(cartItem: item, difference: -1, indexPath: indexPath)
@@ -143,9 +152,9 @@ extension CartViewController: CartDisplayLogic {
     func displayCartFood(_ viewModel: CartModels.GetCartItemsAction.ViewModel) {
         cartItems = viewModel.cartItems
         
-        DispatchQueue.main.async {
-            self.cartView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-            self.setCartBadgeValue()
+        DispatchQueue.main.async { [self] in
+            cartView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            setCartBadgeValue()
         }
     }
     

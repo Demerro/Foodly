@@ -62,7 +62,7 @@ final class FoodDetailsViewController: UIViewController {
         let amount = foodDetailsView.stepper.value
         let cartItem = CartItem(
             amount: amount,
-            totalPrice: Float(amount) * food.price,
+            oneItemPrice: food.price,
             foodReference: food.documentReference!
         )
         let request = FoodDetailsModels.AddToCartAction.Request(cartItem: cartItem)
