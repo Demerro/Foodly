@@ -108,3 +108,5 @@
 "view.totalPrice.subtotal" = "Subtotal";
 "view.totalPrice.delivery" = "Delivery";
 "view.totalPrice.total" = "Total";
+
+"view.cart.button.goToMap" = "Go to map";

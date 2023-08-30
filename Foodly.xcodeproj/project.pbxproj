@@ -275,6 +275,8 @@
 		6912DA212A10A2E9002785E3 /* FoodlyUI */ = {
 			isa = PBXGroup;
 			children = (
+				69E0FD792A9F5330008688E9 /* TotalPriceView.swift */,
+				69825D9D2A48799400D7988C /* CartTableViewCell.swift */,
 				6912DA222A10A45A002785E3 /* FormTextField.swift */,
 				6917A8372A1516BC002EFA5D /* FormCardView.swift */,
 				695E8D222A1A8795009F381B /* LocationView.swift */,
@@ -306,13 +308,11 @@
 		691A78E42A45B3480005944A /* Cart */ = {
 			isa = PBXGroup;
 			children = (
-				69825D9D2A48799400D7988C /* CartTableViewCell.swift */,
 				691A78E52A45B3530005944A /* CartViewController.swift */,
 				691A78E72A45B3660005944A /* CartInteractor.swift */,
 				691A78E92A45BD720005944A /* CartModels.swift */,
 				69825D992A4871E400D7988C /* CartPresenter.swift */,
 				69825D9B2A48772F00D7988C /* CartView.swift */,
-				69E0FD792A9F5330008688E9 /* TotalPriceView.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";

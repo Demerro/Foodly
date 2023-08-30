@@ -27,14 +27,26 @@ final class CartView: UIView {
     }
     
     private func createTableViewFooter() {
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
-        container.addSubview(totalPriceView)
-        tableView.tableFooterView = container
-        totalPriceView.snp.makeConstraints {
+        let container = UIStackView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 150))
+        container.axis = .vertical
+        container.alignment = .center
+        container.spacing = 10
+        
+        [totalPriceView, mapButton].forEach { container.addArrangedSubview($0) }
+        
+        let horizontalConstraints: (ConstraintMaker) -> Void = {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.top.bottom.equalToSuperview()
         }
+        
+        totalPriceView.snp.makeConstraints(horizontalConstraints)
+        
+        mapButton.snp.makeConstraints {
+            horizontalConstraints($0)
+            $0.height.equalTo(50)
+        }
+        
+        tableView.tableFooterView = container
     }
     
     let tableView: UITableView = {
@@ -51,6 +63,16 @@ final class CartView: UIView {
         let view = TotalPriceView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    let mapButton: UIButton = {
+        var config = UIButton.Configuration.borderedProminent()
+        config.title = String(localized: "view.cart.button.goToMap").uppercased()
+        config.cornerStyle = .large
+        
+        let button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
 }

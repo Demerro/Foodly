@@ -8,7 +8,7 @@ protocol CartDisplayLogic: AnyObject {
 
 final class CartViewController: UIViewController {
     
-    var interactor: CartBusinessLogic?
+    private var interactor: CartBusinessLogic?
     
     private let cartView = CartView()
     private var cartItems = [CartItem]() {
