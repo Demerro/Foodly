@@ -4,7 +4,7 @@ import Kingfisher
 
 final class CartTableViewCell: UITableViewCell {
     
-    static let identifier = "CartTableViewCell"
+    static let identifier = NSStringFromClass(CartTableViewCell.self)
     
     var imageURL: String! {
         didSet {
@@ -30,9 +30,8 @@ final class CartTableViewCell: UITableViewCell {
         }
     }
     
-    var increaseButtonTappedAction: (() -> Void)?
-    
-    var decreaseButtonTappedAction: (() -> Void)?
+    var increaseAction: (() -> Void)?
+    var decreaseAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,16 +48,9 @@ final class CartTableViewCell: UITableViewCell {
     private func setupView() {
         self.backgroundColor = .secondarySystemGroupedBackground
         
-        textStackView.addArrangedSubview(foodNameLabel)
-        textStackView.addArrangedSubview(priceLabel)
-        
-        buttonsStackView.addArrangedSubview(decreaseButton)
-        buttonsStackView.addArrangedSubview(amountLabel)
-        buttonsStackView.addArrangedSubview(increaseButton)
-        
-        addSubview(foodImageView)
-        addSubview(textStackView)
-        self.contentView.addSubview(buttonsStackView)
+        [foodNameLabel, priceLabel].forEach { [textStackView] in textStackView.addArrangedSubview($0) }
+    
+        [foodImageView, textStackView, buttonsStackView].forEach { [contentView] in contentView.addSubview($0) }
         
         foodImageView.snp.makeConstraints {
             $0.height.centerY.equalToSuperview()
@@ -66,14 +58,14 @@ final class CartTableViewCell: UITableViewCell {
             $0.width.equalTo(100)
         }
         
-        amountLabel.snp.makeConstraints {
-            $0.trailing.centerY.equalToSuperview()
-        }
-        
         textStackView.snp.makeConstraints {
             $0.leading.equalTo(foodImageView.snp.trailing).offset(10)
-            $0.trailing.equalTo(buttonsStackView.snp.leading)
             $0.centerY.equalToSuperview()
+            $0.trailing.equalTo(contentView.snp.trailing)
+        }
+        
+        [decreaseButton, amountLabel, increaseButton].forEach { [buttonsStackView] in
+            buttonsStackView.addArrangedSubview($0)
         }
         
         buttonsStackView.snp.makeConstraints {
@@ -86,11 +78,11 @@ final class CartTableViewCell: UITableViewCell {
     
     private func setupButtonActions() {
         increaseButton.addAction(UIAction { [weak self] _ in
-            self?.increaseButtonTappedAction?()
+            self?.increaseAction?()
         }, for: .touchUpInside)
         
         decreaseButton.addAction(UIAction { [weak self] _ in
-            self?.decreaseButtonTappedAction?()
+            self?.decreaseAction?()
         }, for: .touchUpInside)
     }
     
@@ -99,16 +91,6 @@ final class CartTableViewCell: UITableViewCell {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        
-        return stackView
-    }()
-    
-    private let buttonsStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
         
         return stackView
     }()
@@ -141,7 +123,17 @@ final class CartTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let amountLabel: UILabel = {
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
+    private lazy var amountLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -150,7 +142,7 @@ final class CartTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let decreaseButton: UIButton = {
+    private lazy var decreaseButton: UIButton = {
         var config = UIButton.Configuration.borderedTinted()
         config.image = UIImage(systemName: "minus")!
         config.buttonSize = .mini
@@ -162,7 +154,7 @@ final class CartTableViewCell: UITableViewCell {
         return button
     }()
     
-    private let increaseButton: UIButton = {
+    private lazy var increaseButton: UIButton = {
         var config = UIButton.Configuration.borderedProminent()
         config.image = UIImage(systemName: "plus")!
         config.buttonSize = .mini
@@ -173,4 +165,5 @@ final class CartTableViewCell: UITableViewCell {
         
         return button
     }()
+    
 }

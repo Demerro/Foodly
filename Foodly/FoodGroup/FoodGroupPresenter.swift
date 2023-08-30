@@ -16,7 +16,7 @@ extension FoodGroupPresenter: FoodGroupPresentationLogic {
             let food = try response.snapshots.map {
                 var item = try $0.data(as: Food.self)
                 item.documentReference = $0.reference
-                item.category = response.foodCategory
+                item.category = response.foodCategory.name
                 
                 return item
             }

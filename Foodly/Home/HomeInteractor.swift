@@ -8,7 +8,7 @@ protocol HomeBusinessLogic: AnyObject {
 
 class HomeInteractor {
     var presenter: HomePresentationLogic?
-    var trendingFoodWorker: TrendingFoodWorkerLogic?
+    var foodWorker: FoodWorkerLogic?
     var restaurantsWorker: RestaurantsWorkerLogic?
     var cartWorker: CartWorkerLogic?
 }
@@ -18,7 +18,8 @@ extension HomeInteractor: HomeBusinessLogic {
     func getTrendingFood(_ request: HomeModels.TrendingFoodAction.Request) {
         Task {
             do {
-                if let response = try await trendingFoodWorker?.getTrendingFood() {
+                if let food = try await foodWorker?.getTrendingFood() {
+                    let response = HomeModels.TrendingFoodAction.Response(food: food)
                     presenter?.presentTrendingFood(response)
                 }
             } catch {
@@ -30,9 +31,14 @@ extension HomeInteractor: HomeBusinessLogic {
     func getNearbyRestaurants(_ request: HomeModels.RestaurantsAction.Request) {
         Task {
             do {
-                if let response = try await restaurantsWorker?.getNearbyRestaurants(request) {
-                    presenter?.presentNearbyRestaurants(response)
+                guard
+                    let mapItems = try await restaurantsWorker?.getNearbyRestaurants(request.coordinate)
+                else {
+                    return
                 }
+                
+                let response = HomeModels.RestaurantsAction.Response(mapItems: mapItems)
+                presenter?.presentNearbyRestaurants(response)
             } catch {
                 print(error)
             }

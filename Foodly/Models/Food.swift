@@ -8,7 +8,7 @@ struct Food: Codable, Identifiable, Hashable {
     let imageURL: String
     let calories: Int
     let price: Float
-    var category: FoodCategory?
+    var category: FoodCategoryName?
     var documentReference: DocumentReference?
     
     private enum CodingKeys: String, CodingKey {

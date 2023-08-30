@@ -80,18 +80,17 @@ extension CartViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier, for: indexPath) as! CartTableViewCell
         let item = cartItems[indexPath.row]
         
-        let food = item.food
-        let amount = item.amount
+        let food = item.food!
         
-        cell.amount = amount
-        cell.foodName = food!.name
-        cell.imageURL = food!.imageURL
-        cell.price = food!.price
+        cell.foodName = food.name
+        cell.imageURL = food.imageURL
+        cell.price = food.price
+        cell.amount = item.amount
         
-        cell.increaseButtonTappedAction = { [weak self, interactor] in
+        cell.increaseAction = { [weak self] in
             guard let self else { return }
             
-            self.cartItems[indexPath.row].amount += 1
+            cartItems[indexPath.row].amount += 1
             DispatchQueue.main.async {
                 self.cartView.tableView.reloadRows(at: [indexPath], with: .none)
             }
@@ -100,10 +99,10 @@ extension CartViewController: UITableViewDataSource {
             interactor?.changeCartFoodAmount(request)
         }
         
-        cell.decreaseButtonTappedAction = { [weak self, interactor] in
-            guard item.amount > 1, let self else { return }
+        cell.decreaseAction = { [weak self] in
+            guard let self, item.amount > 1 else { return }
             
-            self.cartItems[indexPath.row].amount -= 1
+            cartItems[indexPath.row].amount -= 1
             DispatchQueue.main.async {
                 self.cartView.tableView.reloadRows(at: [indexPath], with: .none)
             }

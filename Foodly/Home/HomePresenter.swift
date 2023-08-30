@@ -14,19 +14,7 @@ class HomePresenter {
 // MARK: - HomePresentationLogic
 extension HomePresenter: HomePresentationLogic {
     func presentTrendingFood(_ response: HomeModels.TrendingFoodAction.Response) {
-        let trendingFood = response.snapshots.compactMap { snapshot in
-            do {
-                var food = try snapshot.data(as: Food.self)
-                food.documentReference = snapshot.reference
-                return food
-            } catch {
-                print(error)
-            }
-            
-            return nil
-        }
-        
-        let viewModel = HomeModels.TrendingFoodAction.ViewModel(food: trendingFood)
+        let viewModel = HomeModels.TrendingFoodAction.ViewModel(food: response.food)
         viewController?.displayTrendingFood(viewModel)
     }
     

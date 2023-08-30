@@ -7,7 +7,7 @@ struct FoodCategory: Hashable {
     let image: UIImage
 }
 
-enum FoodCategoryName: String {
+enum FoodCategoryName: String, CaseIterable {
     case burgers = "burgers"
     case pizzas = "pizzas"
     case cakes = "cakes"

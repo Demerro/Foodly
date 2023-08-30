@@ -69,11 +69,11 @@
 "cell.restaurant.cafe" = "Cafe";
 "cell.restaurant.bakery" = "Bakery";
 
-// MARK: - FoodCategoryCollectionViewCell
-"cell.foodCategory.title.burgers" = "Burgers";
-"cell.foodCategory.title.pizzas" = "Pizzas";
-"cell.foodCategory.title.cakes" = "Cakes";
-"cell.foodCategory.title.tacos" = "Tacos";
+// MARK: - Food Categories
+"foodCategory.burgers" = "Burgers";
+"foodCategory.pizzas" = "Pizzas";
+"foodCategory.cakes" = "Cakes";
+"foodCategory.tacos" = "Tacos";
 
 // MARK: - HomeScene
 "view.home.sections.trendingFood.header" = "Trending Now";
@@ -97,3 +97,9 @@
 
 "view.preferences.tableView.row.deliveryLocations.title" = "Delivery Locations";
 "view.preferences.tableView.row.deliveryLocations.subtitle" = "Edit Or Change Your Daily Delivery Locations";
+
+// MARK: - SearchResultsScene
+"view.searchResults.segmentedControl.food" = "Food";
+"view.searchResults.segmentedControl.restaurants" = "Restaurants";
+"view.searchResults.noResultsFound.title" = "No Results Found!";
+"view.searchResults.noResultsFound.subtitle" = "We can’t find any item matching your search.";

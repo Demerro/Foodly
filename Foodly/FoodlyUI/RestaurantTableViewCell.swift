@@ -1,12 +1,12 @@
 import UIKit
 import SnapKit
 
-final class RestaurantCollectionViewCell: UICollectionViewCell {
+final class RestaurantTableViewCell: UITableViewCell {
     
-    static let identifier = NSStringFromClass(RestaurantCollectionViewCell.self)
+    static let identifier = NSStringFromClass(RestaurantTableViewCell.self)
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
     }
@@ -17,26 +17,14 @@ final class RestaurantCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
-    func configureView(with restaurant: Restaurant) {
-        nameLabel.text = restaurant.name
-        locationLabel.text = restaurant.location
-        
-        badgeLabel.text = restaurant.type
-        badgeLabel.textColor = restaurant.color
-        badgeContainer.backgroundColor = restaurant.color.withAlphaComponent(0.2)
-    }
-    
     private func setupView() {
-        self.backgroundColor = .secondarySystemGroupedBackground
-        self.layer.cornerRadius = 15
-        
         badgeContainer.addSubview(badgeLabel)
         [nameLabel, locationLabel, badgeContainer].forEach { stackView.addArrangedSubview($0) }
         contentView.addSubview(stackView)
         
         stackView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
+            $0.center.equalToSuperview()
+            $0.size.equalToSuperview().offset(-20)
         }
         
         badgeContainer.snp.makeConstraints {
@@ -48,10 +36,21 @@ final class RestaurantCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func configureView(with restaurant: Restaurant) {
+        nameLabel.text = restaurant.name
+        locationLabel.text = restaurant.location
+        
+        badgeLabel.text = restaurant.type
+        badgeLabel.textColor = restaurant.color
+        badgeContainer.backgroundColor = restaurant.color.withAlphaComponent(0.2)
+    }
+    
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 5
         return stackView
     }()
     
@@ -84,4 +83,5 @@ final class RestaurantCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
 }

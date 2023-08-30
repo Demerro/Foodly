@@ -66,9 +66,10 @@ final class HomeViewController: UIViewController {
         
         setupLocationManager()
         
+        setupSearchController()
+        
         registerCollectionViewCells()
         registerCollectionViewSupplementaryElements()
-        homeView.collectionView.dataSource = dataSource
         setupSections()
         setupCollectionViewLayout()
         setupSupplementaryViewProvider()
@@ -83,18 +84,18 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupNavBar()
+        addLocationView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        clearNavBar()
+        removeLocationView()
     }
     
     private func configure() {
-        let trendingFoodWorker = TrendingFoodWorker()
-        let restaurantsWorker = RestaurantsWorker()
+        let foodWorker = FirebaseFoodWorker()
+        let restaurantsWorker = MapKitRestaurantsWorker()
         let cartWorker = FirebaseCartWorker()
         let viewController = self
         let interactor = HomeInteractor()
@@ -108,13 +109,17 @@ final class HomeViewController: UIViewController {
         viewController.router = router
         
         interactor.restaurantsWorker = restaurantsWorker
-        interactor.trendingFoodWorker = trendingFoodWorker
+        interactor.foodWorker = foodWorker
         interactor.cartWorker = cartWorker
     }
     
-    private func setupNavBar() {
+    private func addLocationView() {
         guard let navBar = navigationController?.navigationBar else { return }
         navBar.addSubview(homeView.locationView)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.homeView.locationView.alpha = 1
+        }
         
         navBar.addConstraints([
             homeView.locationView.widthAnchor.constraint(equalTo: navBar.widthAnchor, constant: -40),
@@ -122,9 +127,24 @@ final class HomeViewController: UIViewController {
         ])
     }
     
-    private func clearNavBar() {
-        guard let navBar = navigationController?.navigationBar else { return }
-        navBar.subviews.forEach { $0.removeFromSuperview() }
+    private func removeLocationView() {
+        guard let navBar = navigationController?.navigationBar,
+              let locationView = navBar.subviews.first(where: { $0 is LocationView })
+        else { return }
+        
+        UIView.animate(withDuration: 0.3) {
+            locationView.alpha = 0
+        } completion: { _ in
+            locationView.removeFromSuperview()
+        }
+    }
+    
+    private func setupSearchController() {
+        let searchResultsViewController = SearchResultsViewController()
+        let controller = UISearchController(searchResultsController: searchResultsViewController)
+        controller.searchResultsUpdater = searchResultsViewController
+        controller.searchBar.delegate = self
+        self.navigationItem.searchController = controller
     }
     
     private func addNews() {
@@ -137,24 +157,24 @@ final class HomeViewController: UIViewController {
     private func addCategories() {
         let categories = [
             FoodCategory(
-                localizedName: String(localized: "cell.foodCategory.title.burgers"),
+                localizedName: String(localized: "foodCategory.burgers"),
                 name: .burgers,
                 color: UIColor(named: "AccentColor")!,
                 image: UIImage(named: "Burger")!
             ),
             FoodCategory(
-                localizedName: String(localized: "cell.foodCategory.title.pizzas"),
+                localizedName: String(localized: "foodCategory.pizzas"),
                 name: .pizzas,
                 color: .systemOrange,
                 image: UIImage(named: "Pizza")!),
             FoodCategory(
-                localizedName: String(localized: "cell.foodCategory.title.cakes"),
+                localizedName: String(localized: "foodCategory.cakes"),
                 name: .cakes,
                 color: .systemBlue,
                 image: UIImage(named: "Cake")!
             ),
             FoodCategory(
-                localizedName: String(localized: "cell.foodCategory.title.tacos"),
+                localizedName: String(localized: "foodCategory.tacos"),
                 name: .tacos,
                 color: .systemGreen,
                 image: UIImage(named: "Taco")!
@@ -252,6 +272,19 @@ extension HomeViewController: CLLocationManagerDelegate {
             let request = HomeModels.RestaurantsAction.Request(coordinate: location.coordinate)
             interactor?.getNearbyRestaurants(request)
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        removeLocationView()
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        addLocationView()
+        return true
     }
 }
 

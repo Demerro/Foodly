@@ -1,4 +1,3 @@
-import FirebaseFirestore
 import MapKit
 
 struct HomeModels {
@@ -24,7 +23,7 @@ struct HomeModels {
         struct Request { }
         
         struct Response {
-            let snapshots: [DocumentSnapshot]
+            let food: [Food]
         }
         
         struct ViewModel {
