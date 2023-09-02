@@ -17,6 +17,9 @@
 		6902D38E2A7CF138007EE76E /* FoodGroupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6902D38D2A7CF138007EE76E /* FoodGroupPresenter.swift */; };
 		6902D3902A7CF162007EE76E /* FoodGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6902D38F2A7CF162007EE76E /* FoodGroupModels.swift */; };
 		6902D3922A7CF601007EE76E /* FoodCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6902D3912A7CF601007EE76E /* FoodCategory.swift */; };
+		6909B6742AA0E103004AE851 /* MakeOrderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909B6732AA0E103004AE851 /* MakeOrderInteractor.swift */; };
+		6909B6762AA0E114004AE851 /* MakeOrderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909B6752AA0E114004AE851 /* MakeOrderModels.swift */; };
+		6909B6782AA0E200004AE851 /* MakeOrderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6909B6772AA0E200004AE851 /* MakeOrderPresenter.swift */; };
 		6912DA232A10A45A002785E3 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA222A10A45A002785E3 /* FormTextField.swift */; };
 		6912DA2C2A10C0C4002785E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6912DA2B2A10C0C4002785E3 /* GoogleService-Info.plist */; };
 		6912DA2E2A10C175002785E3 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6912DA2D2A10C175002785E3 /* LoginPresenter.swift */; };
@@ -94,6 +97,9 @@
 		69E01FB12A8A633D00839EF5 /* FirebaseFoodWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E01FB02A8A633D00839EF5 /* FirebaseFoodWorker.swift */; };
 		69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */; };
 		69E0FD7A2A9F5330008688E9 /* TotalPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0FD792A9F5330008688E9 /* TotalPriceView.swift */; };
+		69E0FD7D2A9F72BF008688E9 /* MakeOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0FD7C2A9F72BF008688E9 /* MakeOrderViewController.swift */; };
+		69E0FD7F2A9F7302008688E9 /* CartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0FD7E2A9F7302008688E9 /* CartRouter.swift */; };
+		69E0FD812A9FB209008688E9 /* MakeOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0FD802A9FB209008688E9 /* MakeOrderView.swift */; };
 		69E3D9A92A31BE0500F411CF /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9A82A31BE0500F411CF /* ProfileInteractor.swift */; };
 		69E3D9AB2A31BE9E00F411CF /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9AA2A31BE9E00F411CF /* ProfilePresenter.swift */; };
 		69E3D9AD2A31C47600F411CF /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E3D9AC2A31C47600F411CF /* ProfileModels.swift */; };
@@ -129,6 +135,9 @@
 		6902D38D2A7CF138007EE76E /* FoodGroupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroupPresenter.swift; sourceTree = "<group>"; };
 		6902D38F2A7CF162007EE76E /* FoodGroupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroupModels.swift; sourceTree = "<group>"; };
 		6902D3912A7CF601007EE76E /* FoodCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategory.swift; sourceTree = "<group>"; };
+		6909B6732AA0E103004AE851 /* MakeOrderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeOrderInteractor.swift; sourceTree = "<group>"; };
+		6909B6752AA0E114004AE851 /* MakeOrderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeOrderModels.swift; sourceTree = "<group>"; };
+		6909B6772AA0E200004AE851 /* MakeOrderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeOrderPresenter.swift; sourceTree = "<group>"; };
 		6912DA222A10A45A002785E3 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		6912DA2B2A10C0C4002785E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6912DA2D2A10C175002785E3 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
@@ -203,6 +212,9 @@
 		69E01FB02A8A633D00839EF5 /* FirebaseFoodWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFoodWorker.swift; sourceTree = "<group>"; };
 		69E07AFB2A0E253B005FE54D /* LastOnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastOnboardingPageViewController.swift; sourceTree = "<group>"; };
 		69E0FD792A9F5330008688E9 /* TotalPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPriceView.swift; sourceTree = "<group>"; };
+		69E0FD7C2A9F72BF008688E9 /* MakeOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeOrderViewController.swift; sourceTree = "<group>"; };
+		69E0FD7E2A9F7302008688E9 /* CartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRouter.swift; sourceTree = "<group>"; };
+		69E0FD802A9FB209008688E9 /* MakeOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeOrderView.swift; sourceTree = "<group>"; };
 		69E3D9A82A31BE0500F411CF /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		69E3D9AA2A31BE9E00F411CF /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		69E3D9AC2A31C47600F411CF /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
@@ -313,6 +325,7 @@
 				691A78E92A45BD720005944A /* CartModels.swift */,
 				69825D992A4871E400D7988C /* CartPresenter.swift */,
 				69825D9B2A48772F00D7988C /* CartView.swift */,
+				69E0FD7E2A9F7302008688E9 /* CartRouter.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -339,6 +352,7 @@
 		692247682A0A9DEB0025C682 /* Foodly */ = {
 			isa = PBXGroup;
 			children = (
+				69E0FD7B2A9F72B2008688E9 /* MakeOrder */,
 				69B856AE2A8D05AD0063A550 /* SearchResults */,
 				6902D3862A7CEFE1007EE76E /* FoodGroup */,
 				69C3BAD52A595CC70049E771 /* Workers */,
@@ -521,6 +535,18 @@
 			path = FoodWorker;
 			sourceTree = "<group>";
 		};
+		69E0FD7B2A9F72B2008688E9 /* MakeOrder */ = {
+			isa = PBXGroup;
+			children = (
+				69E0FD7C2A9F72BF008688E9 /* MakeOrderViewController.swift */,
+				69E0FD802A9FB209008688E9 /* MakeOrderView.swift */,
+				6909B6732AA0E103004AE851 /* MakeOrderInteractor.swift */,
+				6909B6752AA0E114004AE851 /* MakeOrderModels.swift */,
+				6909B6772AA0E200004AE851 /* MakeOrderPresenter.swift */,
+			);
+			path = MakeOrder;
+			sourceTree = "<group>";
+		};
 		69E3D9AE2A31D9EC00F411CF /* FoodlyCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,12 +716,14 @@
 				69BC39A02A29E44400545DBD /* FoodCategoryCollectionViewCell.swift in Sources */,
 				6999B3E32A38D96700E83C9E /* PriceView.swift in Sources */,
 				69B2D93F2A0E992800323A8A /* LoginView.swift in Sources */,
+				69E0FD812A9FB209008688E9 /* MakeOrderView.swift in Sources */,
 				69E01FAF2A8A62D800839EF5 /* FoodWorkerLogic.swift in Sources */,
 				692247842A0AA5680025C682 /* OnboardingViewController.swift in Sources */,
 				6993670C2A8E12E200FE86C1 /* SearchResultsInteractor.swift in Sources */,
 				6932F8DA2A2B80D900AD1633 /* MapKitRestaurantsWorker.swift in Sources */,
 				69947D4D2A12A2F60062A04F /* UIWindow + Extensions.swift in Sources */,
 				6917A82F2A14E248002EFA5D /* RegisterInteractor.swift in Sources */,
+				6909B6782AA0E200004AE851 /* MakeOrderPresenter.swift in Sources */,
 				6902D38E2A7CF138007EE76E /* FoodGroupPresenter.swift in Sources */,
 				69F7FA0F2A4B26C1007F5D26 /* CartItem.swift in Sources */,
 				69F7FA0D2A4B1DE2007F5D26 /* FoodDetailsModels.swift in Sources */,
@@ -714,7 +742,9 @@
 				6917A82D2A14E18D002EFA5D /* RegisterModels.swift in Sources */,
 				69E3D9B82A31E21600F411CF /* AccountInformationView.swift in Sources */,
 				69544D232A2DE568008AF4BC /* ProfileView.swift in Sources */,
+				6909B6742AA0E103004AE851 /* MakeOrderInteractor.swift in Sources */,
 				6976576E2A18A4A800DF38EA /* HomeViewController.swift in Sources */,
+				69E0FD7F2A9F7302008688E9 /* CartRouter.swift in Sources */,
 				69E3D9B32A31DD5900F411CF /* ProfileRouter.swift in Sources */,
 				6922476A2A0A9DEB0025C682 /* AppDelegate.swift in Sources */,
 				69DCDF362A990BBD00F9E8AD /* RestaurantTableViewCell.swift in Sources */,
@@ -730,6 +760,7 @@
 				69825D9C2A48772F00D7988C /* CartView.swift in Sources */,
 				69E07AFC2A0E253B005FE54D /* LastOnboardingPageViewController.swift in Sources */,
 				69E3D9B62A31E1B000F411CF /* AccountInformationViewController.swift in Sources */,
+				69E0FD7D2A9F72BF008688E9 /* MakeOrderViewController.swift in Sources */,
 				69FCCBE42A1FCAD300E34D14 /* HomePresenter.swift in Sources */,
 				69825D9E2A48799400D7988C /* CartTableViewCell.swift in Sources */,
 				69947D502A12A7C00062A04F /* RegisterViewController.swift in Sources */,
@@ -749,6 +780,7 @@
 				69DC1A992A276A7E00B0C700 /* NewsCollectionViewCell.swift in Sources */,
 				699F3D2B2A16381400F56A9C /* ForgetPasswordModels.swift in Sources */,
 				6999B3E12A38BC2900E83C9E /* FoodDetailsView.swift in Sources */,
+				6909B6762AA0E114004AE851 /* MakeOrderModels.swift in Sources */,
 				69905F002A180DFC0037516C /* LoginRouter.swift in Sources */,
 				691A78E62A45B3530005944A /* CartViewController.swift in Sources */,
 				695E8D232A1A8795009F381B /* LocationView.swift in Sources */,
@@ -955,10 +987,11 @@
 				DEVELOPMENT_TEAM = KZY2C4A2P7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Foodly/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -983,10 +1016,11 @@
 				DEVELOPMENT_TEAM = KZY2C4A2P7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Foodly/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

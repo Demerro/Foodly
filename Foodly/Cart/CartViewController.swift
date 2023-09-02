@@ -9,6 +9,7 @@ protocol CartDisplayLogic: AnyObject {
 final class CartViewController: UIViewController {
     
     private var interactor: CartBusinessLogic?
+    private var router: CartRoutingLogic?
     
     private let cartView = CartView()
     private var cartItems = [CartItem]() {
@@ -34,10 +35,13 @@ final class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = String(localized: "view.cart.title")
+        
         cartView.tableView.dataSource = self
         cartView.tableView.delegate = self
         
         cartView.tableView.register(CartTableViewCell.self, forCellReuseIdentifier: CartTableViewCell.identifier)
+        setupButtonAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +55,13 @@ final class CartViewController: UIViewController {
         let interactor = CartInteractor()
         let presenter = CartPresenter()
         let cartWorker = FirebaseCartWorker()
+        let router = CartRouter()
         
         viewController.interactor = interactor
+        viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
+        router.viewController = viewController
         
         interactor.cartWorker = cartWorker
     }
@@ -74,6 +81,13 @@ final class CartViewController: UIViewController {
     private func updateTableViewFooter() {
         let subtotalPrice = cartItems.reduce(into: 0, { $0 += $1.totalPrice })
         cartView.totalPriceView.configureView(subtotalPrice: subtotalPrice, deliveryPrice: 5) // TODO: Change
+    }
+    
+    private func setupButtonAction() {
+        cartView.mapButton.addAction(UIAction { [weak self] _ in
+            guard let self else { return }
+            router?.goToMap(items: cartItems)
+        }, for: .touchUpInside)
     }
 }
 

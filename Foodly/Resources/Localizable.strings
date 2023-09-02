@@ -109,4 +109,11 @@
 "view.totalPrice.delivery" = "Delivery";
 "view.totalPrice.total" = "Total";
 
+"view.cart.title" = "Added Items";
 "view.cart.button.goToMap" = "Go to map";
+
+// MARK: - MakeOrderScene
+"view.makeOrder.title" = "Make Order";
+"view.makeOrder.alert.title.success" = "Order successfully sent";
+"view.makeOrder.alert.title.failure" = "An error occurred while placing an order";
+"view.makeOrder.alert.dismiss" = "Ok";
