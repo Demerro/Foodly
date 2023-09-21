@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Dewerro/Foodly">
-    <img src="images/cover.jpg" alt="Logo" width="1800" height="1360">
+    <img src="images/cover.jpg" alt="Logo" width="1800" height="800">
   </a>
 
   <h3 align="center">Foodly</h3>
@@ -16,21 +16,6 @@
     <a href="https://github.com/Dewerro/Foodly/issues">Request Feature</a>
   </p>
 </div>
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li><a href="#design-source">Design Source</a></li>
-    <li><a href="#license">License</a></li>
-  </ol>
-</details>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
