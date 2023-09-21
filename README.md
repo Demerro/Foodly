@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Dewerro/Foodly">
-    <img src="images/cover.jpg" alt="Logo" width="1800" height="800">
+    <img src="images/cover.jpg" alt="Logo" width="1200" height="906">
   </a>
 
   <h3 align="center">Foodly</h3>
