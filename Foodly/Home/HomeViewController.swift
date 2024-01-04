@@ -18,7 +18,7 @@ final class HomeViewController: UIViewController {
     private let homeView = HomeView()
     private let locationManager = CLLocationManager()
     
-    private lazy var dataSource = DataSource(collectionView: homeView.collectionView) { collectionView, indexPath, hashable in
+    private lazy var dataSource = DataSource(collectionView: homeView.collectionView) { [interactor] collectionView, indexPath, hashable in
         switch hashable {
         case let news as HomeModels.News:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as! NewsCollectionViewCell
@@ -33,6 +33,9 @@ final class HomeViewController: UIViewController {
         case let food as Food:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCollectionViewCell.identifier, for: indexPath) as! FoodCollectionViewCell
             cell.configureView(with: food)
+            cell.buttonAction = UIAction { _ in
+                interactor?.addFoodToCart(HomeModels.AddFoodToCartAction.Request(food: food))
+            }
             return cell
             
         case let restaurant as Restaurant:
