@@ -61,6 +61,8 @@ Foodly follows the **VIPER** architecture, ensuring modularity and separation of
 Below are screenshots of Foodly, grouped by user flow:
 
 ### Onboarding Flow
+| First | Second | Third |
+| ----- | ------ | ------ |
 | <img src="images/onboarding/onboarding1.png"> | <img src="images/onboarding/onboarding2.png"> | <img src="images/onboarding/onboarding3.png"> |
 
 ### Authentication Flow
@@ -70,7 +72,7 @@ Below are screenshots of Foodly, grouped by user flow:
 
 ### Home Flow
 | Home | Food Category | Food Details | Food Search | Restaurants Search |
-| ---- | ------------- | ------------ | ----------- | ----------------- |
+| ---- | ------------- | ------------ | ----------- | ------------------ |
 | <img src="images/home/home.png"> | <img src="images/home/foodCategory.png"> | <img src="images/home/foodDetails.png"> | <img src="images/home/foodSearch.png"> | <img src="images/home/restaurantsSearch.png"> |
 
 ### Cart Flow
