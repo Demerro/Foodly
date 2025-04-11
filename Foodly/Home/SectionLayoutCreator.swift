@@ -47,11 +47,11 @@ class SectionLayoutCreator {
     
     func createRestaurantsSectionLayout() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(130.0))
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.2)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(130.0)),
             subitems: [item]
         )
         
