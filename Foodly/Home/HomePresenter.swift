@@ -1,5 +1,5 @@
 import MapKit
-import FirebaseFirestoreSwift
+import Firebase
 
 protocol HomePresentationLogic: AnyObject {
     func presentTrendingFood(_ response: HomeModels.TrendingFoodAction.Response)

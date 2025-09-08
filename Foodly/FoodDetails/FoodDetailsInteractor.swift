@@ -1,5 +1,4 @@
-import FirebaseFirestore
-import FirebaseAuth
+import Firebase
 
 protocol FoodDetailsBusinessLogic: AnyObject {
     func addFoodToCart(_ request: FoodDetailsModels.AddToCartAction.Request)

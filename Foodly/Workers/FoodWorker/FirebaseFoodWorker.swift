@@ -1,5 +1,4 @@
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 class FirebaseFoodWorker: FoodWorkerLogic {
     func getTrendingFood() async throws -> [Food] {

@@ -1,5 +1,3 @@
-import FirebaseFirestoreSwift
-
 protocol FoodGroupPresentationLogic: AnyObject {
     func presentGetFoodByCategory(_ response: FoodGroupModels.GetFoodAction.Response)
     func presentAddFoodToCart(_ response: FoodGroupModels.AddFoodToCartAction.Response)

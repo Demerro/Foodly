@@ -1,4 +1,3 @@
-import FirebaseFirestoreSwift
 import FirebaseFirestore
 
 struct CartItem: Codable, Identifiable {

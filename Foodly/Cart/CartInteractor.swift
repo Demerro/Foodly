@@ -1,6 +1,4 @@
-import FirebaseAuth
-import FirebaseFirestore
-import FirebaseFirestoreSwift
+import Firebase
 
 protocol CartBusinessLogic: AnyObject {
     func getCartFood(_ request: CartModels.GetCartItemsAction.Request)

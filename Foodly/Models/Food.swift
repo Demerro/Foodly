@@ -1,5 +1,4 @@
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 struct Food: Codable, Identifiable, Hashable {
     @DocumentID var id: String?

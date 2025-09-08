@@ -1,4 +1,4 @@
-import FirebaseFirestore
+import Firebase
 
 protocol HomeBusinessLogic: AnyObject {
     func getTrendingFood(_ request: HomeModels.TrendingFoodAction.Request)
